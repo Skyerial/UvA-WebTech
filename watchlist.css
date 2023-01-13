@@ -1,0 +1,210 @@
+.tab {
+    display: block;
+    text-align: center;
+}
+
+.tab button {
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 25px;
+    color: #e5e5e5;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    margin: 5px 12px;
+    cursor: pointer;
+}
+
+.tab button:hover {
+    background-color: #B8DBD9;
+    color: black;
+}
+
+.tab button.active {
+    background-color: #B8DBD9;
+    color: black;
+}
+
+.tabcontent{
+    display: none;
+    padding: 6px 12px;
+}
+
+
+/* Search bar and background*/
+
+body {
+    background: #2F4550;
+}
+
+div.form {
+      display: block;
+      text-align: center;
+  }
+
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 20px;
+}
+.search-bar input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    font-size: 20px;
+    color: #B8DBD9;
+}
+
+::placeholder {
+    color: #B8DBD9;
+}
+
+.search-bar button {
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #2F4550;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background: #B8DBD9;
+}
+
+
+/* Space where the movies and movie cards are displayed*/
+
+.moviesection {
+    display: flex;
+    align-items: center;
+    margin: 3%;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.moviesection .card{
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    width: 19%;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    height: 40vh;
+}
+
+.moviesection .card img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    object-fit: fill;
+}
+
+.moviesection .card .content{
+    position: absolute;
+    width: 100%;
+    bottom: -50%;
+    background: #fff;
+    padding: 10px 20px 22px 20px;
+    box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease;
+}
+
+.moviesection .card:hover .content{
+    bottom: 0;
+}
+
+.content .row .details h3{
+    font-size: 22px;
+    font-weight: 500;
+    font-family: Helvetica, sans-serif;
+}
+
+/* Pagination */
+
+.pagination-container {
+    width: calc(100% - 2rem);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem 0;
+    justify-content: center;
+  }
+  
+  .pagination-number,
+  .pagination-button{
+    font-size: 1.1rem;
+    background-color: transparent;
+    border: none;
+    margin: 0.25rem 0.25rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: .2rem;
+  }
+  
+  .pagination-number:hover,
+  .pagination-button:not(.disabled):hover {
+    background: #fff;
+  }
+  
+  .pagination-number.active {
+    color: #fff;
+    background: #0085b6;
+  }
+  .hidden {
+    display: none;
+  }
+/* .pagination {
+    text-align: center;
+    margin: 30px 30px 60px;
+    user-select: none;
+}
+
+.pagination-container {
+    display: inline-block;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    align-items: center;
+    border-radius: 60px;
+}
+
+.pagination-button, .pagination-number {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #e5e5e5;
+    border: none;
+    border-radius: 45px;
+    width: 80px;
+    cursor: pointer;
+}
+
+
+
+.pagination-number:hover, .pagination-button:not(.disabled):hover {
+  background: #fff;
+}
+
+
+.pagination-number.active{
+    color:#fff;
+    background: #0085b6;
+} */
