@@ -27,6 +27,7 @@ function searchbutton() {
 
 function showCard(){
     const container = document.getElementById('cardcontainerID');
+    var information_available = true;
 
     const options = {
         method: 'GET',
@@ -43,32 +44,49 @@ function showCard(){
 	.then(response => {
 		response.result.forEach(data => {
             const filmTitle = data.title;
+            const filmPoster = data.posterURLs.original;
             var filmService = "Not legally available";
             if(data.streamingInfo.hasOwnProperty("nl")) {
 				if(data.streamingInfo.nl.hasOwnProperty("prime")) {
-					filmService = "prime";
+					filmService = "streaming_img/prime.png";
 				} else if(data.streamingInfo.nl.hasOwnProperty("netflix")) {
-					filmService = "netflix";
+					filmService = "streaming_img/netflix.png";
 				} else if(data.streamingInfo.nl.hasOwnProperty("disney")) {
-					filmService = "disney";
+					filmService = "streaming_img/disney.png";
 				} else if(data.streamingInfo.nl.hasOwnProperty("hbo")) {
-					filmService = "hbo";
+					filmService = "streaming_img/hbo.png";
 				} else if(data.streamingInfo.nl.hasOwnProperty("hulu")) {
-					filmService = "hulu";
+					filmService = "streaming_img/hulu.png";
 				} else if(data.streamingInfo.nl.hasOwnProperty("apple")) {
-                    filmService = "apple";
+                    filmService = "streaming_img/apple.png";
+                } else {
+                    information_available = false;
                 }
-			}
-			// Construct card content
-            const content = `
-            <div class="card">
-                <h5>${filmTitle}</h5>
-                <p>${filmService}</p>
-            </div>
-        `;
+			} else {
+                information_available = false;
+            }
 
-        // Append newyly created card element to the container
-        container.innerHTML += content;
+            if (information_available == true) {
+                const content = `
+                <div class="card">
+                    <div class="imagebox">
+                        <img src="${filmPoster}" class="poster">
+                        <div class="streamingservice">
+                            <img src="${filmService}">
+                        </div>
+                    </div>
+                    <div class="details">
+                        <h3>${filmTitle}</h3>
+                    </div>
+                </div>
+            `;
+
+                // Append newyly created card element to the container
+                container.innerHTML += content;
+            } else {
+                information_available = true;
+            }
+			// Construct card content
 		})
 	})
 	.catch(err => console.error(err));
