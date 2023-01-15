@@ -20,13 +20,14 @@
 
 .navbar {
     transition-property: padding;
+    background: #2F4550;
     padding-top: 4%;
     padding-left: 8%;
     padding-right: 8%;
     height: 12%;
     display: flex;
     align-items: center;
-    padding-bottom: 20vh;
+    padding-bottom: 8%;
 }
 
 nav {
@@ -51,11 +52,15 @@ nav ul li a{
     display: flex;
     width: 100%;
     height: 15vh;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
     align-items: center;
     justify-content: center;
 }
 
 .searchrow{
+    margin-top: -65px;
+    background: transparent;
     display: flex;
     width: 100%;
     height: 130px;
@@ -109,22 +114,23 @@ nav ul li a{
 }
 
 .content {
-    margin-top: -60px;
     background: #2F4550;
     display: flex;
     width: 100%;
     min-height: 100vh;
+    padding-bottom: 400px;
     height: 100%;
 }
 
 .cardcontainer {
     background: transparent;
+    position: absolute;
     display: flex;
     flex-flow: wrap;
     flex-direction: row;
     justify-content: center;
     row-gap: 20px;
-    margin-top: 60px;
+    padding-top: 60px;
     height: fit-content;
 }
 

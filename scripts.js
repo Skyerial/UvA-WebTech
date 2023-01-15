@@ -2,26 +2,27 @@ function searchbutton() {
     var search = document.getElementById('textbar').value;
     document.getElementById('textbar').value = search;
 
-    var x = document.getElementById("title");
-    var z = document.getElementById("titletext");
-    var e = document.getElementById("contentID");
+    var titlebox = document.getElementById("title");
+    var titletext = document.getElementById("titletext");
+    var contentbox = document.getElementById("contentID");
 
-    if (x.style.display === "none") {
+    if (titlebox.style.display === "none") {
 
     } else {
-        x.style.height = '0px'
-        z.style.fontSize = '0px'
-        e.style.background = '#6c848c'
+        titlebox.style.height = '0px'
+        titletext.style.fontSize = '0px'
+        contentbox.style.background = '#6c848c'
         var delayInMilliseconds = 1500;
 
         setTimeout(function() {
-            x.style.display = "none";
+            titlebox.style.display = "none";
 
         }, delayInMilliseconds);
     }
 
     var y = document.getElementById("navdiv");
-    y.style.paddingBottom = '2vh';
+    titlebox.style.paddingTop = '0';
+    titlebox.style.paddingBottom = '0';
     showCard();
 }
 
@@ -46,6 +47,7 @@ function showCard(){
             const filmTitle = data.title;
             const filmPoster = data.posterURLs.original;
             var filmService = "Not legally available";
+            // MAKE ARRAY INSTEAD OF IF ELSE -> MULTIPLE STREAMING SERVICES
             if(data.streamingInfo.hasOwnProperty("nl")) {
 				if(data.streamingInfo.nl.hasOwnProperty("prime")) {
 					filmService = "streaming_img/prime.png";
