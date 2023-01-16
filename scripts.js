@@ -23,7 +23,30 @@ function searchbutton() {
     var y = document.getElementById("navdiv");
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
-    showCard();
+    testCard();
+}
+
+function testCard(){
+    const container = document.getElementById('cardcontainerID');
+
+    for(var i = 0; i < 10; i++) {
+            const content = `
+            <div class="card">
+                <div class="imagebox">
+                    <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" class="poster">
+                    <div class="streamingservice">
+                        <img src="streaming_img/prime.png">
+                    </div>
+                </div>
+                <div class="details">
+                    <h3>Avatar</h3>
+                </div>
+            </div>
+        `;
+
+            // Append newyly created card element to the container
+            container.innerHTML += content;
+    }
 }
 
 function showCard(){
