@@ -60,6 +60,7 @@ nav ul li a{
 
 .searchrow{
     margin-top: -65px;
+    position: absolute;
     background: transparent;
     display: flex;
     width: 100%;
@@ -117,20 +118,18 @@ nav ul li a{
     background: #2F4550;
     display: flex;
     width: 100%;
-    min-height: 100vh;
-    padding-bottom: 400px;
-    height: 100%;
+    height: inherit;
 }
 
 .cardcontainer {
-    background: transparent;
-    position: absolute;
+    background: #5a6973;
+    position: inherit;
     display: flex;
     flex-flow: wrap;
     flex-direction: row;
     justify-content: center;
-    row-gap: 20px;
     padding-top: 60px;
+    row-gap: 20px;
     height: fit-content;
 }
 
@@ -154,6 +153,7 @@ nav ul li a{
     height: 90%;
     position: relative;
 }
+
 
 .poster{
     width: 100%;
