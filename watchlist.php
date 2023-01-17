@@ -21,7 +21,7 @@
         <div id="Future Watching" class="tabcontent">
             <div class="moviesection">
                 <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
+                    <img class="img1" src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
                     <div class="content">
                         <div class="row">
                             <div class="details">
@@ -35,183 +35,30 @@
 
         <div id="Currently Watching" class="tabcontent">
             <div class="moviesection">
+            <?php
+                for ($x = 0; $x < 15; $x += 1) {
+            ?>
                 <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
+                    <img class="img1" src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
+                    <img src="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-500x281.png" class="img2">
                     <div class="content">
                         <div class="row">
                             <div class="details">
-                                <h3>Avatar</h3>
+                                <h3>Avatar <?=$x?></h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTc3MDcwMTc1MV5BMl5BanBnXkFtZTcwMzk4NTU3Mg@@._V1_FMjpg_UX1000_.jpg">
-                    <div class="content">
-                        <div class="row">
-                            <div class="details">
-                                <h3>Avatar</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <?php 
+                }
+            ?>
             </div>
         </div>
 
         <div id="Finished Watching" class="tabcontent">      
             <div class="moviesection">
                 <div class="card">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMzdjNjI5MmYtODhiNS00NTcyLWEzZmUtYzVmODM5YzExNDE3XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_QL75_UX190_CR0,2,190,281_.jpg">
+                    <img class="img1" src="https://m.media-amazon.com/images/M/MV5BMzdjNjI5MmYtODhiNS00NTcyLWEzZmUtYzVmODM5YzExNDE3XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_QL75_UX190_CR0,2,190,281_.jpg">
                     <div class="content">
                         <div class="row">
                             <div class="details">
