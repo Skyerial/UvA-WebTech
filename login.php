@@ -1,8 +1,26 @@
 <?php
 
-if(!isset($_SESSION)) { session_start(); }
-
 require_once "temp/db.php";
+
+$password_reset = false;
+if(isset($_GET['success'])){
+    $password_reset = true;
+}
+
+$account_activated = false;
+if(isset($_GET['token'])){
+    $email_token = $_GET['token'];
+    $query = 'UPDATE user SET status = 1
+              WHERE activation_code="'.$email_token.'"';
+    if($conn->query($query)){
+        if (is_resource($conn)) {
+            mysqli_close($conn);
+        }
+        $account_activated = true;
+    }
+}
+
+if(!isset($_SESSION)) { session_start(); }
 
 // The following variables are used to show different error messages in html.
 // An specific error message is shown if the variable is true.
@@ -15,6 +33,9 @@ $errors = [
     'pw_error' => false, // Password error.
     'status_error' => false // The user has not yet activated it's account.
 ];
+
+// A pop up message that notifies the user a email has been sent:
+$email_sent = false;
 
 if (isset($_SESSION['login'])) {
 	header("Location: index.php");
@@ -155,14 +176,14 @@ if (isset($_POST['reset_password'])) {
         if (!$e_query->execute()) { exit("Could not execute query."); }
         $e_query->store_result();
 
-        if ($e_query->num_rows > 0) {
+        if (!($e_query->num_rows > 0)) {
             $errors['main_error'] = true;
         }
 
         $e_query->close();
     }
 
-    if (!$errors['mail_error']) {
+    if (!$errors['mail_error'] && !$errors['main_error']) {
         // Check if the email is verificated:
         $st_query = $conn->prepare("SELECT status FROM user WHERE email = ?");
 
@@ -210,20 +231,20 @@ if (isset($_POST['reset_password'])) {
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-        $email_message = file_get_contents('email_template.html');
+        $email_message = file_get_contents('email_reset.html');
         $email_message =  str_replace("{{USERNAME}}", $username,
         $email_message);
         $email_message =  str_replace("{{ACTIVATION_LINK}}", $email_link,
         $email_message);
 
         // Send the activation mail:
-        mail($email, 'Email activation', $email_message, $headers);
+        mail($email, 'Reset password', $email_message, $headers);
 
         if (is_resource($conn)) {
             mysqli_close($conn);
         }
-        header("location: email_sent.php");
-        exit(0);
+
+        $email_sent = true;
     } else {
         if (is_resource($conn)) {
             mysqli_close($conn);
@@ -239,105 +260,150 @@ if (isset($_POST['reset_password'])) {
         <meta charset="utf-8">
         <title>Login form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles/nav.css">
+        <link rel="stylesheet" href="styles/form.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
     <body>
-        <?php require_once 'nav.php'; ?>
+        <?php include 'nav.php'; ?>
+        <div class="content">
+            <div class="reg-form">
+                <div class="reg-header">
+                    <h2>Login Form</h2>
+                    <p>Please fill all fields in the form</p>
+                </div>
 
-        <div class="reg-form">
-            <div class="reg-header">
-                <h2>Login Form</h2>
-                <p>Please fill all fields in the form</p>
+                <div id="reset_pw" class="email-confirmation">
+                    <p class="confirmation-message">We sent you an email, with
+                        which you can reset your password. Check your email.</p>
+                </div>
+
+                <?php if($email_sent) {
+                    echo "
+                    <script type='text/javascript'>
+                    document.getElementById('reset_pw').style.display = 'block';
+                    </script>
+                    ";
+                    }
+                ?>
+
+                <div id="acc_ac" class="email-confirmation">
+                    <p class="confirmation-message">Your account has been
+                        activated, you can now log in.</p>
+                </div>
+
+                <?php if($account_activated) {
+                    echo "
+                    <script type='text/javascript'>
+                    document.getElementById('acc_ac').style.display = 'block';
+                    </script>
+                    ";
+                    }
+                ?>
+
+                <div id="pw_reset" class="email-confirmation">
+                    <p class="confirmation-message">Your password has been
+                        successfully reset.</p>
+                </div>
+
+                <?php if($password_reset) {
+                    echo "
+                    <script type='text/javascript'>
+                    document.getElementById('pw_reset').style.display = 'block';
+                    </script>
+                    ";
+                    }
+                ?>
+
+                <form method = "post" action = "login.php"
+                autocomplete="off" novalidate>
+
+                    <!-- Enter the (correct) generated CSRF token: -->
+                    <input type = "hidden" name = "csrf_token"
+                    value = "<?= $_SESSION['csrf_token'] ?>">
+
+                    <div class="input-box">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['mail_error']): ?>
+                            <div class="error-message">
+                                <p>Please enter a valid email.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['pw_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                Please enter a valid password with a minimum of 6
+                                characters.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class = "recaptcha">
+                        <div class = "g-recaptcha" data-sitekey =
+                        "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
+                    </div>
+
+                    <div class="form-sub-message">
+                        <?php if($errors['captcha_empty']): ?>
+                            <div class="error-message loose">
+                                <p> Please check the the captcha form. </p>
+                            </div>
+                        <?php elseif($errors['captcha_error']): ?>
+                            <div class="error-message loose">
+                                <p> You did not pass the captcha test, please try
+                                    again. </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <input type="submit" class="form-btn" name="login"
+                    value="Submit">
+
+                    <div class="form-sub-message">
+                        <?php if($errors['csrf_error']): ?>
+                            <div class="error-message">
+                                <p> Invalid CSRF token! </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['status_error']): ?>
+                            <div class="error-message">
+                                <p> You have not yet verificated your email adress.
+                                    Please check your inbox. </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['main_error']): ?>
+                            <div class="error-message">
+                                <p> Incorrect email or password! </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <br>
+
+                    <div class="left-float">
+                    <p class="form-sub-message">Forgot password?</p>
+                    <input type="submit" class="form-btn" name="reset_password"
+                    value="Reset password">
+                    </div>
+                    <div class="left-float">
+                    <p class="form-sub-message">You don't have an account?</p>
+                    <a href="registration.php" class="form-btn">Register here</a>
+                    </div>
+                </form>
+
             </div>
-
-            <form method = "post" action = "login.php"
-            autocomplete="off" novalidate>
-
-                <!-- Enter the (correct) generated CSRF token: -->
-                <input type = "hidden" name = "csrf_token"
-                value = "<?= $_SESSION['csrf_token'] ?>">
-
-                <div class="input-box">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['mail_error']): ?>
-                        <div class="error-message">
-                            <p>Please enter a valid email.</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class="input-box">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['pw_error']): ?>
-                        <div class="error-message">
-                            <p>
-                            Please enter a valid password with a minimum of 6
-                            characters.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class = "recaptcha">
-                    <div class = "g-recaptcha" data-sitekey =
-                    "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
-                </div>
-
-                <div class="form-sub-message">
-                    <?php if($errors['captcha_empty']): ?>
-                        <div class="error-message loose">
-                            <p> Please check the the captcha form. </p>
-                        </div>
-                    <?php elseif($errors['captcha_error']): ?>
-                        <div class="error-message loose">
-                            <p> You did not pass the captcha test, please try
-                                again. </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <input type="submit" class="form-btn" name="login"
-                value="Submit">
-
-                <div class="form-sub-message">
-                    <?php if($errors['csrf_error']): ?>
-                        <div class="error-message">
-                            <p> Invalid CSRF token! </p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['status_error']): ?>
-                        <div class="error-message">
-                            <p> You have not yet verificated your email adress.
-                                Please check your inbox. </p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['main_error']): ?>
-                        <div class="error-message">
-                            <p> Incorrect email or password! </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <br>
-
-                <div class="left-float">
-                <p class="form-sub-message">Forgot password?</p>
-                <input type="submit" class="form-btn" name="reset_password"
-                value="Reset password">
-                </div>
-                <div class="left-float">
-                <p class="form-sub-message">You don't have an account?</p>
-                <a href="registration.php" class="form-btn">Register here</a>
-                </div>
-            </form>
-
         </div>
     </body>
 </html>

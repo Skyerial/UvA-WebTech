@@ -5,7 +5,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>TITEL</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles/homepage.css">
+        <link rel="stylesheet" href="styles/nav.css">
         <script type="text/javascript" src="scripts.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>

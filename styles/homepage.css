@@ -1,61 +1,22 @@
 * {
     margin: 0;
     padding: 0;
-    transition-duration: 1.5s;
     transition-delay: 0s;
     background-color: #2F4550;
     font-family: 'Roboto';
 }
 
-.container {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #2F4550;
-    background-size: cover;
-    padding-left: 8%;
-    padding-right: 8%;
-    padding-top: 4%;
-    box-sizing: border-box;
-}
-
-.navbar {
-    transition-property: padding;
-    background: #2F4550;
-    padding-top: 4%;
-    padding-left: 8%;
-    padding-right: 8%;
-    height: 12%;
-    display: flex;
-    align-items: center;
-    padding-bottom: 8%;
-}
-
-nav {
-    flex: 1;
-    text-align: right;
-}
-
-nav ul li {
-    list-style: none;
-    display: inline-block;
-    margin-left: 60px;
-}
-
-nav ul li a{
-    text-decoration: none;
-    color: #B8DBD9;
-    font-size: 20px;
-}
-
 .titlerow{
+    background-color: #2F4550;
     transition-property: all;
     display: flex;
     width: 100%;
     height: 15vh;
-    padding-top: 15vh;
+    padding-top: 5vh;
     padding-bottom: 10vh;
     align-items: center;
     justify-content: center;
+    transition-duration: 1.5s;
 }
 
 .searchrow{
@@ -67,6 +28,7 @@ nav ul li a{
     height: 130px;
     align-items: center;
     justify-content: center;
+    transition-duration: 1.5s;
 }
 
 .title {
@@ -102,6 +64,7 @@ nav ul li a{
 }
 
 .search-bar button {
+    transition-duration: 1.5s;
     border: 0;
     border-radius: 50%;
     width: 60px;
