@@ -1,3 +1,6 @@
+var amountofCards = 0;
+
+
 function searchbutton() {
     var search = document.getElementById('textbar').value;
     document.getElementById('textbar').value = search;
@@ -20,10 +23,19 @@ function searchbutton() {
         }, delayInMilliseconds);
     }
 
-    var y = document.getElementById("navdiv");
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
+    deleteCards();
     testCard();
+}
+
+function deleteCards() {
+    for (var i = 0; i < amountofCards; i++) {
+        var cardid = "card" + i;
+        var card = document.getElementById(cardid);
+        card.remove();
+    }
+    amountofCards = 0;
 }
 
 function testCard(){
@@ -31,7 +43,7 @@ function testCard(){
 
     for(var i = 0; i < 10; i++) {
             const content = `
-            <div class="card">
+            <div class="card" id="card${i}">
                 <div class="imagebox">
                     <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" class="poster">
                     <div class="streamingservice">
@@ -46,7 +58,21 @@ function testCard(){
 
             // Append newyly created card element to the container
             container.innerHTML += content;
+            amountofCards++;
     }
+
+    for (var j = 0; j < 10; j++) {
+        var cardid = "card" + j;
+        var card = document.getElementById(cardid);
+        changeOpacity(card);
+    }
+
+}
+
+function changeOpacity(card) {
+    setTimeout(() => {
+        card.style.opacity = '1';
+    }, 500);
 }
 
 function showCard(){

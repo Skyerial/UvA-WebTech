@@ -8,6 +8,10 @@
     font-family: 'Roboto';
 }
 
+body {
+    background: #2F4550;
+}
+
 .content {
     background-color: #5a6973;
     width: 100%;
