@@ -27,7 +27,20 @@
                 </form>
             </div>
 
-            <div class="cardcontainer" id="cardcontainerID"></div>
+            <div class="cardcontainer" id="cardcontainerID">
+                <!-- <div class="card">
+                    <div class="imagebox">
+                        <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"/>
+
+                    </div>
+                    <h3>Avatar</h3>
+                    <div class="hover-content">
+                        <button class="cardbutton">A</button>
+                        <button class="cardbutton">B</button>
+                        <button class="cardbutton">C</button>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </body>
 </html>

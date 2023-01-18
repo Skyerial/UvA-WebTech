@@ -252,6 +252,14 @@ if (isset($_POST['reset_password'])) {
     }
 }
 
+if (isset($_POST['to_register'])) {
+    if (is_resource($conn)) {
+        mysqli_close($conn);
+    }
+    header("location: registration.php");
+    exit(0);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -399,7 +407,7 @@ if (isset($_POST['reset_password'])) {
                     </div>
                     <div class="left-float">
                     <p class="form-sub-message">You don't have an account?</p>
-                    <a href="registration.php" class="form-btn">Register here</a>
+                    <input type="submit" class="form-btn" name="to_register" value="Register here">
                     </div>
                 </form>
 

@@ -12,6 +12,10 @@ body {
     background: #2F4550;
 }
 
+a {
+    text-decoration: none;
+}
+
 .content {
     background-color: #5a6973;
     width: 100%;
