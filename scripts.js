@@ -135,10 +135,10 @@ function displayCards(data){
     const container = document.getElementById('cardcontainerID');
     var information_available = true;
 
-    console.log(data);
+    // console.log(data);
 
     data.forEach(data => {
-        console.log(data.movieTitle);
+        // console.log(data.movieTitle);
 
         var divs = ``;
         if (data.netflix == true) {

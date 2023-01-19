@@ -8,7 +8,7 @@
         <title>TITEL</title>
         <link rel="stylesheet" href="styles/homepage.css">
         <link rel="stylesheet" href="styles/nav.css">
-        <link rel="stylesheet" href="watchlist.css">
+        <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="scripts.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
