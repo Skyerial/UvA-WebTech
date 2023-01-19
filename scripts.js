@@ -45,16 +45,24 @@ function testCard(){
             const content = `
             <div class="card" id="card${i}">
                 <div class="imagebox">
-                    <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"/>
-                    <div class="buttonbox">
-                        <a href="" class="cardbutton">A</a>
-                        <a href="" class="cardbutton">B</a>
-                        <a href="" class="cardbutton">C</a>
+                    <img class="poster" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"/>
+                    <div class="streamingservicebox">
+                        <div class="streamingservice">
+                            <img src="streaming_img/netflix.png">
+                        </div>
+                        <div class="streamingservice">
+                            <img src="streaming_img/netflix.png">
+                        </div>
+                        <div class="streamingservice">
+                            <img src="streaming_img/netflix.png">
+                        </div>
                     </div>
                 </div>
                 <h3>Avatar</h3>
                 <div class="hover-content">
-                    <p> LOREM IPSUM NOGWATTUS </p>
+                    <a href="" class="cardbutton">A</a>
+                    <a href="" class="cardbutton">B</a>
+                    <a href="" class="cardbutton">C</a>
                 </div>
             </div>
         `;
