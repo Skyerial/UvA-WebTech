@@ -75,9 +75,8 @@ function condenseData($response) {
     $obj = json_decode($response);
     $result = array();
     $i = 0;
-    
+
     foreach ($obj->result as $data) {
-        $i++;
         $movie = new movieDetails;
         $movie->movieTitle = $data->title;
         if(!empty($data->posterURLs->original)) {
@@ -104,6 +103,7 @@ function condenseData($response) {
             }
         }
         $result[$i] = $movie;
+        $i++;
     }
     // var_dump($result);
     return $result;
