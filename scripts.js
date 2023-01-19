@@ -1,9 +1,44 @@
 var amountofCards = 0;
 
+// This string check found on:
+// https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-numbers/
+// and:
+// https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
+function specialChar(str) {
+    return /^\w+( \w+)*$/.test(str);
+}
+
+function getCardData(search){
+    const container = document.getElementById('cardcontainerID');
+
+    // START XMLHttpRequest
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "APICall/movieAPICall.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4 && xhttp.status == 200) {
+            var movieDetails = xhttp.responseText;
+            // console.log(JSON.parse(movieDetails));
+            return JSON.parse(movieDetails);
+            // console.log(movieDetails);
+            // showCard(movieDetails);
+        }
+    };
+    
+    xhttp.send('movieTitle=' + search);
+    // END XMLHttpRequest
+}
+
 
 function searchbutton() {
     var search = document.getElementById('textbar').value;
-    document.getElementById('textbar').value = search;
+    if(!specialChar(search)) {
+        console.log(search);
+        document.getElementById('textbar').value = '';
+        // need to make sure that it shows search input was not valid...
+        return;
+    }
 
     var titlebox = document.getElementById("title");
     var titletext = document.getElementById("titletext");
