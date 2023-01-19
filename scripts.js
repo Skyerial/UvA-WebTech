@@ -19,13 +19,13 @@ function getCardData(search){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status == 200) {
             var movieDetails = xhttp.responseText;
-            // console.log(JSON.parse(movieDetails));
-            return JSON.parse(movieDetails);
+            //console.log(JSON.parse(movieDetails));
+            displayCards(JSON.parse(movieDetails));
             // console.log(movieDetails);
             // showCard(movieDetails);
         }
     };
-    
+
     xhttp.send('movieTitle=' + search);
     // END XMLHttpRequest
 }
@@ -61,7 +61,8 @@ function searchbutton() {
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
     deleteCards();
-    testCard();
+    //testCard();
+    getCardData(search);
 }
 
 function deleteCards() {
@@ -119,6 +120,81 @@ function changeOpacity(card) {
     setTimeout(() => {
         card.style.opacity = '1';
     }, 500);
+}
+
+function streamingdiv(service) {
+
+    var div = `<div class="streamingservice">
+    <img src="streaming_img/${service}.png">
+  </div>`
+
+    return div;
+}
+
+function displayCards(data){
+    const container = document.getElementById('cardcontainerID');
+    var information_available = true;
+
+    console.log(data);
+
+    data.forEach(data => {
+        console.log(data.movieTitle);
+
+        var divs = ``;
+        if (data.netflix == true) {
+            divs = divs + streamingdiv("netflix");
+        }
+        if (data.apple == true) {
+            divs = divs + streamingdiv("apple");
+        }
+        if (data.disney == true) {
+            divs = divs + streamingdiv("disney");
+        }
+        if (data.hbo == true) {
+            divs = divs + streamingdiv("hbo");
+        }
+        if (data.hulu == true) {
+            divs = divs + streamingdiv("hulu");
+        }
+        if (data.prime == true) {
+            divs = divs + streamingdiv("prime");
+        }
+        if (divs == `` || !data.moviePoster) {
+            information_available = false;
+        }
+
+        if (information_available == true) {
+            const content = `
+                <div class="card" id="card${amountofCards}">
+                    <div class="imagebox">
+                        <img class="poster" src="${data.moviePoster}"/>
+                        <div class="streamingservicebox">
+                            ${divs}
+                        </div>
+                    </div>
+                    <h3>${data.movieTitle}</h3>
+                    <div class="hover-content">
+                        <a href="" class="cardbutton">A</a>
+                        <a href="" class="cardbutton">B</a>
+                        <a href="" class="cardbutton">C</a>
+                    </div>
+                </div>
+            `;
+
+            // Append newyly created card element to the container
+            container.innerHTML += content;
+            amountofCards++;
+        }
+        information_available = true;
+    })
+
+    for (var i = 0; i < amountofCards; i++) {
+        var cardid = "card" + i;
+        var card = document.getElementById(cardid);
+        changeOpacity(card);
+    }
+
+
 }
 
 function showCard(){
