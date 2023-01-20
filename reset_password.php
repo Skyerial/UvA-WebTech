@@ -2,7 +2,7 @@
 
 if(!isset($_SESSION)) { session_start(); }
 
-require_once "temp/db.php";
+require_once "/../../../conn/db.php";
 $pw_error = false;
 
 if(isset($_GET['email_token'])){

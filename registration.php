@@ -2,7 +2,7 @@
 
 if(!isset($_SESSION)) { session_start(); }
 
-require_once "temp/db.php"; // Do NOT put .php files in root!!!
+require_once "/../../../conn/db.php"; // Do NOT put .php files in root!!!
 
 // The following variables are used to show different error messages in html.
 // An specific error message is shown if the variable is true.

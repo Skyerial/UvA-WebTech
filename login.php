@@ -1,6 +1,6 @@
 <?php
 
-require_once "temp/db.php";
+require_once "/../../../conn/db.php";
 
 $password_reset = false;
 if(isset($_GET['success'])){
