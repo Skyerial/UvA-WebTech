@@ -27,18 +27,35 @@ nav ul li a{
     font-size: 20px;
 }
 
-/* profile image stuff */
-/* #container {
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    background: #333;
+/* footer stuff */
+footer {
+    background: #2F4550;
+    width: 100vw;
+    color: #B8DBD9;
 }
 
-#name {
-    width: 100%;
+.footer-content {
     text-align: center;
-    color: white;
-    font-size: 36px;
-    line-height: 100px;
-} */
+    margin: auto;
+}
+
+footer ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 10px;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: #B8DBD9;
+}
+
+.footer-bottom {
+    background: #2F4550;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+}
