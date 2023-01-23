@@ -1,6 +1,5 @@
 <?php
-// $q = $_POST['movieTitle'];
-$q = $_GET['name'];
+$q = $_POST['movieTitle'];
 
 // title needs to be checked before it is used anywhere...
 function buildUrl($title) {
@@ -110,9 +109,9 @@ function condenseData($response) {
     return $result;
 }
 
-// $actualDataToSend = condenseData(apiCall(buildUrl($q)));
+$actualDataToSend = condenseData(apiCall(buildUrl($q)));
 
 
-// header('Content-Type: application/json; charset=UTF-8');
-// echo json_encode($actualDataToSend);
+header('Content-Type: application/json; charset=UTF-8');
+echo json_encode($actualDataToSend);
 ?>

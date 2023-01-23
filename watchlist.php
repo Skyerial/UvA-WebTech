@@ -16,7 +16,10 @@
     <body>
 
         <!-- insert the nav bar -->
-        <?php require_once("nav.php")?>
+        <?php
+            require_once("nav.php");
+            include("retrieve_playlist.php");
+        ?>
 
         <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
 
