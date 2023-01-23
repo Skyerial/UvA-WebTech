@@ -103,7 +103,7 @@ body {
 }
 
 .card {
-    opacity: 0;
+    /* opacity: 0; */
     transition-duration: 0.6s;
     width: 250px;
     height: 400px;

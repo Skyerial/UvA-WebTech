@@ -1,9 +1,10 @@
-var amountofCards = 0;
+// var amountofCards = 0;
 
 // This string check found on:
 // https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-numbers/
 // and:
 // https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
+
 function specialChar(str) {
     return /^\w+( \w+)*$/.test(str);
 }
@@ -30,11 +31,55 @@ function getCardData(search){
     // END XMLHttpRequest
 }
 
+function animations() {
+    var titlebox = document.getElementById("title");
+    var titletext = document.getElementById("titletext");
+    var contentbox = document.getElementById("contentID");
+
+    if (titlebox.style.display === "none") {
+
+    } else {
+        titlebox.style.height = '0px'
+        titletext.style.fontSize = '0px'
+        contentbox.style.background = '#6c848c'
+        var delayInMilliseconds = 1500;
+
+        setTimeout(function() {
+            titlebox.style.display = "none";
+
+        }, delayInMilliseconds);
+    }
+
+    titlebox.style.paddingTop = '0';
+    titlebox.style.paddingBottom = '0';
+}
+function createCard(moviePoster, amountofCards, movieTitle) {
+    const container = document.getElementById('cardcontainerID');
+
+    const content = `
+        <div class="card" id="card${amountofCards}">
+            <div class="imagebox">
+                <img class="poster" src="${moviePoster}"/>
+                <div class="streamingservicebox">
+
+                </div>
+            </div>
+            <h3>${movieTitle}</h3>
+            <div class="hover-content">
+                <a onclick="to_watch(); return false;" class="cardbutton">Future</a>
+                <a class="cardbutton">B</a>
+                <a class="cardbutton">C</a>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML += content;
+}
 
 function searchbutton() {
     var search = document.getElementById('textbar').value;
     if(!specialChar(search)) {
-        console.log(search);
+        //console.log(search);
         document.getElementById('textbar').value = '';
         // need to make sure that it shows search input was not valid...
         return;
@@ -65,13 +110,12 @@ function searchbutton() {
     getCardData(search);
 }
 
-function deleteCards() {
+function deleteCards(amountofCards) {
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
         var card = document.getElementById(cardid);
         card.remove();
     }
-    amountofCards = 0;
 }
 
 function testCard(){
@@ -96,9 +140,9 @@ function testCard(){
                 </div>
                 <h3>Avatar</h3>
                 <div class="hover-content">
-                    <a href="" class="cardbutton">A</a>
-                    <a href="" class="cardbutton">B</a>
-                    <a href="" class="cardbutton">C</a>
+                    <a href="" onclick="to_watch(${i}); return false;" class="cardbutton">Future</a>
+                    <a href="" onclick="cur_watching(); return false;" class="cardbutton">Current</a>
+                    <a href="" onclick="watched(); return false;" class="cardbutton">Finished</a>
                 </div>
             </div>
         `;
@@ -135,10 +179,10 @@ function displayCards(data){
     const container = document.getElementById('cardcontainerID');
     var information_available = true;
 
-    console.log(data);
+    //console.log(data);
 
     data.forEach(data => {
-        console.log(data.movieTitle);
+        //console.log(data.movieTitle);
 
         var divs = ``;
         if (data.netflix == true) {
@@ -174,12 +218,15 @@ function displayCards(data){
                     </div>
                     <h3>${data.movieTitle}</h3>
                     <div class="hover-content">
-                        <a href="" class="cardbutton">A</a>
-                        <a href="" class="cardbutton">B</a>
-                        <a href="" class="cardbutton">C</a>
+                        <a onclick="to_watch(${amountofCards}); return false;" class="cardbutton">Future</a>
+                        <a class="cardbutton">B</a>
+                        <a class="cardbutton">C</a>
                     </div>
                 </div>
             `;
+
+            // const p = document.createElement('p');
+            // p.textContent = '<b>Test</b>'
 
             // Append newyly created card element to the container
             container.innerHTML += content;
