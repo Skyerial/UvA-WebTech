@@ -13,3 +13,4 @@ function openWatch(evt, watchName) {
 }
 
 document.getElementById("defaultOpen").click();
+
