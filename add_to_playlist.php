@@ -161,7 +161,7 @@ function updatePlaylists($conn, $user_id, $item_id, $playlist_id) {
         JOIN playlist_name ON playlist_item.pid = playlist_name.pid
         JOIN playlist_user ON playlist_name.pid = playlist_user.pid
         WHERE playlist_user.uid = ? AND playlist_item.iid = ?
-        AND playlist_item.pid != ?");
+        AND playlist_item.pid = ?");
 
     if (!$double_item->bind_param("iii", $user_id, $item_id, $playlist_id)) {
         exit("Could not bind parameters.");

@@ -18,17 +18,30 @@
         <!-- insert the nav bar -->
         <?php
             require_once("nav.php");
-            include("retrieve_playlist.php");
+            require_once("retrieve_playlist.php");
+            require_once "/../../../conn/db.php";
+
+            if(!isset($_SESSION)) { session_start(); }
+
+            // Check if the user is logged in, if not exit with an error message:
+            if (!(isset($_SESSION['login']))) {
+                if (is_resource($conn)) {
+                    mysqli_close($conn);
+                }
+                exit("You are not logged in.");
+            }
+
+            // Retrieve the user id:
+            $user_id = retrieve_uid($conn, $_SESSION['login']);
+            if (!$user_id) { exit("No user found."); }
+
+            // This variable holds the name of the playlist, you must retrieve it somehow.
+            $playlist = "finished watching";
+
+
         ?>
 
         <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
-
-            <div class="searchrow" id="formID">
-                <form class="search-bar" name="search" action="#" onsubmit="searchbutton();return false">
-                    <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
-                    <button type="submit" id="buttonID"></button>
-                </form>
-            </div>
 
             <div class="tabrow">
                 <div class="tab">
@@ -40,51 +53,19 @@
 
             <div id="Future Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <?php
-                        $movieTitle = "Cars";
-                        $moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
-                        $movieService = "streaming_img/netflix.png";
-                        for ($i = 0; $i < 10; $i++) {
-                    ?>
-                    <!-- -------------- -->
-                    <div class="card" id="card">
-                        <div class="imagebox">
-                            <img class="poster" src="<?=$moviePoster?>"/>
-                            <div class="streamingservicebox">
-                                <div class="streamingservice">
-                                    <img src="<?=$movieService?>">
-                                </div>
-                                <div class="streamingservice">
-                                    <img src="<?=$movieService?>">
-                                </div>
-                                <div class="streamingservice">
-                                    <img src="<?=$movieService?>">
-                                </div>
-                            </div>
-                        </div>
-                        <h3><?=$movieTitle?></h3>
-                        <div class="hover-content">
-                            <a href="" onclick="to_watch(); return false;" class="cardbutton">Future</a>
-                            <a href="" onclick="cur_watching(); return false;" class="cardbutton">Current</a>
-                            <a href="" onclick="watched(); return false;" class="cardbutton">Finished</a>
-                        </div>
-                    </div>
-            <!-- -------------- -->
-                    <?php
-                        }
-                    ?>
+                    <?php retrieve_playlist($conn, $user_id, "future watching"); ?>
                 </div>
             </div>
 
             <div id="Currently Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <!-- CURRENTLY WATCHING CARDS -->
+                <?php retrieve_playlist($conn, $user_id, "currently watching"); ?>
                 </div>
             </div>
 
             <div id="Finished Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <!-- FINISHED WATCHING -->
+                    <?php retrieve_playlist($conn, $user_id, "finished watching"); ?>
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
-/* Tab to switch between lists */
 .tabrow {
-    margin-top: 20px;
+    margin-top: -65px;
     position: absolute;
     background: transparent;
     display: flex;

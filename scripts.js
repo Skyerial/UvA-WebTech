@@ -86,7 +86,7 @@ function searchbutton() {
 }
 
 // removes old cards
-function deleteCards(amountofCards) {
+function deleteCards() {
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
         var card = document.getElementById(cardid);
@@ -98,7 +98,7 @@ function deleteCards(amountofCards) {
 function testCard(){
     const container = document.getElementById('cardcontainerID');
     const moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
-    const movieTitle = "Avatar";
+    const movieTitle = "avatar avatar avatar avatar";
 
     for(var i = 0; i < 10; i++) {
 
@@ -118,7 +118,9 @@ function testCard(){
                             </div>
                         </div>
                     </div>
-                    <h3 id="title${i}" value="${movieTitle}">${movieTitle}</h3>
+                    <div class="titlebox">
+                        <h3 id="title${i}" value="${movieTitle}">${movieTitle}</h3>
+                    </div>
                     <div class="hover-content">
                         <a href="javascript:void(0)" onclick="to_watch(${i}); return false;" class="cardbutton">Future</a>
                         <a href="javascript:void(0)" onclick="cur_watching(${i}); return false;" class="cardbutton">Current</a>
@@ -161,6 +163,10 @@ function streamingdiv(service) {
 function displayCards(data){
     const container = document.getElementById('cardcontainerID');
     var information_available = true;
+    var displayed = {};
+    var cards =[];
+    displayed.cards = cards;
+
 
     data.forEach(data => {
         //create streamingservice divs
@@ -188,6 +194,13 @@ function displayCards(data){
         }
 
         if (information_available == true) {
+            var carddata = {
+                "id": amountofCards,
+                "movieTitle": data.movieTitle,
+                "moviePoster": data.moviePoster
+            }
+            displayed.cards.push(carddata);
+
             const content = `
                 <div class="card" id="card${amountofCards}">
                     <div class="imagebox">
@@ -211,6 +224,8 @@ function displayCards(data){
         }
         information_available = true;
     })
+
+    console.log(JSON.stringify(displayed));
 
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;

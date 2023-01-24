@@ -64,32 +64,47 @@ function retrieve_playlist($conn, $user_id, $name) {
         // Note: the variables are arrays, so title = $row['title'];
         // Note: $row['streaming_service'] is all lowercase (e.g. netflix);
         // Note: after the close-statement, the variables no longer exist!
-        echo $row['title'] . " " . $row['picture_url'] . " " . $row['streaming_service'];
+        //echo $row['title'] . " " . $row['picture_url'] . " " . $row['streaming_service'];
+        ?>
+            <div class="card" id="card" style="opacity: 1 !important;">
+                <div class="imagebox">
+                    <img class="poster" id="poster${i}" value="${moviePoster}" src="<?= $row['picture_url']?>"/>
+                    <div class="streamingservicebox">
+                        <a href="https://www.netflix.com/" class="streamingservice">
+                            <img src="streaming_img/<?=$row['streaming_service']?>.png">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="title${i}" value="${movieTitle}"><?= $row['title']?></h3>
+                </div>
+                <div class="hover-content">
+                    <?php if ($name == "future watching") {
+                    ?>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Current</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Watched</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                    <?php
+                    } else if ($name == "currently watching") {
+                    ?>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Future</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Watched</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                    <?php
+                    } else if ($name == "finished watching") {
+                    ?>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Future</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Current</a>
+                    <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php
     }
 
     $retrieve->close();
 }
-
-require_once "/../../../conn/db.php";
-
-if(!isset($_SESSION)) { session_start(); }
-
-// Check if the user is logged in, if not exit with an error message:
-if (!(isset($_SESSION['login']))) {
-    if (is_resource($conn)) {
-        mysqli_close($conn);
-    }
-    exit("You are not logged in.");
-}
-
-// Retrieve the user id:
-$user_id = retrieve_uid($conn, $_SESSION['login']);
-if (!$user_id) { exit("No user found."); }
-
-// This variable holds the name of the playlist, you must retrieve it somehow.
-$playlist = "finished watching";
-
-// Show playlist:
-retrieve_playlist($conn, $user_id, $playlist);
 
 ?>
