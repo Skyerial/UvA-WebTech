@@ -1,7 +1,35 @@
-function searchbutton() {
-    var search = document.getElementById('textbar').value;
-    document.getElementById('textbar').value = search;
+var amountofCards = 0;
 
+// This string check found on:
+// https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-numbers/
+// and:
+// https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
+
+function specialChar(str) {
+    return /^\w+( \w+)*$/.test(str);
+}
+
+function getCardData(search){
+    const container = document.getElementById('cardcontainerID');
+
+    // START XMLHttpRequest
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "APICall/movieApiCall.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4 && xhttp.status == 200) {
+            var movieDetails = xhttp.responseText;
+            console.log(movieDetails);
+            //displayCards(JSON.parse(movieDetails));
+        }
+    };
+
+    xhttp.send('movieTitle=' + search);
+    // END XMLHttpRequest
+}
+
+function animations() {
     var titlebox = document.getElementById("title");
     var titletext = document.getElementById("titletext");
     var contentbox = document.getElementById("contentID");
@@ -20,101 +48,193 @@ function searchbutton() {
         }, delayInMilliseconds);
     }
 
-    var y = document.getElementById("navdiv");
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
-    testCard();
 }
 
-function testCard(){
-    const container = document.getElementById('cardcontainerID');
+function searchbutton() {
+    var search = document.getElementById('textbar').value;
+    if(!specialChar(search)) {
+        document.getElementById('textbar').value = '';
+        // need to make sure that it shows search input was not valid...
+        return;
+    }
 
-    for(var i = 0; i < 10; i++) {
-            const content = `
-            <div class="card">
-                <div class="imagebox">
-                    <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" class="poster">
-                    <div class="streamingservice">
-                        <img src="streaming_img/prime.png">
-                    </div>
-                </div>
-                <div class="details">
-                    <h3>Avatar</h3>
-                </div>
-            </div>
-        `;
+    // handle animations
+    var titlebox = document.getElementById("title");
+    var titletext = document.getElementById("titletext");
+    var contentbox = document.getElementById("contentID");
 
-            // Append newyly created card element to the container
-            container.innerHTML += content;
+    if (titlebox.style.display === "none") {
+
+    } else {
+        titlebox.style.height = '0px'
+        titletext.style.fontSize = '0px'
+        contentbox.style.background = '#6c848c'
+        var delayInMilliseconds = 1500;
+
+        setTimeout(function() {
+            titlebox.style.display = "none";
+
+        }, delayInMilliseconds);
+    }
+
+    titlebox.style.paddingTop = '0';
+    titlebox.style.paddingBottom = '0';
+    deleteCards();
+    //testCard();
+    getCardData(search);
+}
+
+// removes old cards
+function deleteCards() {
+    for (var i = 0; i < amountofCards; i++) {
+        var cardid = "card" + i;
+        var card = document.getElementById(cardid);
+        card.remove();
     }
 }
 
-function showCard(){
+// creates dummy cards
+function testCard(){
     const container = document.getElementById('cardcontainerID');
-    var information_available = true;
+    const moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
+    const movieTitle = "avatar avatar avatar avatar";
 
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07',
-            'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-        }
-    };
+    for(var i = 0; i < 10; i++) {
 
-    const apiRequestURL = buildURL();
-
-    fetch(apiRequestURL, options)
-	.then(response => response.json())
-	.then(response => {
-		response.result.forEach(data => {
-            const filmTitle = data.title;
-            const filmPoster = data.posterURLs.original;
-            var filmService = "Not legally available";
-            // MAKE ARRAY INSTEAD OF IF ELSE -> MULTIPLE STREAMING SERVICES
-            if(data.streamingInfo.hasOwnProperty("nl")) {
-				if(data.streamingInfo.nl.hasOwnProperty("prime")) {
-					filmService = "streaming_img/prime.png";
-				} else if(data.streamingInfo.nl.hasOwnProperty("netflix")) {
-					filmService = "streaming_img/netflix.png";
-				} else if(data.streamingInfo.nl.hasOwnProperty("disney")) {
-					filmService = "streaming_img/disney.png";
-				} else if(data.streamingInfo.nl.hasOwnProperty("hbo")) {
-					filmService = "streaming_img/hbo.png";
-				} else if(data.streamingInfo.nl.hasOwnProperty("hulu")) {
-					filmService = "streaming_img/hulu.png";
-				} else if(data.streamingInfo.nl.hasOwnProperty("apple")) {
-                    filmService = "streaming_img/apple.png";
-                } else {
-                    information_available = false;
-                }
-			} else {
-                information_available = false;
-            }
-
-            if (information_available == true) {
-                const content = `
-                <div class="card">
+            const content = `
+                <div class="card" id="card${i}">
                     <div class="imagebox">
-                        <img src="${filmPoster}" class="poster">
-                        <div class="streamingservice">
-                            <img src="${filmService}">
+                        <img class="poster" id="poster${i}" value="${moviePoster}" src="${moviePoster}"/>
+                        <div class="streamingservicebox">
+                            <div class="streamingservice">
+                                <img src="streaming_img/netflix.png">
+                            </div>
+                            <div class="streamingservice">
+                                <img src="streaming_img/netflix.png">
+                            </div>
+                            <div class="streamingservice">
+                                <img src="streaming_img/netflix.png">
+                            </div>
                         </div>
                     </div>
-                    <div class="details">
-                        <h3>${filmTitle}</h3>
+                    <div class="titlebox">
+                        <h3 id="title${i}" value="${movieTitle}">${movieTitle}</h3>
+                    </div>
+                    <div class="hover-content">
+                        <a href="javascript:void(0)" onclick="to_watch(${i}); return false;" class="cardbutton">Future</a>
+                        <a href="javascript:void(0)" onclick="cur_watching(${i}); return false;" class="cardbutton">Current</a>
+                        <a href="javascript:void(0)" onclick="watched(${i}); return false;" class="cardbutton">Watched</a>
                     </div>
                 </div>
             `;
 
-                // Append newyly created card element to the container
-                container.innerHTML += content;
-            } else {
-                information_available = true;
+            // Append newly created card element to the container
+            container.innerHTML += content;
+            amountofCards++;
+    }
+
+    for (var j = 0; j < 10; j++) {
+        var cardid = "card" + j;
+        var card = document.getElementById(cardid);
+        changeOpacity(card);
+    }
+
+}
+
+//changes card opacity so that the cards will appear smoothly
+function changeOpacity(card) {
+    setTimeout(() => {
+        card.style.opacity = '1';
+    }, 500);
+}
+
+// creates a html div module for the streamingservice
+function streamingdiv(service) {
+
+    var div = `<div class="streamingservice">
+                    <img src="streaming_img/${service}.png">
+                </div>`;
+
+    return div;
+}
+
+// generates all the cards based on incoming data
+function displayCards(data){
+    const container = document.getElementById('cardcontainerID');
+    var information_available = true;
+    var displayed = {};
+    var cards =[];
+    displayed.cards = cards;
+
+
+    data.forEach(data => {
+        //create streamingservice divs
+        var divs = ``;
+        if (data.netflix == true) {
+            divs = divs + streamingdiv("netflix");
+        }
+        if (data.apple == true) {
+            divs = divs + streamingdiv("apple");
+        }
+        if (data.disney == true) {
+            divs = divs + streamingdiv("disney");
+        }
+        if (data.hbo == true) {
+            divs = divs + streamingdiv("hbo");
+        }
+        if (data.hulu == true) {
+            divs = divs + streamingdiv("hulu");
+        }
+        if (data.prime == true) {
+            divs = divs + streamingdiv("prime");
+        }
+        if (divs == `` || !data.moviePoster) {
+            information_available = false;
+        }
+
+        if (information_available == true) {
+            var carddata = {
+                "id": amountofCards,
+                "movieTitle": data.movieTitle,
+                "moviePoster": data.moviePoster
             }
-			// Construct card content
-		})
-	})
-	.catch(err => console.error(err));
+            displayed.cards.push(carddata);
+
+            const content = `
+                <div class="card" id="card${amountofCards}">
+                    <div class="imagebox">
+                        <img class="poster" id="poster${amountofCards}" value="${data.moviePoster}" src="${data.moviePoster}"/>
+                        <div class="streamingservicebox">
+                            ${divs}
+                        </div>
+                    </div>
+                    <h3 id=title${amountofCards} value="${data.movieTitle}">${data.movieTitle}</h3>
+                    <div class="hover-content">
+                        <a href="javascript:void(0)" onclick="to_watch(${amountofCards}); return false;" class="cardbutton">Future</a>
+                        <a href="javascript:void(0)" onclick="cur_watching(${amountofCards}); return false;" class="cardbutton">Current</a>
+                        <a href="javascript:void(0)" onclick="watched(${amountofCards}); return false;" class="cardbutton">Watched</a>
+                    </div>
+                </div>
+            `;
+
+            // Append newyly created card element to the container
+            container.innerHTML += content;
+            amountofCards++;
+        }
+        information_available = true;
+    })
+
+    console.log(JSON.stringify(displayed));
+
+    for (var i = 0; i < amountofCards; i++) {
+        var cardid = "card" + i;
+        var card = document.getElementById(cardid);
+        changeOpacity(card);
+    }
+
+
 }
 
 function buildURL() {

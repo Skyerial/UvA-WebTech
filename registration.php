@@ -2,7 +2,7 @@
 
 if(!isset($_SESSION)) { session_start(); }
 
-require_once "temp/db.php"; // Do NOT put .php files in root!!!
+require_once "/../../../conn/db.php"; // Do NOT put .php files in root!!!
 
 // The following variables are used to show different error messages in html.
 // An specific error message is shown if the variable is true.
@@ -16,6 +16,9 @@ $errors = [
     'pwc_error' => false, // Password and confirm password don't match error.
     'username_error' => false
 ];
+
+// A pop up message that notifies the user a email has been sent:
+$email_sent = false;
 
 // The user cannot register, if the user is already logged in:
 if (isset($_SESSION['login'])) {
@@ -91,7 +94,8 @@ if (isset($_POST['register'])) {
         $check_dup_email->close();
     }
 
-    if (empty($password) || strlen($password) < 6) {
+    if (empty($password) || strlen($password) < 6 ||
+        (strpos($password, " ") !== false)) {
         $errors['pw_error'] = true;
     }
     if ($password != $cpassword) { $errors['pwc_error'] = true; }
@@ -99,8 +103,8 @@ if (isset($_POST['register'])) {
     if (!(in_array(true, $errors))) {
         // Generate a email verification token:
         $email_token = bin2hex(random_bytes(32));
-        $email_link = "http://webtech-in01.webtech-uva.nl/~tijnk/pages/" .
-        "email_activate.php?email_token=$email_token";
+        $email_link = "http://webtech-in01.webtech-uva.nl/~marcob/" .
+        "login.php?token=$email_token";
 
         // Hash the users password with PASSWORD_BCRYPT and a salt:
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
@@ -120,7 +124,7 @@ if (isset($_POST['register'])) {
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-        $email_message = file_get_contents('email_template.html');
+        $email_message = file_get_contents('email_activation.html');
         $email_message =  str_replace("{{USERNAME}}", $username,
         $email_message);
         $email_message =  str_replace("{{ACTIVATION_LINK}}", $email_link,
@@ -135,8 +139,8 @@ if (isset($_POST['register'])) {
         if (is_resource($conn)) {
             mysqli_close($conn);
         }
-        header("location: email_sent.php");
-        exit(0);
+
+        $email_sent = true;
     } else {
         if (is_resource($conn)) {
             mysqli_close($conn);
@@ -152,113 +156,134 @@ if (isset($_POST['register'])) {
         <meta charset="utf-8">
         <title>Registration form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="styles/nav.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
     <body>
-        <?php require_once 'nav.php'; ?>
+        <?php include 'nav.php'; ?>
+        <div class="content">
+            <div class="reg-form">
+                <div class="reg-header">
+                    <h2>Registration Form</h2>
+                    <p>Please fill all fields in the form</p>
+                </div>
 
-        <div class="reg-form">
-            <div class="reg-header">
-                <h2>Registration Form</h2>
-                <p>Please fill all fields in the form</p>
+                <div id="e-con" class="email-confirmation">
+                    <p class="confirmation-message">We sent you an activation code.
+                        Check your email and click on the link to verify.</p>
+                </div>
+
+                <?php if($email_sent) {
+                    echo "
+                    <script type='text/javascript'>
+                    document.getElementById('e-con').style.display = 'block';
+                    console.log(10);
+                    </script>
+                    ";
+                    }
+                ?>
+
+                <form method = "post" action = "registration.php"
+                autocomplete="off" novalidate>
+
+                    <!-- Enter the (correct) generated CSRF token: -->
+                    <input type = "hidden" name = "csrf_token"
+                    value = "<?= $_SESSION['csrf_token'] ?>">
+
+                    <div class="input-box">
+                        <label>Username</label><br>
+                        <input type="text" name="username" class="form-control"
+                        value="" maxlength="30" required="">
+                        <?php if($errors['username_error']): ?>
+                            <div class="error-message">
+                                <p>Please enter a valid username. A username cannot
+                                contain spaces.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Email</label><br>
+                        <input type="email" name="email" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['mail_error']): ?>
+                            <div class="error-message">
+                                <p>Please enter a valid email.</p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['mail_dup_error']): ?>
+                            <div class="error-message">
+                                <p>This email is already in use.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Password</label><br>
+                        <input type="password" name="password" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['pw_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                    Please enter a valid password with a minimum of
+                                    6 characters.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Confirm Password</label><br>
+                        <input type="password" name="cpassword"
+                        class="form-control" value="" maxlength="255" required="">
+                        <?php if($errors['pwc_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                    The fields 'Password' and 'Confirm Password'
+                                    don't match.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class = "recaptcha">
+                        <div class = "g-recaptcha" data-sitekey =
+                        "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
+                    </div>
+
+                    <div class="form-sub-message">
+                        <?php if($errors['csrf_error']): ?>
+                            <div class="error-message">
+                                <p> Invalid CSRF token! </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['captcha_empty']): ?>
+                            <div class="error-message">
+                                <p> Please check the the captcha form. </p>
+                            </div>
+                        <?php elseif($errors['captcha_error']): ?>
+                            <div class="error-message">
+                                <p> You did not pass the captcha test, please try
+                                    again. </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <input type="submit" class="form-btn" name="register"
+                    value="Submit">
+
+                    <br><br><br><br>
+                    <p class="form-sub-message">Already have an account?</p>
+                    <a href="login.php" class="form-btn">Login</a>
+                </form>
+
+
+                <!-- <p class="form-sub-message">Already have an account?</p>
+                <a href="login.php" class="form-btn">Login</a> -->
             </div>
-
-            <form method = "post" action = "registration.php"
-            autocomplete="off" novalidate>
-
-                <!-- Enter the (correct) generated CSRF token: -->
-                <input type = "hidden" name = "csrf_token"
-                value = "<?= $_SESSION['csrf_token'] ?>">
-
-                <div class="input-box">
-                    <label>Username</label><br>
-                    <input type="text" name="username" class="form-control"
-                    value="" maxlength="30" required="">
-                    <?php if($errors['username_error']): ?>
-                        <div class="error-message">
-                            <p>Please enter a valid username. A username cannot
-                               contain spaces.</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class="input-box">
-                    <label>Email</label><br>
-                    <input type="email" name="email" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['mail_error']): ?>
-                        <div class="error-message">
-                            <p>Please enter a valid email.</p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['mail_dup_error']): ?>
-                        <div class="error-message">
-                            <p>This email is already in use.</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class="input-box">
-                    <label>Password</label><br>
-                    <input type="password" name="password" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['pw_error']): ?>
-                        <div class="error-message">
-                            <p>
-                                Please enter a valid password with a minimum of
-                                6 characters.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class="input-box">
-                    <label>Confirm Password</label><br>
-                    <input type="password" name="cpassword"
-                    class="form-control" value="" maxlength="255" required="">
-                    <?php if($errors['pwc_error']): ?>
-                        <div class="error-message">
-                            <p>
-                                The fields 'Password' and 'Confirm Password'
-                                don't match.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class = "recaptcha">
-                    <div class = "g-recaptcha" data-sitekey =
-                    "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
-                </div>
-
-                <div class="form-sub-message">
-                    <?php if($errors['csrf_error']): ?>
-                        <div class="error-message">
-                            <p> Invalid CSRF token! </p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['captcha_empty']): ?>
-                        <div class="error-message">
-                            <p> Please check the the captcha form. </p>
-                        </div>
-                    <?php elseif($errors['captcha_error']): ?>
-                        <div class="error-message">
-                            <p> You did not pass the captcha test, please try
-                                again. </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <input type="submit" class="form-btn" name="register"
-                value="Submit">
-            </form>
-
-            <br><br>
-
-            <p class="form-sub-message">Already have an account?</p>
-            <a href="login.php" class="form-btn">Login</a>
         </div>
     </body>
 </html>
