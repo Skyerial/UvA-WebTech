@@ -16,5 +16,6 @@
         <div class="titlerow" id="title">
             <h1 class="title" id="titletext">About, soonTM</h1>
         </div>
+        <?php require_once("footer.php")?>
     </body>
 </html>

@@ -61,8 +61,8 @@ function searchbutton() {
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
     deleteCards();
-    //testCard();
-    getCardData(search);
+    testCard();
+    // getCardData(search);
 }
 
 function deleteCards() {
@@ -77,7 +77,7 @@ function deleteCards() {
 function testCard(){
     const container = document.getElementById('cardcontainerID');
 
-    for(var i = 0; i < 10; i++) {
+    for(var i = 0; i < 35; i++) {
             const content = `
             <div class="card" id="card${i}">
                 <div class="imagebox">
@@ -108,7 +108,7 @@ function testCard(){
             amountofCards++;
     }
 
-    for (var j = 0; j < 10; j++) {
+    for (var j = 0; j < 35; j++) {
         var cardid = "card" + j;
         var card = document.getElementById(cardid);
         changeOpacity(card);
