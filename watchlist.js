@@ -12,11 +12,5 @@ function openWatch(evt, watchName) {
     evt.currentTarget.className += " active";
 }
 
-function showCards() {
-    var futureWatching = document.getElementById("Future Watching");
-    var currentlyWatching = document.getElementById("Currently Watching");
-    var finishedWatching = document.getElementById("Finished Watching");
-    
-}
 
 document.getElementById("defaultOpen").click();

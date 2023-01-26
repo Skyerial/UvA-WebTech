@@ -61,14 +61,15 @@ function apiCall($apiUrl) {
  */
 
 class movieDetails {
+    var $id;
     var $movieTitle;
     var $moviePoster;
-    var $prime = false;
-    var $netflix = false;
-    var $disney = false;
-    var $hbo = false;
-    var $hulu = false;
-    var $apple = false;
+    var $prime;
+    var $netflix;
+    var $disney;
+    var $hbo;
+    var $hulu;
+    var $apple;
 }
 
 function condenseData($response) {
@@ -81,27 +82,32 @@ function condenseData($response) {
         $movie->movieTitle = $data->title;
         if(!empty($data->posterURLs->original)) {
             $movie->moviePoster = $data->posterURLs->original;
+        } else {
+            continue;
         }
         if(!empty($data->streamingInfo->nl)) {
             if(!empty($data->streamingInfo->nl->prime)) {
-                $movie->prime = true;
+                $movie->prime = $data->streamingInfo->nl->prime[0]->link;
             }
             if(!empty($data->streamingInfo->nl->netflix)) {
-                $movie->netflix = true;
+                $movie->netflix = $data->streamingInfo->nl->netflix[0]->link;
             }
             if(!empty($data->streamingInfo->nl->disney)) {
-                $movie->disney = true;
+                $movie->disney = $data->streamingInfo->nl->disney[0]->link;
             }
             if(!empty($data->streamingInfo->nl->hbo)) {
-                $movie->hbo = true;
+                $movie->hbo = $data->streamingInfo->nl->hbo[0]->link;
             }
             if(!empty($data->streamingInfo->nl->hulu)) {
-                $movie->hulu = true;
+                $movie->hulu = $data->streamingInfo->nl->hulu[0]->link;
             }
             if(!empty($data->streamingInfo->nl->apple)) {
-                $movie->apple = true;
+                $movie->apple = $data->streamingInfo->nl->apple[0]->link;
             }
+        } else {
+            continue;
         }
+        $movie->id = $i;
         $result[$i] = $movie;
         $i++;
     }

@@ -1,4 +1,5 @@
 var amountofCards = 0;
+var data;
 
 // This string check found on:
 // https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-numbers/
@@ -20,7 +21,9 @@ function getCardData(search){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status == 200) {
             var movieDetails = xhttp.responseText;
-            displayCards(JSON.parse(movieDetails));
+            console.log(JSON.parse(movieDetails));
+            data = JSON.parse(movieDetails);
+            displayCards(data);
         }
     };
 
@@ -150,11 +153,11 @@ function changeOpacity(card) {
 }
 
 // creates a html div module for the streamingservice
-function streamingdiv(service) {
+function streamingdiv(service, servicelink) {
 
-    var div = `<div class="streamingservice">
+    var div = `<a href="${servicelink}" class="streamingservice">
                     <img src="streaming_img/${service}.png">
-                </div>`;
+                </a>`;
 
     return div;
 }
@@ -162,77 +165,59 @@ function streamingdiv(service) {
 // generates all the cards based on incoming data
 function displayCards(data){
     const container = document.getElementById('cardcontainerID');
-    var information_available = true;
-    var displayed = {};
-    var cards =[];
-    displayed.cards = cards;
-
 
     data.forEach(data => {
         //create streamingservice divs
         var divs = ``;
-        if (data.netflix == true) {
-            divs = divs + streamingdiv("netflix");
+        if (data.netflix) {
+            divs = divs + streamingdiv("netflix", data.netflix);
         }
-        if (data.apple == true) {
-            divs = divs + streamingdiv("apple");
+        if (data.apple) {
+            divs = divs + streamingdiv("apple", data.apple);
         }
-        if (data.disney == true) {
-            divs = divs + streamingdiv("disney");
+        if (data.disney) {
+            divs = divs + streamingdiv("disney", data.disney);
         }
-        if (data.hbo == true) {
-            divs = divs + streamingdiv("hbo");
+        if (data.hbo) {
+            divs = divs + streamingdiv("hbo", data.hbo);
         }
-        if (data.hulu == true) {
-            divs = divs + streamingdiv("hulu");
+        if (data.hulu) {
+            divs = divs + streamingdiv("hulu", data.hulu);
         }
-        if (data.prime == true) {
-            divs = divs + streamingdiv("prime");
-        }
-        if (divs == `` || !data.moviePoster) {
-            information_available = false;
+        if (data.prime) {
+            divs = divs + streamingdiv("prime", data.prime);
         }
 
-        if (information_available == true) {
-            var carddata = {
-                "id": amountofCards,
-                "movieTitle": data.movieTitle,
-                "moviePoster": data.moviePoster
-            }
-            displayed.cards.push(carddata);
-
-            const content = `
-                <div class="card" id="card${amountofCards}">
-                    <div class="imagebox">
-                        <img class="poster" id="poster${amountofCards}" value="${data.moviePoster}" src="${data.moviePoster}"/>
-                        <div class="streamingservicebox">
-                            ${divs}
-                        </div>
-                    </div>
-                    <h3 id=title${amountofCards} value="${data.movieTitle}">${data.movieTitle}</h3>
-                    <div class="hover-content">
-                        <a href="javascript:void(0)" onclick="to_watch(${amountofCards}); return false;" class="cardbutton">Future</a>
-                        <a href="javascript:void(0)" onclick="cur_watching(${amountofCards}); return false;" class="cardbutton">Current</a>
-                        <a href="javascript:void(0)" onclick="watched(${amountofCards}); return false;" class="cardbutton">Watched</a>
+        const content = `
+            <div class="card" id="card${data.id}">
+                <div class="imagebox">
+                    <img class="poster" src="${data.moviePoster}"/>
+                    <div class="streamingservicebox">
+                        ${divs}
                     </div>
                 </div>
-            `;
+                <h3">${data.movieTitle}</h3>
+                <div class="hover-content">
+                    <a href="javascript:void(0)" onclick="to_watch(${data.id}); return false;" class="cardbutton">Future</a>
+                    <a href="javascript:void(0)" onclick="cur_watching(${data.id}); return false;" class="cardbutton">Current</a>
+                    <a href="javascript:void(0)" onclick="watched(${data.id}); return false;" class="cardbutton">Watched</a>
+                </div>
+            </div>
+        `;
 
-            // Append newyly created card element to the container
-            container.innerHTML += content;
-            amountofCards++;
-        }
-        information_available = true;
+        // Append newyly created card element to the container
+        container.innerHTML += content;
+        amountofCards++;
+
     })
 
-    console.log(JSON.stringify(displayed));
+    //console.log(JSON.stringify(displayed));
 
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
         var card = document.getElementById(cardid);
         changeOpacity(card);
     }
-
 
 }
 
