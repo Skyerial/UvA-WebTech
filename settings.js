@@ -1,10 +1,13 @@
+// Show regions on click.
 function dropdown() {
     var x = document.body;
     x.classList.toggle("show");
 }
 
+// This doesn't work, click anywhere and close dropdown again.
 document.addEventListener("click", classList.remove("show"));
 
+// Set new selected region and change region in database user.
 function new_region(region, email) {
     // Show the selected region.
     document.getElementById("selected-region").innerHTML = region;
@@ -20,6 +23,7 @@ function new_region(region, email) {
     fetch(request);
 }
 
+// Search bar region.
 function search() {
     var input = document.getElementById("search-input");
     // Set input string to uppercase.

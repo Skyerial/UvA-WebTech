@@ -14,8 +14,13 @@
         <!-- insert the nav bar -->
         <?php require_once("nav.php")?>
         <div class="titlerow" id="title">
-            <h1 class="title" id="titletext">About, soonTM</h1>
+            <h1 class="title" id="titletext">About</h1>
         </div>
+
+        <p>Projectplan tekst</p>
+
+
+
         <?php require_once("footer.php")?>
     </body>
 </html>

@@ -8,7 +8,7 @@ function specialChar(str) {
     return /^\w+( \w+)*$/.test(str);
 }
 
-function getCardData(search){
+function getCardData(search) {
     const container = document.getElementById('cardcontainerID');
 
     // START XMLHttpRequest
