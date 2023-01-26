@@ -1,6 +1,14 @@
 <?php
 
-// Define log file:
+////////////////////////////////////////////////////////////////////////////////
+// Imported files:
+////////////////////////////////////////////////////////////////////////////////
+require_once "account_verification/session_token.php";
+require_once "/../../../conn/db.php";
+
+////////////////////////////////////////////////////////////////////////////////
+// Error log file definement:
+////////////////////////////////////////////////////////////////////////////////
 define("ERROR_LOG_FILE", "errorLog/error.txt");
 
 class movieDetails {
@@ -15,9 +23,17 @@ class movieDetails {
 }
 
 $movie = new movieDetails;
+$card_counter = 0;
+$displayed_cards = array();
 
+function get_data() {
+    global $displayed_cards;
+    var_dump($displayed_cards);
+    return $displayed_cards;
+}
 function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
     global $movie;
+
     // new card
     if ($movie->moviePoster != $moviePoster) {
         if ($movie->moviePoster) {
@@ -43,34 +59,46 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
 }
 
 function display_card($movie, $playlist) {
-    //var_dump($movie);
+    global $card_counter;
+    global $displayed_cards;
+    $displayed_cards[] = array('id' => "$card_counter",
+                                'movieTitle' => "$movie->movieTitle",
+                                'moviePoster' => "$movie->moviePoster",
+                                'prime' => "$movie->prime",
+                                'netflix' => "$movie->netflix",
+                                'disney' => "$movie->disney",
+                                'hbo' => "$movie->hbo",
+                                'hulu' => "$movie->hulu",
+                                'apple' => "$movie->apple",
+                                );
+    //var_dump($displayed_cards);
     ?>
-        <div class="card" id="card" style="opacity: 1 !important;">
+        <div class="card" id="card<?=$card_counter?>" style="opacity: 1 !important;">
             <div class="imagebox">
                 <img class="poster" src="<?=$movie->moviePoster?>"/>
                 <div class="streamingservicebox">
                     <?php if($movie->prime) {?>
-                        <a href="<?=$movie->prime?>" class="streamingservice">
+                        <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/prime.png">
                         </a>
                     <?php } if($movie->netflix) {?>
-                        <a href="<?=$movie->netflix?>" class="streamingservice">
+                        <a href="<?=$movie->netflix?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/netflix.png">
                         </a>
                     <?php } if($movie->disney) {?>
-                        <a href="<?=$movie->disney?>" class="streamingservice">
+                        <a href="<?=$movie->disney?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/disney.png">
                         </a>
                     <?php } if($movie->hbo) {?>
-                        <a href="<?=$movie->hbo?>" class="streamingservice">
+                        <a href="<?=$movie->hbo?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/hbo.png">
                         </a>
                     <?php } if($movie->hulu) {?>
-                        <a href="<?=$movie->hulu?>" class="streamingservice">
+                        <a href="<?=$movie->hulu?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/hulu.png">
                         </a>
                     <?php } if($movie->apple) {?>
-                        <a href="<?=$movie->apple?>" class="streamingservice">
+                        <a href="<?=$movie->apple?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/apple.png">
                         </a>
                     <?php }?>
@@ -82,20 +110,20 @@ function display_card($movie, $playlist) {
             <div class="hover-content">
                 <?php if ($playlist == "future watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Current</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Watched</a>
+                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
+                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
                 <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
                 <?php
                 } else if ($playlist == "currently watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Future</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Watched</a>
+                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
+                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
                 <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
                 <?php
                 } else if ($playlist == "finished watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Future</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Current</a>
+                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
+                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
                 <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
                 <?php
                 }
@@ -103,6 +131,7 @@ function display_card($movie, $playlist) {
             </div>
         </div>
     <?php
+    $card_counter++;
 }
 
 // retrieve_playlist retrieves the title, picture URL and streaming service
@@ -144,7 +173,7 @@ function retrieve_playlist($conn, $email, $playlist) {
         // Note: the variables are arrays, so title = $row['title'];
         // Note: $row['streaming_service'] is all lowercase (e.g. netflix);
         // Note: after the close-statement, the variables no longer exist!
-        echo $row['title'] . " " . $row['streaming_service'];
+        //echo $row['title'] . " " . $row['streaming_service'];
         fill_class($row['title'], $row['picture_url'], $row['ss_link'], $row['streaming_service'], $playlist);
     }
     //display last card
@@ -154,6 +183,5 @@ function retrieve_playlist($conn, $email, $playlist) {
     }
     $movie = new MovieDetails;
 }
-
 ?>
 

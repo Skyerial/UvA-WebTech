@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="watchlist.js" defer></script>
+        <script type="text/javascript" src="addtest.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
@@ -22,27 +23,34 @@
 
             if(!isset($_SESSION)) { session_start(); }
 
-            // Check if the user is logged in, if not exit with an error message:
-            if (!(isset($_SESSION['login']))) {
-                if (is_resource($conn)) {
-                    mysqli_close($conn);
+            // Check if the user is logged in, if not redirect the user to the login page.
+            if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
+                if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
+                    if (is_resource($conn)) { mysqli_close($conn); }
+                    header("Location: login.php");
+                    exit(0);
                 }
-                exit("You are not logged in.");
+            } else {
+                if (is_resource($conn)) { mysqli_close($conn); }
+                header("Location: login.php");
+                exit(0);
             }
 
             //Show playlist:
             function display_playlist($conn, $playlist) {
                 try {
                     //echo($conn);
-                    retrieve_playlist($conn, $_SESSION['login'], $playlist);
+                    retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
+                    global $displayed_cards;
+                    $_SESSION['displayed_cards'] = $displayed_cards;
+                    //var_dump($displayed_cards);
+                    //echo json_encode($displayed_cards);
                 } catch (Exception $err) {
-                    // $err_file = fopen(ERROR_LOG_FILE, "a");
-                    // fwrite($err_file, $err->getMessage() . "\n");
-                    // fclose($err_file);
+                    $err_file = fopen(ERROR_LOG_FILE, "a");
+                    fwrite($err_file, $err->getMessage() . "\n");
+                    fclose($err_file);
                 }
             }
-
-
 
         ?>
 
@@ -78,3 +86,4 @@
 
     </body>
 </html>
+

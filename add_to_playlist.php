@@ -4,7 +4,7 @@
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
 require_once "account_verification/session_token.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Error log file definement:
@@ -168,11 +168,15 @@ function retrieve_pid($conn, $user_id, $playlist) {
         throw new Exception ("[list_exist] Could not execute query.");
     }
 
-    $list_exist->bind_result($playlist_id);
-    $list_exist->fetch();
-    $list_exist->close();
+    $list_exist->store_result();
+    if ($list_exist->num_rows > 0) {
+        // Item already exists. Retrieve item id:
+        $list_exist->bind_result($playlist_id);
+        $list_exist->fetch();
+        $list_exist->close();
 
-    if (empty($playlist_id)) {
+        return $playlist_id;
+    } else {
         // No playlist exists, create a new one:
         $add_playlist = $conn->prepare("INSERT INTO playlist_user(uid)
                                         VALUES (?)");
@@ -288,22 +292,20 @@ function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
 ////////////////////////////////////////////////////////////////////////////////
 
 $body = file_get_contents('php://input');
-$json = json_decode($body);
-$title = $json->title;
-$picture = $json->picture;
-$service = $json->service;
-$service_url = $json->service_url;
-$playlist = $json->playlist;
+$json = json_decode($body, true);
+$title = $json["movieTitle"];
+$picture = $json["moviePoster"];
+$service = $json["service"];
+$service_url = $json["service_url"];
+$playlist = $json["playlist"];
+//exit("$body");
 
-//delay
-echo date('h:i:s') . "<br>";
-
-//sleep for 1 seconds
-sleep(1);
-
-//start again
-echo date('h:i:s');
-
+// check if $playlist stores a valid value.
+if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
+    exit("Invalid playlist");
+}
+$cookie = $_COOKIE['login'];
+exit("$cookie");
 // Check if the user is logged in, if not redirect the user to the login page.
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
