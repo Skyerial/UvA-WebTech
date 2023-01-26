@@ -170,7 +170,7 @@ function retrieve_pid($conn, $user_id, $playlist) {
 
     $list_exist->store_result();
     if ($list_exist->num_rows > 0) {
-        // Item already exists. Retrieve item id:
+        // Playlist already exists. Retrieve playlist id:
         $list_exist->bind_result($playlist_id);
         $list_exist->fetch();
         $list_exist->close();
@@ -292,20 +292,13 @@ function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
 ////////////////////////////////////////////////////////////////////////////////
 
 $body = file_get_contents('php://input');
-$json = json_decode($body, true);
-$title = $json["movieTitle"];
-$picture = $json["moviePoster"];
-$service = $json["service"];
-$service_url = $json["service_url"];
-$playlist = $json["playlist"];
-//exit("$body");
+$json = json_decode($body);
+$title = $json->title;
+$picture = $json->picture;
+$service = $json->service;
+$service_url = $json->service_url;
+$playlist = $json->playlist;
 
-// check if $playlist stores a valid value.
-if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
-    exit("Invalid playlist");
-}
-$cookie = $_COOKIE['login'];
-exit("$cookie");
 // Check if the user is logged in, if not redirect the user to the login page.
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {

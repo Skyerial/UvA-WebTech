@@ -7,10 +7,7 @@ function sendData(id, playlist) {
 
     //console.log(JSON.parse(body));
     const request = new Request('switch_playlist.php', {
-        method: 'POST', body: body, credentials: 'include',
-        headers: {
-            'Cookie': document.cookie
-        }
+        method: 'POST', body: body
     });
     fetch(request).then(response => response.text()).then(result => console.log(result));
     //.then(result => console.log(result));

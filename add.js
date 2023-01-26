@@ -1,8 +1,8 @@
 function addToPlaylist(id, service_url, service, playlist) {
 
     const body = JSON.stringify({
-        movieTitle: data[id].movieTitle,
-        moviePoster: data[id].moviePoster,
+        title: data[id].movieTitle,
+        picture: data[id].moviePoster,
         service: service,
         service_url: service_url,
         playlist: playlist
@@ -12,8 +12,7 @@ function addToPlaylist(id, service_url, service, playlist) {
     const request = new Request('add_to_playlist.php', {
         method: 'POST', body: body
     });
-    fetch(request).then(response => response.text())
-    //.then(result => console.log(result));
+    fetch(request).then(response => response.text()).then(result => console.log(result));
 }
 
 function sendData(id, playlist) {
