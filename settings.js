@@ -12,16 +12,28 @@ function new_region(region, email) {
     // Show the selected region.
     document.getElementById("selected-region").innerHTML = region;
 
-    const body = JSON.stringify({
-        region: region,
-        email: email,
+    // Send the data to update_region.php:
+    fetch('update_region.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: JSON.stringify({
+            region: region,
+            email: email
+        })
+    }).then(response => {
+        if (response.headers.get('Content-Type') !== 'application/json') {
+            throw new Error('Unexpected Content-Type');
+        } else if (response.status === 200) {
+            alert("Region updated successfully!");
+        } else {
+            alert("Error occurred while updating region!");
+        }
+        return response.json();
+    }).catch(error => {
+        console.error('Error:', error);
     });
-    // Change the region per user in another file.
-    const request = new Request('update_region.php', {
-        method: 'POST', body: body
-    });
-    fetch(request);
 }
+
 
 // Search bar region.
 function search() {

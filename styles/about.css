@@ -1,0 +1,36 @@
+* {
+    font-family: 'Roboto';
+}
+
+.titlerow {
+    height: 5vh;
+    padding-top: 2vh;
+    padding-bottom: 3vh;
+    border-radius: 25px 25px 0 0;
+}
+
+.title {
+    font-size: 400%;
+}
+
+.text {
+    text-align: center;
+    color: #e0f3f2;
+    width: 75%;
+    padding: 20px;
+    border-radius: 25px;
+    margin: auto;
+}
+
+body {
+    background-color: #5a6973;
+}
+
+.border {
+    width: 30%;
+    margin: auto;
+    border: 2px solid;
+    border-color: #B8DBD9;
+    border-radius: 25px;
+    background-color: #6c848c;
+}
