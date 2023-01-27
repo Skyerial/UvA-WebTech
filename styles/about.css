@@ -27,10 +27,15 @@ body {
 }
 
 .border {
-    width: 30%;
+    width: 34%;
     margin: auto;
     border: 2px solid;
     border-color: #B8DBD9;
     border-radius: 25px;
     background-color: #6c848c;
+    padding-bottom: 20px;
+}
+
+.table {
+    display: table;
 }

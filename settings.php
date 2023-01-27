@@ -410,49 +410,61 @@ if (isset($_POST['change_password'])) {
                     ?>
 
                     <!-- End confirmation messages -->
-
                     <form method = "post" action = "settings.php"
                     autocomplete="off" novalidate>
                         <input type="hidden" name="csrf_token"
                         value="<?=retrieve_csrf($conn)?>">
 
-                        <label>Username</label>
-                        <input type="text" name="username" class="#"
-                        value="" maxlength="30" required=""><br>
-
-                        <?php if($errors['username_error']): ?>
-                            <div class="#">
-                                <p>
-                                    Please enter a valid username. A username
-                                    cannot contain spaces.
-                                </p>
+                        <div class = "table">
+                            <div class = "column left">    
+                                <label>Username</label>
                             </div>
-                        <?php endif; ?>
-
-                        <label>Current password</label>
-                        <input type="password" name="cur_password" class="#"
-                        value="" maxlength="255" required=""><br>
-
-                        <?php if($errors['curpw_error']): ?>
-                            <div class="#">
-                                <p>
-                                    Please enter your current password
-                                </p>
+                            <div class = "column right">    
+                                <input type="text" name="username" class="#"
+                                value="" maxlength="30" required=""><br>
                             </div>
-                        <?php endif; ?>
 
-                        <label>New Password</label>
-                        <input type="password" name="new_password" class="#"
-                        value="" maxlength="255" required=""><br><br>
-
-                        <?php if($errors['pw_error']): ?>
-                            <div class="#">
-                                <p>
-                                    Please enter a valid password with a
-                                    minimum of 6 characters.
-                                </p>
+                            <?php if($errors['username_error']): ?>
+                                <div class="appear">
+                                    <p>
+                                        Please enter a valid username. A username
+                                        cannot contain spaces.
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <div class = "column left">    
+                                <label>Current password</label>
                             </div>
-                        <?php endif; ?>
+                            <div class = "column right">    
+                                <input type="password" name="cur_password" class="#"
+                                value="" maxlength="255" required=""><br>
+                            </div>
+
+                            <?php if($errors['curpw_error']): ?>
+                                <div class="appear">
+                                    <p>
+                                        Please enter your current password
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class = "column left">    
+                                <label>New Password</label>
+                            </div>
+                            <div class = "column right">    
+                                <input type="password" name="new_password" class="#"
+                                value="" maxlength="255" required=""><br><br>
+                            </div>
+
+                            <?php if($errors['pw_error']): ?>
+                                <div class="appear">
+                                    <p>
+                                        Please enter a valid password with a
+                                        minimum of 6 characters.
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
 
                         <input type="submit" class="changed_name"
                         name="change_username" value="Change username">
@@ -460,7 +472,7 @@ if (isset($_POST['change_password'])) {
                         name="change_password" value="Change password">
 
                         <?php if($errors['csrf_error']): ?>
-                            <div class="#">
+                            <div class="appear">
                                 <p>
                                     Invalid/Expired CSRF token!
                                     Please refresh the page.
@@ -471,7 +483,8 @@ if (isset($_POST['change_password'])) {
                 </div>
             </div>
         </div>
-
+        
+        <br>
         <?php require_once("footer.php")?>
         
     </body>

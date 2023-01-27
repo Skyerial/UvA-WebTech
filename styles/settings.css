@@ -156,3 +156,29 @@ select {
 .show .view {
     opacity: 1;
 }
+
+/* Columns for input forms. */
+.column {
+    float: left;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.left {
+    width: 25%;
+    /* box-sizing: border-box; */
+}
+
+.right {
+    width: 25%;
+}
+
+.column:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* 
+.appear {
+    /* display: hidden; */
+    /* color: #5a6973 */
