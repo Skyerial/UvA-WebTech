@@ -92,8 +92,8 @@ function searchbutton() {
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
     deleteCards();
-    testCard();
-    // getCardData(search);
+    // testCard();
+    getCardData(search);
 }
 
 // removes old cards
