@@ -89,15 +89,15 @@ if (isset($_POST['reset_password'])) {
 
     <body>
         <?php include 'nav.php'; ?>
+        <div class="content">
+            <div class="reg-form">
+                <div class="reg-header">
+                    <h2>Login Form</h2>
+                    <p>Please fill all fields in the form</p>
+                </div>
 
-        <div class="reg-form">
-            <div class="reg-header">
-                <h2>Login Form</h2>
-                <p>Please fill all fields in the form</p>
-            </div>
-
-            <form method = "post" action = "reset_password.php"
-            autocomplete="off" novalidate>
+                <form method = "post" action = "reset_password.php"
+                autocomplete="off" novalidate>
 
                 <div class="input-box">
                     <label>Password</label>
@@ -113,9 +113,10 @@ if (isset($_POST['reset_password'])) {
                     <?php endif; ?>
                 </div>
 
-                <input type="submit" class="form-btn" name="reset_password"
-                value="Submit">
-            </form>
+                    <input type="submit" class="form-btn" name="reset_password"
+                    value="Submit">
+                </form>
+            </div>
         </div>
     </body>
 </html>

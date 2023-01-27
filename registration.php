@@ -176,95 +176,100 @@ if (isset($_POST['register'])) {
                 <input type="hidden" name="csrf_token"
                 value="<?=generate_csrf($conn)?>">
 
-                <div class="input-box">
-                    <label>Username</label><br>
-                    <input type="text" name="username" class="form-control"
-                    value="" maxlength="30" required="">
-                    <?php if($errors['username_error']): ?>
-                        <div class="error-message">
-                            <p>Please enter a valid username. A username cannot
-                               contain spaces.</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <div class="input-box">
+                        <label>Username</label><br>
+                        <input type="text" name="username" class="form-control"
+                        value="" maxlength="30" required="">
+                        <?php if($errors['username_error']): ?>
+                            <div class="error-message">
+                                <p>Please enter a valid username. A username cannot
+                                contain spaces.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <div class="input-box">
-                    <label>Email</label><br>
-                    <input type="email" name="email" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['mail_error']): ?>
-                        <div class="error-message">
-                            <p>Please enter a valid email.</p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['mail_dup_error']): ?>
-                        <div class="error-message">
-                            <p>This email is already in use.</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <div class="input-box">
+                        <label>Email</label><br>
+                        <input type="email" name="email" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['mail_error']): ?>
+                            <div class="error-message">
+                                <p>Please enter a valid email.</p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['mail_dup_error']): ?>
+                            <div class="error-message">
+                                <p>This email is already in use.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <div class="input-box">
-                    <label>Password</label><br>
-                    <input type="password" name="password" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['pw_error']): ?>
-                        <div class="error-message">
-                            <p>
-                                Please enter a valid password with a minimum of
-                                6 characters.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <div class="input-box">
+                        <label>Password</label><br>
+                        <input type="password" name="password" class="form-control"
+                        value="" maxlength="255" required="">
+                        <?php if($errors['pw_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                    Please enter a valid password with a minimum of
+                                    6 characters.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <div class="input-box">
-                    <label>Confirm Password</label><br>
-                    <input type="password" name="cpassword"
-                    class="form-control" value="" maxlength="255" required="">
-                    <?php if($errors['pwc_error']): ?>
-                        <div class="error-message">
-                            <p>
-                                The fields 'Password' and 'Confirm Password'
-                                don't match.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <div class="input-box">
+                        <label>Confirm Password</label><br>
+                        <input type="password" name="cpassword"
+                        class="form-control" value="" maxlength="255" required="">
+                        <?php if($errors['pwc_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                    The fields 'Password' and 'Confirm Password'
+                                    don't match.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <div class = "recaptcha">
-                    <div class = "g-recaptcha" data-sitekey =
-                    "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
-                </div>
+                    <div class = "recaptcha">
+                        <div class = "g-recaptcha" data-sitekey =
+                        "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
+                    </div>
 
-                <div class="form-sub-message">
-                    <?php if($errors['csrf_error']): ?>
-                        <div class="error-message">
-                            <p> Invalid CSRF token! </p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($errors['captcha_empty']): ?>
-                        <div class="error-message">
-                            <p> Please check the the captcha form. </p>
-                        </div>
-                    <?php elseif($errors['captcha_error']): ?>
-                        <div class="error-message">
-                            <p> You did not pass the captcha test, please try
-                                again. </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <div class="form-sub-message">
+                        <?php if($errors['csrf_error']): ?>
+                            <div class="error-message">
+                                <p> Invalid CSRF token! </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['captcha_empty']): ?>
+                            <div class="error-message">
+                                <p> Please check the the captcha form. </p>
+                            </div>
+                        <?php elseif($errors['captcha_error']): ?>
+                            <div class="error-message">
+                                <p> You did not pass the captcha test, please try
+                                    again. </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <input type="submit" class="form-btn" name="register"
-                value="Submit">
-            </form>
+                    <input type="submit" class="form-btn" name="register"
+                    value="Submit">
+
+                    <br><br><br><br>
+                    <p class="form-sub-message">Already have an account?</p>
+                    <a href="login.php" class="form-btn">Login</a>
+                </form>
 
             <!-- End registration form -->
 
             <br><br>
 
-            <p class="form-sub-message">Already have an account?</p>
-            <a href="login.php" class="form-btn">Login</a>
+                <!-- <p class="form-sub-message">Already have an account?</p>
+                <a href="login.php" class="form-btn">Login</a> -->
+            </div>
         </div>
     </body>
 </html>

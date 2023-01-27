@@ -305,6 +305,14 @@ if (isset($_POST['to_register'])) {
     exit(0);
 }
 
+if (isset($_POST['to_register'])) {
+    if (is_resource($conn)) {
+        mysqli_close($conn);
+    }
+    header("location: registration.php");
+    exit(0);
+}
+
 ?>
 
 <!DOCTYPE html>
