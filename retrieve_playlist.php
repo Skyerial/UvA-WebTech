@@ -40,9 +40,11 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
             display_card($movie, $playlist);
             $movie = new movieDetails;
         }
-        $movie->movieTitle = $movieTitle;
-        $movie->moviePoster = $moviePoster;
+        $movie->movieTitle = htmlspecialchars($movieTitle);
+        $movie->moviePoster = htmlspecialchars($moviePoster);
     }
+    $ssLink = htmlspecialchars($ssLink);
+
     if ($service == "prime") {
         $movie->prime = $ssLink;
     } else if ($service == "netflix") {
@@ -71,6 +73,9 @@ function display_card($movie, $playlist) {
                                 'hulu' => "$movie->hulu",
                                 'apple' => "$movie->apple",
                                 );
+    $current = "currently watching";
+    $future = "future watching";
+    $finished = "finished watching";
     //var_dump($displayed_cards);
     ?>
         <div class="card" id="card<?=$card_counter?>" style="opacity: 1 !important;">
@@ -98,7 +103,7 @@ function display_card($movie, $playlist) {
                             <img src="streaming_img/hulu.png">
                         </a>
                     <?php } if($movie->apple) {?>
-                        <a href="<?=$movie->apple?>" target="_blank" class="streamingservice">
+                        <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/apple.png">
                         </a>
                     <?php }?>
@@ -112,19 +117,19 @@ function display_card($movie, $playlist) {
                 ?>
                 <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
                 <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">Delete</a>
                 <?php
                 } else if ($playlist == "currently watching") {
                 ?>
                 <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
                 <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">Delete</a>
                 <?php
                 } else if ($playlist == "finished watching") {
                 ?>
                 <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
                 <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
-                <a href="javascript:void(0)" onclick="" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">Delete</a>
                 <?php
                 }
                 ?>

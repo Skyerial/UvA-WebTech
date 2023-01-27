@@ -80,8 +80,8 @@ function condenseData($response) {
     foreach ($obj->result as $data) {
         $movie = new movieDetails;
         $movie->movieTitle = $data->title;
-        if(!empty($data->posterURLs->original)) {
-            $movie->moviePoster = $data->posterURLs->original;
+        if(!empty($data->posterURLs->{"500"})) {
+            $movie->moviePoster = $data->posterURLs->{"500"};
         } else {
             continue;
         }

@@ -413,27 +413,22 @@ if($data["prime"]) {
     $service_url = $data["prime"];
     addToPlaylist($title, $poster, $service_url, "prime", $playlist);
 }
-sleep(1);
 if($data["netflix"]) {
     $service_url = $data["netflix"];
     addToPlaylist($title, $poster, $service_url, "netflix", $playlist);
 }
-sleep(1);
 if($data["disney"]) {
     $service_url = $data["disney"];
     addToPlaylist($title, $poster, $service_url, "disney", $playlist);
 }
-sleep(1);
 if($data["hbo"]) {
     $service_url = $data["hbo"];
     addToPlaylist($title, $poster, $service_url, "hbo", $playlist);
 }
-sleep(1);
 if($data["hulu"]) {
     $service_url = $data["hulu"];
     addToPlaylist($title, $poster, $service_url, "hulu", $playlist);
 }
-sleep(1);
 if($data["apple"]) {
     $service_url = $data["apple"];
     addToPlaylist($title, $poster, $service_url, "apple", $playlist);
