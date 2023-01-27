@@ -1,0 +1,68 @@
+.tabrow {
+    margin-top: -6.7vh;
+    position: absolute;
+    background: transparent;
+    display: flex;
+    width: 100vw;
+    height: 13.5vh;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 1.5s;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2f4550;
+    border-style: outset;
+    border-color: rgb(108, 132, 140);
+    height: 8vh;
+    border-radius: 40px;
+}
+
+.tab button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 25px;
+    color: #e5e5e5;
+    padding: 1.6vh 1.7vw;
+    text-align: center;
+    display: inline-block;
+    font-size: calc(1em + .1vmin);
+    margin: 1em 1em;
+    cursor: pointer;
+}
+
+.tab button:hover {
+    background-color: #B8DBD9;
+    color: black;
+}
+
+.tab button.active {
+    background-color: #B8DBD9;
+    color: black;
+}
+
+.tabcontent{
+    display: none;
+    padding: 6px 12px;
+}
+
+/* Empty message */
+.banner {
+    position: relative;
+    text-align: center;
+    height: 50vw;
+    width: 50vw;
+}
+
+.banner img {
+    padding: 20px;
+    height: 30%;
+    width: 30%;
+}
+
+h3 {
+    font-size: calc(1em + 1vmin);
+}
