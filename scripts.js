@@ -58,6 +58,14 @@ function searchbutton() {
         }, delayInMilliseconds);
     }
 
+    // maybe this should be done with display none, as to not make invisible
+    // buttons?...
+    var footer = document.getElementById('footerID');
+    footer.style.visibility = 'visible';
+    var navLogo = document.getElementById('logoID');
+    navLogo.style.visibility = 'visible';
+    navLogo.style.opacity = 1;
+
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
     deleteCards();
@@ -76,24 +84,24 @@ function deleteCards() {
 
 function testCard(){
     const container = document.getElementById('cardcontainerID');
-
+    
     for(var i = 0; i < 35; i++) {
-            const content = `
-            <div class="card" id="card${i}">
-                <div class="imagebox">
-                    <img class="poster" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"/>
+        const content = `
+        <div class="card" id="card${i}">
+        <div class="imagebox">
+        <img class="poster" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"/>
                     <div class="streamingservicebox">
                         <div class="streamingservice">
                             <img src="streaming_img/netflix.png">
+                            </div>
+                        <div class="streamingservice">
+                        <img src="streaming_img/netflix.png">
                         </div>
                         <div class="streamingservice">
                             <img src="streaming_img/netflix.png">
                         </div>
-                        <div class="streamingservice">
-                            <img src="streaming_img/netflix.png">
                         </div>
-                    </div>
-                </div>
+                        </div>
                 <h3>Avatar</h3>
                 <div class="hover-content">
                     <a href="" class="cardbutton">A</a>
@@ -103,17 +111,16 @@ function testCard(){
             </div>
         `;
 
-            // Append newyly created card element to the container
-            container.innerHTML += content;
+        // Append newyly created card element to the container
+        container.innerHTML += content;
             amountofCards++;
     }
-
+    
     for (var j = 0; j < 35; j++) {
         var cardid = "card" + j;
         var card = document.getElementById(cardid);
         changeOpacity(card);
     }
-
 }
 
 function changeOpacity(card) {

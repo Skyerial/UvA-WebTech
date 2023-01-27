@@ -10,21 +10,38 @@
         <link rel="stylesheet" href="styles/nav.css">
         <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="scripts.js"></script>
+        <script type="text/javascript" src="watchlist.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
 
         <!-- insert the nav bar -->
-        <?php require_once("nav.php")?>
+        <?php
+            require_once("nav.php");
+            require_once("retrieve_playlist.php");
+            require_once "/../../../conn/db.php";
 
-        <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
-            
-            <div class="searchrow" id="formID">
-                <form class="search-bar" name="search" action="#" onsubmit="searchbutton();return false">
-                    <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
-                    <button type="submit" id="buttonID"></button>
-                </form>
-            </div>
+            if(!isset($_SESSION)) { session_start(); }
+
+            // Check if the user is logged in, if not exit with an error message:
+            if (!(isset($_SESSION['login']))) {
+                if (is_resource($conn)) {
+                    mysqli_close($conn);
+                }
+                exit("You are not logged in.");
+            }
+
+            // Retrieve the user id:
+            $user_id = retrieve_uid($conn, $_SESSION['login']);
+            if (!$user_id) { exit("No user found."); }
+
+            // This variable holds the name of the playlist, you must retrieve it somehow.
+            $playlist = "finished watching";
+
+
+        ?>
+
+        <div class="content" id="contentID">
 
             <div class="tabrow">
                 <div class="tab">
@@ -36,65 +53,29 @@
 
             <div id="Future Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <div class="card" id="card0" style="opacity: 1;">
-                        <div class="imagebox">
-                            <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg">
-                            <div class="buttonbox">
-                                <a href="" class="cardbutton">A</a>
-                                <a href="" class="cardbutton">B</a>
-                                <a href="" class="cardbutton">C</a>
-                            </div>
-                        </div>
-                        <h3>Avatar</h3>
-                        <div class="hover-content">
-                        <p> LOREM IPSUM NOGWATTUS </p>
-                        </div>
-                    </div>
+                <div class="banner">
+                    <!-- <img src="streaming_img/watchlist.png"> -->
+                    <!-- <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. <h3> -->
+                </div>
+                    <!-- <?php retrieve_playlist($conn, $user_id, "future watching"); ?> -->
                 </div>
             </div>
 
             <div id="Currently Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <div class="card" id="card0" style="opacity: 1;">
-                        <div class="imagebox">
-                            <img src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg">
-                            <div class="buttonbox">
-                                <a href="" class="cardbutton">A</a>
-                                <a href="" class="cardbutton">B</a>
-                                <a href="" class="cardbutton">C</a>
-                            </div>
-                        </div>
-                        <h3>Avatar</h3>
-                        <div class="hover-content">
-                        <p> LOREM IPSUM NOGWATTUS </p>
-                        </div>
-                    </div>
+                    <!-- <?php retrieve_playlist($conn, $user_id, "currently watching"); ?> -->
                 </div>
             </div>
 
             <div id="Finished Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <div class="card" id="card0" style="opacity: 1;">
-                        <div class="imagebox">
-                            <img src="https://m.media-amazon.com/images/M/MV5BMzdjNjI5MmYtODhiNS00NTcyLWEzZmUtYzVmODM5YzExNDE3XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_QL75_UX190_CR0,2,190,281_.jpg">
-                            <div class="buttonbox">
-                                <a href="" class="cardbutton">A</a>
-                                <a href="" class="cardbutton">B</a>
-                                <a href="" class="cardbutton">C</a>
-                            </div>
-                        </div>
-                        <h3>Avatar</h3>
-                        <div class="hover-content">
-                        <p> LOREM IPSUM NOGWATTUS </p>
-                        </div>
-                    </div>
+                    <!-- <?php retrieve_playlist($conn, $user_id, "finished watching"); ?> -->
                 </div>
             </div>
-            
+
         </div>
 
-        <?php require_once("footer.php")?>
-        
-        <script type="text/javascript" src="watchlist.js"></script>
+        <?php require_once("footer.php"); ?>
+
     </body>
-</html> 
+</html>

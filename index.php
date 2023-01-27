@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="styles/homepage.css">
         <link rel="stylesheet" href="styles/nav.css">
         <script type="text/javascript" src="scripts.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
 
         <!-- insert the nav bar -->
-        <?php require_once("nav.php")?>
+        <?php require_once("nav.php"); ?>
 
         <main>
             <div class="titlerow" id="title">
@@ -45,7 +46,7 @@
             </div>
         </main>
 
-        <!-- <?php require_once("footer.php")?> -->
+        <?php require_once("footer.php"); ?>
 
     </body>
 </html>

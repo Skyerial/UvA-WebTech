@@ -1,4 +1,4 @@
-<footer>
+<footer id="footerID">
     <div class="footer-content">
         <ul>
             <li><a href="index.php">Home</a></li>
