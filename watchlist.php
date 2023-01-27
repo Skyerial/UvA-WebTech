@@ -38,42 +38,45 @@
             // This variable holds the name of the playlist, you must retrieve it somehow.
             $playlist = "finished watching";
 
-
         ?>
 
-        <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
+        <main>
+            <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
 
-            <div class="tabrow">
-                <div class="tab">
-                    <button class="tablinks" onclick="openWatch(event, 'Future Watching')" id="defaultOpen">Future Watching</button>
-                    <button class="tablinks" onclick="openWatch(event, 'Currently Watching')">Currently Watching</button>
-                    <button class="tablinks" onclick="openWatch(event, 'Finished Watching')">Finished Watching</button>
+                <div class="tabrow">
+                    <div class="tab">
+                        <button class="tablinks" onclick="openWatch(event, 'Future Watching')" id="defaultOpen">Future Watching</button>
+                        <button class="tablinks" onclick="openWatch(event, 'Currently Watching')">Currently Watching</button>
+                        <button class="tablinks" onclick="openWatch(event, 'Finished Watching')">Finished Watching</button>
+                    </div>
                 </div>
+
+                <div id="Future Watching" class ="tabcontent">
+                    <div class="cardcontainer" id="cardcontainerID">
+                    <div class="banner">
+                        <img src="streaming_img/watchlist.png">
+                        <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
+                    </div>
+                        <!-- <?php //retrieve_playlist($conn, $user_id, "future watching"); ?> -->
+                    </div>
+                </div>
+
+                <div id="Currently Watching" class ="tabcontent">
+                    <div class="cardcontainer" id="cardcontainerID">
+                        <!-- <?php //retrieve_playlist($conn, $user_id, "currently watching"); ?> -->
+                    </div>
+                </div>
+
+                <div id="Finished Watching" class ="tabcontent">
+                    <div class="cardcontainer" id="cardcontainerID">
+                        <!-- <?php //retrieve_playlist($conn, $user_id, "finished watching"); ?> -->
+                    </div>
+                </div>
+
             </div>
+        </main>
 
-            <div id="Future Watching" class ="tabcontent">
-                <div class="cardcontainer" id="cardcontainerID">
-                <div class="banner">
-                    <img src="streaming_img/watchlist.png">
-                    <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. <h3>
-                </div>
-                    <?php retrieve_playlist($conn, $user_id, "future watching"); ?>
-                </div>
-            </div>
-
-            <div id="Currently Watching" class ="tabcontent">
-                <div class="cardcontainer" id="cardcontainerID">
-                <?php retrieve_playlist($conn, $user_id, "currently watching"); ?>
-                </div>
-            </div>
-
-            <div id="Finished Watching" class ="tabcontent">
-                <div class="cardcontainer" id="cardcontainerID">
-                    <?php retrieve_playlist($conn, $user_id, "finished watching"); ?>
-                </div>
-            </div>
-
-        </div>
+        <?php require_once("footer.php"); ?>
 
     </body>
 </html>

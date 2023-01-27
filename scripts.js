@@ -40,6 +40,7 @@ function animations() {
         titlebox.style.height = '0px'
         titletext.style.fontSize = '0px'
         contentbox.style.background = '#6c848c'
+        
         var delayInMilliseconds = 1500;
 
         setTimeout(function() {

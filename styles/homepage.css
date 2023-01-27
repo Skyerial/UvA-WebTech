@@ -75,6 +75,7 @@ body {
     height: 60px;
     background: #2F4550;
     cursor: pointer;
+    border-top-style: hidden;
 }
 
 .search-bar button:hover {
@@ -85,8 +86,8 @@ body {
     transition-duration: 1.5s;
     background: #2F4550;
     display: flex;
-    width: 100%;
-    height: inherit;
+    width: 100vw;
+    min-height: 100vh;
 }
 
 .cardcontainer {
