@@ -5,43 +5,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>TITEL</title>
         <link rel="stylesheet" href="styles/homepage.css">
         <link rel="stylesheet" href="styles/nav.css">
         <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="watchlist.js" defer></script>
+        <script type="text/javascript" src="switch.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
 
         <!-- insert the nav bar -->
         <?php
-            require_once("nav.php");
-            require_once("retrieve_playlist.php");
-            require_once "/../../../conn/db.php";
+            require_once "nav.php";
+            require_once "../../../conn/db.php";
+            require_once "retrieve_playlist.php";
 
             if(!isset($_SESSION)) { session_start(); }
 
-            // Check if the user is logged in, if not exit with an error message:
-            if (!(isset($_SESSION['login']))) {
-                if (is_resource($conn)) {
-                    mysqli_close($conn);
+            // Check if the user is logged in, if not redirect the user to the login page.
+            if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
+                if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
+                    if (is_resource($conn)) { mysqli_close($conn); }
+                    header("Location: login.php");
+                    exit(0);
                 }
-                exit("You are not logged in.");
+            } else {
+                if (is_resource($conn)) { mysqli_close($conn); }
+                header("Location: login.php");
+                exit(0);
             }
 
-            // Retrieve the user id:
-            $user_id = retrieve_uid($conn, $_SESSION['login']);
-            if (!$user_id) { exit("No user found."); }
-
-            // This variable holds the name of the playlist, you must retrieve it somehow.
-            $playlist = "finished watching";
-
+            //Show playlist:
+            function display_playlist($conn, $playlist) {
+                try {
+                    //echo($conn);
+                    retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
+                    global $displayed_cards;
+                    $_SESSION['displayed_cards'] = $displayed_cards;
+                    //var_dump($displayed_cards);
+                    //echo json_encode($displayed_cards);
+                } catch (Exception $err) {
+                    $err_file = fopen(ERROR_LOG_FILE, "a");
+                    fwrite($err_file, $err->getMessage() . "\n");
+                    fclose($err_file);
+                }
+            }
 
         ?>
 
-        <div class="content" id="contentID">
+        <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
 
             <div class="tabrow">
                 <div class="tab">
@@ -53,29 +66,24 @@
 
             <div id="Future Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                <div class="banner">
-                    <!-- <img src="streaming_img/watchlist.png"> -->
-                    <!-- <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. <h3> -->
-                </div>
-                    <!-- <?php retrieve_playlist($conn, $user_id, "future watching"); ?> -->
+                    <?php display_playlist($conn, "future watching"); ?>
                 </div>
             </div>
 
             <div id="Currently Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <!-- <?php retrieve_playlist($conn, $user_id, "currently watching"); ?> -->
+                <?php display_playlist($conn, "currently watching"); ?>
                 </div>
             </div>
 
             <div id="Finished Watching" class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <!-- <?php retrieve_playlist($conn, $user_id, "finished watching"); ?> -->
+                    <?php display_playlist($conn, "finished watching"); ?>
                 </div>
             </div>
 
         </div>
 
-        <?php require_once("footer.php"); ?>
-
     </body>
 </html>
+

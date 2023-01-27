@@ -4,15 +4,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>TITEL</title>
-        <link rel="stylesheet" href="styles/homepage.css">
-        <link rel="stylesheet" href="styles/nav.css">
+        <link rel="stylesheet" type="text/css" href="styles/homepage.css">
+        <link rel="stylesheet" type="text/css" href="styles/nav.css">
+        <title>wheretowatch.com</title>
+        <script type="text/javascript" src="watchlistadd.js"></script>
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
+        <script type="text/javascript" src="add.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
-
         <!-- insert the nav bar -->
         <?php require_once("nav.php"); ?>
 
