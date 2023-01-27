@@ -1,22 +1,22 @@
 <?php
 
-function add_session_token($conn, $session_token, $email) {
-    // Hash the session token:
-    $hashed_token = password_hash($session_token, PASSWORD_BCRYPT);
+// function add_session_token($conn, $session_token, $email) {
+//     // Hash the session token:
+//     $hashed_token = password_hash($session_token, PASSWORD_BCRYPT);
 
-    $add_session_token = $conn->prepare(
-        "UPDATE user SET session_token = ? WHERE email = ?"
-    );
+//     $add_session_token = $conn->prepare(
+//         "UPDATE user SET session_token = ? WHERE email = ?"
+//     );
 
-    if (!$add_session_token->bind_param("ss", $hashed_token, $email)) {
-        throw new Exception ("[add_token] Could not bind parameters.");
-    }
-    if (!$add_session_token->execute()) {
-        throw new Exception ("[add_token] Could not execute query.");
-    }
+//     if (!$add_session_token->bind_param("ss", $hashed_token, $email)) {
+//         throw new Exception ("[add_token] Could not bind parameters.");
+//     }
+//     if (!$add_session_token->execute()) {
+//         throw new Exception ("[add_token] Could not execute query.");
+//     }
 
-    $add_session_token->close();
-}
+//     $add_session_token->close();
+// }
 
 function retrieve_token($conn, $email) {
     $token_query = $conn->prepare(

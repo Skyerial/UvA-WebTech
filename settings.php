@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "../../tijnk/public_html/pages/account_verification/basic_error_checks.php";
-require_once "../../tijnk/public_html/pages/account_verification/close_connection.php";
-require_once "../../tijnk/public_html/pages/account_verification/csrf.php";
-require_once "../../tijnk/public_html/pages/account_verification/session_token.php";
+require_once "account_verification/basic_error_checks.php";
+require_once "account_verification/close_connection.php";
+require_once "account_verification/csrf.php";
+require_once "account_verification/session_token.php";
 require_once "/../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -300,30 +300,6 @@ if (isset($_POST['change_password'])) {
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="settings.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-
-        <!-- <?php
-        // require_once "../../../../conn/db.php";
-        // // Block the page if the user is not logged in:
-        // // if (!isset($_SESSION)) { session_start(); }
-        // // if (!(isset($_SESSION['login']))) { exit("You are not logged in"); }
-
-        // // Receive the current region of the user.
-        // $retrieve_region = $conn->prepare("SELECT region.region FROM user LEFT JOIN 
-        // region ON user.rid = region.rid WHERE email = ?");
-        // if (!$retrieve_region->bind_param("s", $_SESSION['login'])) {
-        //     exit("Could not bind parameters.");
-        // }
-        // if (!$retrieve_region->execute()) {
-        //     exit("Could not execute query.");
-        // }
-        // $retrieve_result = $retrieve_region->get_result();
-        // $retrieve_row = $retrieve_result->fetch_assoc();
-        // if(isset($retrieve_row['region'])){
-        //     $region = $retrieve_row['region'];
-        // } else {
-        //     $region = "Select region";
-        // }
-        ?> -->
     </head>
     <body>
         <!-- insert the nav bar -->
