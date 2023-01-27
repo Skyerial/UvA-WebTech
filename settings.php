@@ -256,6 +256,7 @@ if (isset($_POST['change_password'])) {
 
     // Error checking: password.
     basic_password_error($cur_password, $errors);
+    basic_password_error($new_password, $errors);
 
     if (!(in_array(true, $errors))) {
         // To check if the entered password corresponds to the password in the
@@ -399,6 +400,7 @@ if (isset($_POST['change_password'])) {
                                 <input type="text" name="username" class="#"
                                 value="" maxlength="30" required=""><br>
                             </div>
+                            <br><br>
 
                             <?php if($errors['username_error']): ?>
                                 <div class="appear">
@@ -414,7 +416,7 @@ if (isset($_POST['change_password'])) {
                             <div class = "column right">    
                                 <input type="password" name="cur_password" class="#"
                                 value="" maxlength="255" required=""><br>
-                            </div>
+                            </div><br><br>
 
                             <?php if($errors['curpw_error']): ?>
                                 <div class="appear">
@@ -442,9 +444,9 @@ if (isset($_POST['change_password'])) {
                             <?php endif; ?>
                         </div>
 
-                        <input type="submit" class="changed_name"
+                        <input type="submit" class="submit"
                         name="change_username" value="Change username">
-                        <input type="submit" class="changed_pass"
+                        <input type="submit" class="submit"
                         name="change_password" value="Change password">
 
                         <?php if($errors['csrf_error']): ?>
