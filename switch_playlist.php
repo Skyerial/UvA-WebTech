@@ -305,6 +305,9 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         exit("You are not logged in");
     }
 
+        /* Start transaction */
+    $conn->begin_transaction();
+
     // Retrieve necessary variable to add item to the database:
     try {
         $service_id = retrieve_ssid($conn, $service);
@@ -312,6 +315,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
     if (!$service_id) { exit("Streaming service is not known."); }
 
@@ -322,6 +327,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
 
     // Add the service link to the database:
@@ -331,6 +338,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
 
     // Retrieve necessary variable to add the item to the playlist:
@@ -340,6 +349,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
     if (!$user_id) { exit("No user found."); }
 
@@ -350,6 +361,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
 
     // Check if the item doesn't already exist in another playlist:
@@ -359,6 +372,8 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
 
     // Finally add the item to the playlist:
@@ -368,7 +383,12 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+
+        $conn->rollback();
     }
+
+    /* If code reaches this point without errors then commit the data in the database */
+    $conn->commit();
 
     // The code has successfully executed. Close the connection to the database and
     // exit with succes code '0':
@@ -404,10 +424,12 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     exit("cookie");
 }
 
+
 $data = $_SESSION['displayed_cards'][$id];
 //var_dump($data["movieTitle"]);
 $title = $data["movieTitle"];
 $poster = $data["moviePoster"];
+
 
 if($data["prime"]) {
     $service_url = $data["prime"];

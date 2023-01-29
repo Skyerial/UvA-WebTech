@@ -25,12 +25,16 @@ function deleteData(id, playlist) {
 }
 
 
+function deleteCard(id) {
+    var cardID = "card" + id;
+    var card = document.getElementById(cardID);
+    card.remove();
+}
 
+function to_watch(id) { sendData(id, "future watching"); deleteCard(id);  }
 
-function to_watch(id) { sendData(id, "future watching"); }
+function cur_watching(id) { sendData(id, "currently watching"); deleteCard(id); }
 
-function cur_watching(id) { sendData(id, "currently watching"); }
+function watched(id) { sendData(id, "finished watching"); deleteCard(id); }
 
-function watched(id) { sendData(id, "finished watching"); }
-
-function delete_item(id, playlist) { deleteData(id, playlist); }
+function delete_item(id, playlist) { deleteData(id, playlist); deleteCard(id); }

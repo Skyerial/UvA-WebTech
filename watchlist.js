@@ -1,5 +1,6 @@
 function openWatch(evt, watchName) {
     var i, tabcontent, tablinks;
+    //document.location.reload()
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";

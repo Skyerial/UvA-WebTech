@@ -73,6 +73,7 @@ function display_card($movie, $playlist) {
                                 'hulu' => "$movie->hulu",
                                 'apple' => "$movie->apple",
                                 );
+                                
     $current = "currently watching";
     $future = "future watching";
     $finished = "finished watching";

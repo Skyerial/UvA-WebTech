@@ -16,7 +16,7 @@ require_once "/../../../conn/db.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAV</title>
-
+    <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32" />
     <link rel="stylesheet" href="styles/nav.css">
 </head>
 
@@ -29,7 +29,7 @@ require_once "/../../../conn/db.php";
                 <?php
                 if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
                 && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
-                <li><a href="watchlist.php">WATCHLIST</a></li>
+                <li><a href="future.php">WATCHLIST</a></li>
                 <li><a href="settings.php">SETTINGS</a></li>
                 <li><a href="account_verification/logout.php">LOGOUT</a></li>
                 <!-- <li>
