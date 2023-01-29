@@ -305,6 +305,14 @@ if (isset($_POST['to_register'])) {
     exit(0);
 }
 
+if (isset($_POST['to_register'])) {
+    if (is_resource($conn)) {
+        mysqli_close($conn);
+    }
+    header("location: registration.php");
+    exit(0);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -460,9 +468,9 @@ if (isset($_POST['to_register'])) {
             </div>
         </form>
 
-        <!-- End login form -->
+            </div>
+        </div>
 
-    </div>
-</body>
-
+        <?php require_once("footer.php")?>
+    </body>
 </html>

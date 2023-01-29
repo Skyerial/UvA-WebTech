@@ -1,5 +1,9 @@
-.navbar {
+@import "colors.css";
+
+nav {
     transition-property: padding;
+    position: sticky;
+    bottom: 100%;
     background: #2F4550;
     padding-top: 60px;
     padding-left: 8%;
@@ -7,22 +11,129 @@
     height: auto;
     display: flex;
     align-items: center;
-    padding-bottom: 80px;
+    padding-bottom: 65px;
 }
 
-nav {
-    flex: 1;
+.nav-logo {
+    visibility: hidden;
+    opacity: 0;
+    transition: 2.5s ease;
+    font-size: 30px;
+}
+.nav-logo p a {
+    font-weight: 1000;
+    text-decoration: none;
+    color: #B8DBD9;
+    font-family: sans-serif;
+}
+@media only screen and (max-width: 768px) {
+    .nav-logo {
+        font-size: 25px;
+    }
+}
+
+.navbar {
     text-align: right;
+    flex: 1;
 }
-
 nav ul li {
     list-style: none;
     display: inline-block;
     margin-left: 60px;
 }
-
-nav ul li a{
+nav ul li a {
     text-decoration: none;
     color: #B8DBD9;
     font-size: 20px;
+}
+nav ul li a:hover {
+    transition: 0.2s;
+    color: aliceblue;
+}
+nav ul li::after { 
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: aliceblue;
+    display: block;
+    margin: auto;
+    transition: 0.3s;
+}
+nav ul li:hover::after {
+    width: 103%;
+}
+#sidebar .toggle-button {
+    position: absolute;
+    top: 55px;
+    right: 165px;
+    padding: 5px;
+}
+@media only screen and (max-width: 768px) {
+    #sidebar {
+        position: absolute;
+        right: -150px;
+        top: 0;
+        width: 150px;
+        height: 100vh;
+        background-color: #000;
+    }
+    #sidebar.active {
+        right: 0;
+    }
+    .navbar {
+        text-align: left;
+    }
+    #sidebar ul li {
+        padding: 20px 24px;
+        margin-left: 0;
+    }
+    #sidebar .toggle-button {
+        position: absolute;
+        top: 55px;
+        right: 165px;
+        padding: 5px;
+    }
+    .toggle-button span {
+        width: 35px;
+        height: 5px;
+        background: #B8DBD9;
+        display: block;
+        margin: 4px;
+    }
+}
+
+/* footer stuff */
+footer {
+    visibility: hidden;
+    background: #2F4550;
+    /* this keeps the footer at the bottom of the page */
+    position: sticky;
+    top: 100%;
+    width: 100vw;
+    color: #B8DBD9;
+    padding-top: 10px;
+}
+.footer-content {
+    text-align: center;
+    margin: auto;
+}
+footer ul li {
+    display: inline-block;
+    list-style: none;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+footer ul li a {
+    text-decoration: none;
+    color: #B8DBD9;
+}
+.footer-bottom {
+    background: #2F4550;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.footer-bottom p {
+    font-size: 14px;
 }

@@ -81,10 +81,18 @@ function searchbutton() {
         }, delayInMilliseconds);
     }
 
+    // maybe this should be done with display none, as to not make invisible
+    // buttons?...
+    var footer = document.getElementById('footerID');
+    footer.style.visibility = 'visible';
+    var navLogo = document.getElementById('logoID');
+    navLogo.style.visibility = 'visible';
+    navLogo.style.opacity = 1;
+
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
     deleteCards();
-    //testCard();
+    // testCard();
     getCardData(search);
 }
 
@@ -136,13 +144,12 @@ function testCard(){
             container.innerHTML += content;
             amountofCards++;
     }
-
-    for (var j = 0; j < 10; j++) {
+    
+    for (var j = 0; j < 35; j++) {
         var cardid = "card" + j;
         var card = document.getElementById(cardid);
         changeOpacity(card);
     }
-
 }
 
 //changes card opacity so that the cards will appear smoothly
