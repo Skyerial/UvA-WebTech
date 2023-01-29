@@ -1,6 +1,31 @@
 <?php
 $q = $_POST['movieTitle'];
 
+function retrieve_short($conn, $email) {
+    $retrieve_short = $conn->prepare(
+        "SELECT region.short_region
+        FROM user
+        LEFT JOIN region ON user.rid = region.rid
+        WHERE email = ?"
+    );
+
+    if (!$retrieve_short->bind_param("s", $email)) {
+        throw new Exception ("[retrieve_short] Could not bind parameters.");
+    }
+    if (!$retrieve_short->execute()) {
+        throw new Exception ("[retrieve_short] Could not execute query.");
+    }
+
+    $retrieve_result = $retrieve_short->get_result();
+    $retrieve_row = $retrieve_short->fetch_assoc();
+
+    if(isset($retrieve_short['short_region'])){
+        return $retrieve_short['short_region'];
+    } else {
+        return "nl";
+    }
+}
+
 // title needs to be checked before it is used anywhere...
 function buildUrl($title) {
     if(!preg_match('/^\w+( \w+)*$/', $title)) {
@@ -13,7 +38,18 @@ function buildUrl($title) {
     $countrySetting = '&country=';
     $typeSetting = '&type=';
     $languageSetting = '&output_language=';
-    $country = 'nl';
+
+    // Check if the user is logged in, if not redirect the user to the login page.
+    if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
+        if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
+            $country = 'nl';
+        } else {
+            $country = retrieve_short($conn, $_COOKIE);
+        }
+    } else {
+        $country = 'nl';
+    }
+
     $type = 'all';
     $language = 'en';
     return "{$startUrl}{$title}{$countrySetting}{$country}{$typeSetting}{$type}{$languageSetting}{$language}";

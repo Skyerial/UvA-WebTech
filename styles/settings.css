@@ -162,6 +162,7 @@ select {
     float: left;
     padding: 3px;
     box-sizing: border-box;
+    height: 1px;
 }
 
 .left {

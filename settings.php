@@ -335,7 +335,8 @@ if (isset($_POST['change_password'])) {
                     <!-- Get all regions from database and put them in a dropdown -->
                     <div id = "regions" class = "all-options">
                         <?php while ($line = mysqli_fetch_array($receive)):;?>
-                        <div class = "option" onclick = "new_region('<?php echo $line[1];?>', '<?php echo$_COOKIE['checker'] ?>')">
+                        <div class = "option" onclick = "new_region('<?php echo $line[1];?>', 
+                        '<?php echo$_COOKIE['checker'] ?>')">
                             <input type = "radio" class = "input_php">
                             <label><?php echo $line[1];?></label>
                         </div>
