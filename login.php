@@ -485,4 +485,7 @@ if (isset($_POST['to_register'])) {
 
         </div>
         </main>
+
+        <?php require_once("footer.php")?>
+    </body>
 </html>

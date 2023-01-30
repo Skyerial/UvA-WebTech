@@ -115,7 +115,11 @@ body {
     justify-content: center;
     padding-top: 60px;
     row-gap: 20px;
+    /* min-height: 60vw; */
     height: fit-content;
+}
+.cardcontainer.open {
+    min-height: 64vh;
 }
 .card {
     opacity: 0;

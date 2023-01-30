@@ -113,7 +113,7 @@ function testCard(){
     const moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
     const movieTitle = "avatar avatar avatar avatar";
 
-    for(var i = 0; i < 10; i++) {
+    for(var i = 0; i < 1; i++) {
 
             const content = `
                 <div class="card" id="card${i}">

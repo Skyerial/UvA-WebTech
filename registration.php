@@ -144,7 +144,7 @@ if (isset($_POST['register'])) {
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
-    <body>
+    <body onload="showFooter()">
         <?php require_once("nav.php");?>
 
         <main id="mainID">

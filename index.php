@@ -9,6 +9,7 @@
         <title>wheretowatch.com</title>
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
+        <script type="text/javascript" src="homepageScript.js" defer></script>
         <script type="text/javascript" src="add.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
@@ -23,7 +24,7 @@
 
             <div class="content" id="contentID">
                 <div class="searchrow" id="formID">
-                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();return false">
+                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();showLoadingAnimation();return false">
                         <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
                         <button type="submit" id="buttonID"></button>
                     </form>
