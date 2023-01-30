@@ -7,7 +7,7 @@ require_once "account_verification/basic_error_checks.php";
 require_once "account_verification/close_connection.php";
 require_once "account_verification/csrf.php";
 require_once "account_verification/session_token.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Check session:

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password reset</title>
+    <title>Account Blocked</title>
     <style>
         body {
             background-color: #d1cdcd;
@@ -14,6 +14,7 @@
             background-color: #383f43;
         }
     </style>
+
 </head>
 
 <body>
@@ -41,23 +42,24 @@
           ">
             WhereToWatch.com
         </div>
-
         <!-- The title for the email content -->
         <h2 style="text-align: center; color: #B8DBD9; font-size: 18px;">
-            Reset Password
+            Account Blocked
         </h2>
 
         <!-- The main text for the email content -->
         <p style="
-              text-align: center;
-              color: #B8DBD9;
-              font-size: 14px;
-              padding: 0 10%;
-              line-height: 1.5;">
+          text-align: center;
+          color: #B8DBD9;
+          font-size: 14px;
+          padding: 0 10%;
+          line-height: 1.5;">
 
             Hello {{USERNAME}},
-            We've received a request to reset your password on WhereToWatch.com.
-            Please click the green button below to set a new password.
+            We have noticed that your account on WhereToWatch.com has been
+            blocked due to multiple failed login attempts.
+
+            To unlock your account, please click the green button below.
         </p>
 
         <!-- The button for resetting the password -->
@@ -88,23 +90,4 @@
             </a>
 
         </div>
-
-        <!--
-            This section displays a message to the email owner in case the
-            process was not initiated by the owner.
-        -->
-        <p style="
-              text-align: center;
-              color: #B8DBD9;
-              font-size: 12px;
-              padding: 0 10%;
-              margin-top: 20px;
-              line-height: 1.5;">
-
-            If you did not initiate this password reset, please ignore this
-            message and contact us if necessary.
-        </p>
     </div>
-</body>
-
-</html>

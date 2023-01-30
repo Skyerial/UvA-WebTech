@@ -36,6 +36,21 @@ function reset_password($conn, $hashed_password, $token) {
     $reset_pw->close();
 }
 
+function activate_account($conn) {
+    $activate_account = $conn->prepare(
+        "UPDATE user SET status = '0' WHERE activation_code = ?"
+    );
+
+    if (!$activate_account->bind_param("s", $_SESSION['token'])) {
+        throw new Exception ("[activate_account] Could not bind parameters.");
+    }
+    if (!$activate_account->execute()) {
+        throw new Exception ("[activate_account] Could not execute query.");
+    }
+
+    $activate_account->close();
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Start session:
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +79,14 @@ if (isset($_POST['reset_password'])) {
             fclose($err_file);
         }
 
+        try {
+            activate_account($conn);
+        } catch (Exception $err) {
+            $err_file = fopen(ERROR_LOG_FILE, "a");
+            fwrite($file, $err->getMessage() . "\n");
+            fclose($err_file);
+        }
+
         close_connection($conn);
         session_destroy();
         unset($_SESSION['token']);
@@ -80,25 +103,24 @@ if (isset($_POST['reset_password'])) {
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Login form</title>
+        <title>Unblock account</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
-        <link rel="stylesheet" href="styles/nav.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
     <body>
         <?php include 'nav.php'; ?>
-        <div class="content">
-            <div class="reg-form">
-                <div class="reg-header">
-                    <h2>Login Form</h2>
-                    <p>Please fill all fields in the form</p>
-                </div>
 
-                <form method = "post" action = "reset_password.php"
-                autocomplete="off" novalidate>
+        <div class="reg-form">
+            <div class="reg-header">
+                <h2>Unblock account</h2>
+                <p>Enter a new password to unblock your account.</p>
+            </div>
+
+            <form method = "post" action = "reset_password.php"
+            autocomplete="off" novalidate>
 
                 <div class="input-box">
                     <label>Password</label>
@@ -114,10 +136,9 @@ if (isset($_POST['reset_password'])) {
                     <?php endif; ?>
                 </div>
 
-                    <input type="submit" class="form-btn" name="reset_password"
-                    value="Submit">
-                </form>
-            </div>
+                <input type="submit" class="form-btn" name="reset_password"
+                value="Submit">
+            </form>
         </div>
     </body>
 </html>
