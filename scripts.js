@@ -91,6 +91,7 @@ function searchbutton() {
 
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
+
     deleteCards();
     // testCard();
     getCardData(search);
@@ -103,6 +104,7 @@ function deleteCards() {
         var card = document.getElementById(cardid);
         card.remove();
     }
+    amountofCards = 0;
 }
 
 // creates dummy cards
@@ -144,7 +146,7 @@ function testCard(){
             container.innerHTML += content;
             amountofCards++;
     }
-    
+
     for (var j = 0; j < 35; j++) {
         var cardid = "card" + j;
         var card = document.getElementById(cardid);
@@ -162,7 +164,7 @@ function changeOpacity(card) {
 // creates a html div module for the streamingservice
 function streamingdiv(service, servicelink) {
 
-    var div = `<a href="${servicelink}" class="streamingservice">
+    var div = `<a href="${servicelink}" target="_blank" class="streamingservice">
                     <img src="streaming_img/${service}.png">
                 </a>`;
 

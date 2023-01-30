@@ -117,6 +117,8 @@ function condenseData($response) {
 
 $actualDataToSend = condenseData(apiCall(buildUrl($q)));
 
+if(!isset($_SESSION)) { session_start(); }
+$_SESSION['displayed_cards'][0] = $actualDataToSend;
 
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($actualDataToSend);

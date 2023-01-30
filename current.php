@@ -34,22 +34,6 @@
                 exit(0);
             }
 
-            //Show playlist:
-            function display_playlist($conn, $playlist) {
-                try {
-                    //echo($conn);
-                    retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
-                    global $displayed_cards;
-                    $_SESSION['displayed_cards'] = $displayed_cards;
-                    //var_dump($displayed_cards);
-                    //echo json_encode($displayed_cards);
-                } catch (Exception $err) {
-                    $err_file = fopen(ERROR_LOG_FILE, "a");
-                    fwrite($err_file, $err->getMessage() . "\n");
-                    fclose($err_file);
-                }
-            }
-
         ?>
 
         <div class="content" id="contentID" style="background: rgb(108, 132, 140);">

@@ -1,10 +1,6 @@
-function addToPlaylist(id, service_url, service, playlist) {
-
+async function sendData(id, playlist) {
     const body = JSON.stringify({
-        title: data[id].movieTitle,
-        picture: data[id].moviePoster,
-        service: service,
-        service_url: service_url,
+        id: id,
         playlist: playlist
     })
 
@@ -12,44 +8,41 @@ function addToPlaylist(id, service_url, service, playlist) {
     const request = new Request('add_to_playlist.php', {
         method: 'POST', body: body
     });
-    fetch(request).then(response => response.text()).then(result => console.log(result));
-}
-
-function sendData(id, playlist) {
-    if (data[id].prime) {
-        addToPlaylist(id, data[id].prime, "prime", playlist);
+    //fetch(request).then(response => response.text()).then(result => console.log(result));
+    try {
+        const response = await fetch(request);
+        if (response.status != 200) {
+            console.log("response is not 200");
+        }
+        const text = await response.text();
+        if (text == "not logged in") {
+            alert("Log in to make use of this functionality");
+        } else {
+            deleteCard(id);
+        }
+        //console.log(text);
+    } catch (error) {
+        console.log("an error occured");
     }
-    setTimeout(function(){
-        if (data[id].netflix) {
-            addToPlaylist(id, data[id].netflix, "netflix", playlist);
-        }
-    }, 500);
-    setTimeout(function(){
-        if (data[id].disney) {
-            addToPlaylist(id, data[id].disney, "disney", playlist);
-        }
-    }, 1000);
-    setTimeout(function(){
-        if (data[id].hbo) {
-            addToPlaylist(id, data[id].hbo, "hbo", playlist);
-        }
-    }, 1500);
-    setTimeout(function(){
-        if (data[id].hulu) {
-            addToPlaylist(id, data[id].hulu, "hulu", playlist);
-        }
-    }, 2000);
-    setTimeout(function(){
-        if (data[id].apple) {
-            addToPlaylist(id, data[id].apple, "apple", playlist);
-        }
-    }, 2500);
 
 }
+
+function deleteCard(id) {
+    var cardID = "card" + id;
+    var card = document.getElementById(cardID);
+    card.style.opacity = "0";
+
+    var delayInMilliseconds = 500;
+
+    setTimeout(function() {
+        card.remove();
+    }, delayInMilliseconds);
+}
+
 
 // addToPlaylist("future watching")
-function to_watch(id) { sendData(id, "future watching"); }
+function to_watch(id) { sendData(id, "future watching", "add"); }
 
-function cur_watching(id) { sendData(id, "currently watching"); }
+function cur_watching(id) { sendData(id, "currently watching", "add"); }
 
-function watched(id) { sendData(id, "finished watching"); }
+function watched(id) { sendData(id, "finished watching", "add"); }

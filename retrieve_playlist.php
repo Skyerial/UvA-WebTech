@@ -26,11 +26,7 @@ $movie = new movieDetails;
 $card_counter = 0;
 $displayed_cards = array();
 
-function get_data() {
-    global $displayed_cards;
-    var_dump($displayed_cards);
-    return $displayed_cards;
-}
+
 function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
     global $movie;
 
@@ -40,10 +36,9 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
             display_card($movie, $playlist);
             $movie = new movieDetails;
         }
-        $movie->movieTitle = htmlspecialchars($movieTitle);
-        $movie->moviePoster = htmlspecialchars($moviePoster);
+        $movie->movieTitle = $movieTitle;
+        $movie->moviePoster = $moviePoster;
     }
-    $ssLink = htmlspecialchars($ssLink);
 
     if ($service == "prime") {
         $movie->prime = $ssLink;
@@ -63,17 +58,16 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
 function display_card($movie, $playlist) {
     global $card_counter;
     global $displayed_cards;
-    $displayed_cards[] = array('id' => "$card_counter",
-                                'movieTitle' => "$movie->movieTitle",
-                                'moviePoster' => "$movie->moviePoster",
-                                'prime' => "$movie->prime",
-                                'netflix' => "$movie->netflix",
-                                'disney' => "$movie->disney",
-                                'hbo' => "$movie->hbo",
-                                'hulu' => "$movie->hulu",
-                                'apple' => "$movie->apple",
-                                );
-                                
+
+    //add card to backend cards array
+    $new_card = clone($movie);
+    $displayed_cards[] = $new_card;
+
+    //sanitize before pushing to html
+    foreach($movie as &$value) {
+        $value = htmlspecialchars($value);
+    }
+
     $current = "currently watching";
     $future = "future watching";
     $finished = "finished watching";
@@ -188,6 +182,22 @@ function retrieve_playlist($conn, $email, $playlist) {
         display_card($movie, $playlist);
     }
     $movie = new MovieDetails;
+}
+
+//Show playlist:
+function display_playlist($conn, $playlist) {
+    try {
+        //echo($conn);
+        retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
+        global $displayed_cards;
+        $_SESSION['displayed_cards'][1] = $displayed_cards;
+        //print_r($displayed_cards);
+        //echo json_encode($displayed_cards);
+    } catch (Exception $err) {
+        $err_file = fopen(ERROR_LOG_FILE, "a");
+        fwrite($err_file, $err->getMessage() . "\n");
+        fclose($err_file);
+    }
 }
 ?>
 
