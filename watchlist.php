@@ -11,9 +11,10 @@
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="watchlist.js" defer></script>
         <script type="text/javascript" src="switch.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
-    <body>
+    <body onload="showFooter()">
 
         <!-- insert the nav bar -->
         <?php
@@ -53,7 +54,7 @@
             }
 
         ?>
-
+        <main id="mainID">
         <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
 
             <div class="tabrow">
@@ -83,7 +84,9 @@
             </div>
 
         </div>
+        </main>
 
+        <?php require_once("footer.php")?>
     </body>
 </html>
 

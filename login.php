@@ -323,13 +323,16 @@ if (isset($_POST['to_register'])) {
     <title>Login form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="styles/nav.css">
+    <script type="text/javascript" src="menuScript.js" defer></script>
     <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
     </script>
 </head>
 
-<body>
+<body onload="showFooter()">
     <?php include "nav.php"; ?>
 
+    <main id="mainID">
     <div class="reg-form">
         <div class="reg-header">
             <h2>Login Form</h2>
@@ -470,6 +473,7 @@ if (isset($_POST['to_register'])) {
 
             </div>
         </div>
+        </main>
 
         <?php require_once("footer.php")?>
     </body>

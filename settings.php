@@ -300,11 +300,14 @@ if (isset($_POST['change_password'])) {
         <link rel="stylesheet" href="styles/settings.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="settings.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
-    <body>
+    <body onload="showFooter()">
         <!-- insert the nav bar -->
         <?php require_once("nav.php")?>
+        
+        <main id="mainID">
         <p></p>
         <div class = "border">
             <div class="titlerow" id="title">
@@ -463,6 +466,7 @@ if (isset($_POST['change_password'])) {
         </div>
         
         <br>
+        </main>
         <?php require_once("footer.php")?>
         
     </body>

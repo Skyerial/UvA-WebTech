@@ -117,4 +117,5 @@ form {
 .recaptcha {
     margin-left: 40px;
     margin-bottom: 10px;
+    transform: scale(0.5);
 }

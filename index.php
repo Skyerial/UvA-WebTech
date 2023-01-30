@@ -17,7 +17,7 @@
         <!-- insert the nav bar -->
         <?php require_once("nav.php"); ?>
 
-        <main>
+        <main id="mainID">
             <div class="titlerow" id="title">
                 <h1 class="title" id="titletext">wheretowatch.com</h1>
             </div>

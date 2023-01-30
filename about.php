@@ -9,14 +9,14 @@
         <link rel="stylesheet" href="styles/nav.css">
         <link rel="stylesheet" href="styles/about.css">
         <script type="text/javascript" src="scripts.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
-    <body>
+    <body onload="showFooter()">
         <!-- insert the nav bar -->
         <?php require_once("nav.php")?>
 
-        <br>
-
+        <main id="mainID">
         <div class = "border">
             <div class="titlerow" id="title">
                 <h1 class="title" id="titletext">About</h1>
@@ -25,13 +25,14 @@
             <p class = "text">
                 This website is a project created regarding an assignment given by the University 
                 of Amsterdam. Our project group exists of five students who study 
-                computer science. <br><br>
+                computer science. <br></br>
                 WhereToWatch.com was created by
                 M. Blok, T. van den Kommer, J. Kops, J. Lauppe and D. Oppenhuizen.
             </p>
         </div>
+        </main>
 
-
+        
         <?php require_once("footer.php")?>
     </body>
 </html>

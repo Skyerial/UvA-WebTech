@@ -11,13 +11,14 @@ nav {
     height: auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-bottom: 65px;
 }
 
 .nav-logo {
     visibility: hidden;
     opacity: 0;
-    transition: 2.5s ease;
+    transition: 2s ease;
     font-size: 30px;
 }
 .nav-logo p a {
@@ -34,7 +35,7 @@ nav {
 
 .navbar {
     text-align: right;
-    flex: 1;
+    /* flex: 1; */
 }
 nav ul li {
     list-style: none;
@@ -62,44 +63,58 @@ nav ul li::after {
 nav ul li:hover::after {
     width: 103%;
 }
-#sidebar .toggle-button {
-    position: absolute;
-    top: 55px;
-    right: 165px;
+.toggle-button {
+    width: fit-content;
+    margin: auto 0;
+    display: none;
+    cursor: pointer;
     padding: 5px;
 }
+.toggle-button span {
+    width: 35px;
+    height: 5px;
+    background: #B8DBD9;
+    display: block;
+    margin: 4px;
+}
+.open .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #4d6a79;
+}
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 166px; /* this needs to be set to the height of the navbar
+                  same goes for the 50px in height
+                  by doing this the menu will appear under the navbar
+                  height wise */
+    left: 0;
+    height: calc(100vh - 166px);
+    width: 100%;
+}
+.mobile-menu li {
+    margin: 0;
+    padding: 1vh 0;
+    text-align: center;
+}
+.mobile-menu .home-mobile {
+    padding-top: 2vh;
+}
 @media only screen and (max-width: 768px) {
-    #sidebar {
-        position: absolute;
-        right: -150px;
-        top: 0;
-        width: 150px;
-        height: 100vh;
-        background-color: #000;
+    .computer-menu {
+        display: none;
     }
-    #sidebar.active {
-        right: 0;
-    }
-    .navbar {
-        text-align: left;
-    }
-    #sidebar ul li {
-        padding: 20px 24px;
-        margin-left: 0;
-    }
-    #sidebar .toggle-button {
-        position: absolute;
-        top: 55px;
-        right: 165px;
-        padding: 5px;
-    }
-    .toggle-button span {
-        width: 35px;
-        height: 5px;
-        background: #B8DBD9;
+    .toggle-button {
         display: block;
-        margin: 4px;
+        margin: 0;
     }
+}
+
+main.open {
+    display: none;
 }
 
 /* footer stuff */

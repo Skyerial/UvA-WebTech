@@ -4,11 +4,17 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <?php
-            if(!isset($_SESSION)) { session_start(); }
-            if (isset($_SESSION['login'])): ?>
-            <li><a href="watchlist.php">Watchlist</a></li>
-            <li><a href="settings.php">Settings</a></li>
-            <li><a href="logout.php">Logout</a></li>
+                if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
+                && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
+                <li><a href="watchlist.php">Watchlist</a></li>
+                <li><a href="settings.php">Settings</a></li>
+                <li><a href="account_verification/logout.php">Logout</a></li>
+            <!-- <li>
+                <div id="container">
+                    <div id="name"></div>
+                </div>
+            </li> -->
+
             <?php else: ?>
             <li><a href="login.php">Login</a></li>
             <?php endif; ?>
