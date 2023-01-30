@@ -4,6 +4,16 @@ function dropdown() {
     x.classList.toggle("show");
 }
 
+function input_user() {
+    var x = document.body;
+    x.classList.toggle("go");
+}
+
+function input_pass() {
+    var x = document.body;
+    x.classList.toggle("lol");
+}
+
 // This doesn't work, click anywhere and close dropdown again.
 document.addEventListener("click", classList.remove("show"));
 

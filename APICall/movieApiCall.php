@@ -1,6 +1,31 @@
 <?php
 $q = $_POST['movieTitle'];
 
+require_once "../account_verification/session_token.php";
+require_once "../../../../conn/db.php";
+
+function check_mail($conn, $email) {
+    $check_mail = $conn->prepare(
+        "SELECT email FROM user WHERE email = ?"
+    );
+
+    if (!$check_mail->bind_param("s", $email)) {
+        throw new Exception ("[check_mail] Could not bind parameters.");
+    }
+    if (!$check_mail->execute()) {
+        throw new Exception ("[check_mail] Could not execute query.");
+    }
+
+    $check_mail->store_result();
+    if ($check_mail->num_rows === 0) {
+        $check_mail->close();
+        return false;
+    } else {
+        $check_mail->close();
+        return true;
+    }
+}
+
 function retrieve_short($conn, $email) {
     $retrieve_short = $conn->prepare(
         "SELECT region.short_region
@@ -16,18 +41,18 @@ function retrieve_short($conn, $email) {
         throw new Exception ("[retrieve_short] Could not execute query.");
     }
 
-    $retrieve_result = $retrieve_short->get_result();
-    $retrieve_row = $retrieve_short->fetch_assoc();
+    $retrieving_result = $retrieve_short->get_result();
+    $retrieving_row = $retrieving_result->fetch_assoc();
 
-    if(isset($retrieve_short['short_region'])){
-        return $retrieve_short['short_region'];
+    if(isset($retrieving_row['short_region'])){
+        return $retrieving_row['short_region'];
     } else {
-        return "nl";
+        return 'nl';
     }
 }
 
 // title needs to be checked before it is used anywhere...
-function buildUrl($title) {
+function buildUrl($title, $conn) {
     if(!preg_match('/^\w+( \w+)*$/', $title)) {
         return NULL;
     }
@@ -44,7 +69,9 @@ function buildUrl($title) {
         if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
             $country = 'nl';
         } else {
-            $country = retrieve_short($conn, $_COOKIE);
+            if (check_mail($conn, $_COOKIE['checker'])) {
+                $country = retrieve_short($conn, $_COOKIE['checker']);
+            }
         }
     } else {
         $country = 'nl';
@@ -151,7 +178,7 @@ function condenseData($response) {
     return $result;
 }
 
-$actualDataToSend = condenseData(apiCall(buildUrl($q)));
+$actualDataToSend = condenseData(apiCall(buildUrl($q, $conn)));
 
 
 header('Content-Type: application/json; charset=UTF-8');

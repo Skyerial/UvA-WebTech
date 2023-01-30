@@ -324,6 +324,8 @@ if (isset($_POST['change_password'])) {
                 onclick = "dropdown()">
                     <?= $region?>
                 </div>
+                <!-- There needs to be a space -->
+                <p></p>
 
                 <div class = "view">
                     <!-- Search bar to look up regions. -->
@@ -352,11 +354,18 @@ if (isset($_POST['change_password'])) {
                 <div>
                     <p>Change your settings:</p>
                 </div>
+
+                <div>
+                    <button class = "buttons" onclick = input_user()>Change username</button>
+                    <button class = "buttons" onclick = input_pass()>Change password</button>
+                </div>
+
+
                 <div>
                     <!-- Start confirmation messages -->
 
                     <div id="un-con" class="email-confirmation">
-                        <p class="#">
+                        <p class="confirmation-message">
                             Your username has been successfully changed!
                         </p>
                     </div>
@@ -372,7 +381,7 @@ if (isset($_POST['change_password'])) {
                     ?>
 
                     <div id="pw-con" class="email-confirmation">
-                        <p class="#">
+                        <p class="confirmation-message">
                             Your password has been successfully changed!
                         </p>
                     </div>
@@ -394,10 +403,10 @@ if (isset($_POST['change_password'])) {
                         value="<?=retrieve_csrf($conn)?>">
 
                         <div class = "table">
-                            <div class = "column left">    
+                            <div class = "column left userchange">    
                                 <label>Username</label>
                             </div>
-                            <div class = "column right">    
+                            <div class = "column right userchange"> 
                                 <input type="text" name="username" class="#"
                                 value="" maxlength="30" required=""><br>
                             </div>
@@ -411,10 +420,11 @@ if (isset($_POST['change_password'])) {
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <div class = "column left">    
+
+                            <div class = "column left passchange">    
                                 <label>Current password</label>
                             </div>
-                            <div class = "column right">    
+                            <div class = "column right passchange">    
                                 <input type="password" name="cur_password" class="#"
                                 value="" maxlength="255" required=""><br>
                             </div><br><br>
@@ -427,10 +437,10 @@ if (isset($_POST['change_password'])) {
                                 </div>
                             <?php endif; ?>
                             
-                            <div class = "column left">    
+                            <div class = "column left passchange">    
                                 <label>New Password</label>
                             </div>
-                            <div class = "column right">    
+                            <div class = "column right passchange">    
                                 <input type="password" name="new_password" class="#"
                                 value="" maxlength="255" required=""><br><br>
                             </div>
@@ -445,9 +455,9 @@ if (isset($_POST['change_password'])) {
                             <?php endif; ?>
                         </div>
 
-                        <input type="submit" class="submit"
-                        name="change_username" value="Change username">
-                        <input type="submit" class="submit"
+                        <input type="submit" class="buttons"
+                        name="change_username" value="Submit username">
+                        <input type="submit" class="buttons"
                         name="change_password" value="Change password">
 
                         <?php if($errors['csrf_error']): ?>
