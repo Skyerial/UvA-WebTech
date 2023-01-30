@@ -9,7 +9,7 @@ require_once "account_verification/email.php";
 require_once "account_verification/login_attempt.php";
 require_once "account_verification/recaptcha.php";
 require_once "account_verification/session_token.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -129,7 +129,7 @@ define("ERROR_LOG_FILE", "errorLog/error.txt");
 // Handling login form:
 ////////////////////////////////////////////////////////////////////////////////
 if (isset($_POST['login'])) {
-    // captcha_check($errors);
+    captcha_check($errors);
 
     // Check if the correct CSRF token is used:
     $csrf_token_from_form = $_POST['csrf_token'];
@@ -321,7 +321,8 @@ if (isset($_POST['to_register'])) {
     <meta charset="utf-8">
     <title>Login form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="styles/nav.css">
     <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
     </script>
 </head>

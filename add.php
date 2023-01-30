@@ -4,7 +4,7 @@
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
 require_once "account_verification/session_token.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {

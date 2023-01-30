@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 require_once "account_verification/basic_error_checks.php";
 require_once "account_verification/close_connection.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Start error definement:
@@ -105,7 +105,7 @@ if (isset($_POST['reset_password'])) {
         <meta charset="utf-8">
         <title>Unblock account</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="styles/form.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>

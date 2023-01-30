@@ -8,7 +8,7 @@ require_once "account_verification/close_connection.php";
 require_once "account_verification/csrf.php";
 require_once "account_verification/email.php";
 require_once "account_verification/recaptcha.php";
-require_once "/../../../../conn/db.php";
+require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -138,13 +138,16 @@ if (isset($_POST['register'])) {
         <meta charset="utf-8">
         <title>Registration form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="styles/nav.css">
+        <script type="text/javascript" src="menuScript.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
     <body>
-        <?php include 'nav.php'; ?>
+        <?php require_once("nav.php");?>
 
+        <main id="mainID">
         <div class="reg-form">
             <div class="reg-header">
                 <h2>Registration Form</h2>
@@ -271,5 +274,8 @@ if (isset($_POST['register'])) {
             <p class="form-sub-message">Already have an account?</p>
             <a href="login.php" class="form-btn">Login</a>
         </div>
+        </main>
+
+        <?php require_once("footer.php");?>
     </body>
 </html>

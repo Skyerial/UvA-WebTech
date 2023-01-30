@@ -83,6 +83,7 @@ if (isset($_POST['reset_password'])) {
         <title>Login form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="styles/nav.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
