@@ -3,12 +3,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "/../../../../conn/db.php";
+require_once "/../../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
 
+// generate_csrf generates a new csrf token and adds it to the database.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//
+// Side effect: A new csrf token is added to the table csrf_token.
 function generate_csrf($conn) {
     $csrf_token = bin2hex(random_bytes(32));
 
@@ -26,6 +32,13 @@ function generate_csrf($conn) {
     $add_csrf->close();
 }
 
+// retrieve_csrf retrieves the most recent csrf token. If the token is older
+// than one hour, a new token is generated and that one is retrieved instead.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//
+// Output: The most recent csrf token.
 function retrieve_csrf($conn) {
     $retrieve_csrf = $conn->prepare(
         "SELECT csrf_token, time

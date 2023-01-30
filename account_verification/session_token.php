@@ -19,6 +19,26 @@ function add_session_token($conn, $session_token, $email) {
 }
 
 function retrieve_token($conn, $email) {
+    // Prepare SQL statement to check if the email exists:
+    $mail_query = $conn->prepare(
+        "SELECT email FROM user WHERE email = ?"
+    );
+
+    if (!$mail_query->bind_param("s", $email)) {
+        throw new Exception ("[retrieve_token] Could not bind parameters.");
+    }
+    if (!$mail_query->execute()) {
+        throw new Exception ("[retrieve_token] Could not execute query.");
+    }
+
+    $mail_query->store_result();
+    if ($mail_query->num_rows === 0) {
+        $mail_query->close();
+        return false;
+    }
+    $mail_query->close();
+
+    // The email exists:
     $token_query = $conn->prepare(
         "SELECT session_token FROM user WHERE email = ?"
     );
@@ -40,6 +60,7 @@ function retrieve_token($conn, $email) {
 function check_token($conn, $email, $session_token) {
     // Retrieve token corresponding to email from the database:
     $re_token = retrieve_token($conn, $email);
+    if ($re_token === false) { return false; }
 
     // Check if the session token corresponds to the token in the database:
     if (password_verify($session_token, $re_token)) {

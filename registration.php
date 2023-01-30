@@ -138,7 +138,7 @@ if (isset($_POST['register'])) {
         <meta charset="utf-8">
         <title>Registration form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="../css/form.css">
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>

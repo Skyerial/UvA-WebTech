@@ -83,7 +83,7 @@ function mail_dup_error($conn, $email, &$errors, $dup) {
 // Output: None.
 function basic_password_error($password, &$errors) {
     if (empty($password) || strlen($password) < 6) {
-        $errors['pw_error'] = true;
+        setError($errors, 'pw_error');
     }
 }
 

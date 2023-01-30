@@ -1,5 +1,14 @@
 <?php
 
+////////////////////////////////////////////////////////////////////////////////
+// Imported files:
+////////////////////////////////////////////////////////////////////////////////
+require_once "email.php";
+
+////////////////////////////////////////////////////////////////////////////////
+// Functions:
+////////////////////////////////////////////////////////////////////////////////
+
 // add_login_attempt changes the value of the row 'login_attempt' by +1 of
 // the user with $email.
 //
@@ -17,6 +26,8 @@ function add_login_attempt($conn, $email) {
         exit("Could not bind parameters.");
     }
     if (!$add_attempt->execute()) { exit("Could not execute query."); }
+
+    $add_attempt->close();
 }
 
 // reset_login_attempt sets the value of the row 'login_attempt' to 0 of
@@ -36,6 +47,8 @@ function reset_login_attempt($conn, $email) {
         exit("Could not bind parameters.");
     }
     if (!$reset_attempt->execute()) { exit("Could not execute query."); }
+
+    $reset_attempt->close();
 }
 
 // block_account blocks the account with email $email.
@@ -55,6 +68,35 @@ function block_account($conn, $email) {
         exit("Could not bind parameters.");
     }
     if (!$block_account->execute()) { exit("Could not execute query."); }
+
+    $block_account->close();
+
+    // Send an email to give the user the ability to change unblock
+    // its account.
+
+    // Retrieve the username:
+    try {
+        $username = retrieve_username($conn, $email);
+    } catch (Exception $err) {
+        $err_file = fopen(ERROR_LOG_FILE, "a");
+        fwrite($err_file, $err->getMessage() . "\n");
+        fclose($err_file);
+    }
+
+    // Generate email token and replace the current one in the database:
+    try {
+        $email_token = bin2hex(random_bytes(32));
+        replace_token($conn, $email, $email_token);
+    } catch (Exception $err) {
+        $err_file = fopen(ERROR_LOG_FILE, "a");
+        fwrite($err_file, $err->getMessage() . "\n");
+        fclose($err_file);
+    }
+
+    // Generate and send the email:
+    $email_link = "https://webtech-in01.webtech-uva.nl/~tijnk/pages/" .
+    "unblock_account.php?token=$email_token";
+    unblock_mail($username, $email, $email_link);
 }
 
 // login_attempt_check checks if the user with $email still has available
@@ -81,10 +123,12 @@ function login_attempt_check($conn, $email) {
         $row = $attempts->fetch_assoc();
         if ($row['login_attempt'] >= 10) {
             block_account($conn, $email);
+            $check_attempt->close();
             return true;
         }
     }
 
+    $check_attempt->close();
     return false;
 }
 
