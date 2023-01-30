@@ -58,7 +58,7 @@ function replace_token($conn, $email, $email_token) {
 //        false otherwise.
 //
 // Output: None.
-function generate_email($username, $email, $email_token, $email_link, $act) {
+function generate_email($username, $email, $email_link, $act) {
     // Create a html email:
     $headers  = "From: noreply@WhereToWatch2.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
@@ -83,7 +83,7 @@ function generate_email($username, $email, $email_token, $email_link, $act) {
     );
     $email_message =  str_replace(
         "{{ACTIVATION_LINK}}",
-        urlencode($email_link),
+        htmlspecialchars($email_link),
         $email_message
     );
 

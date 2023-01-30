@@ -9,7 +9,7 @@ require_once "account_verification/email.php";
 require_once "account_verification/login_attempt.php";
 require_once "account_verification/recaptcha.php";
 require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+require_once "/../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -134,7 +134,6 @@ if (isset($_POST['login'])) {
 
     if ($csrf_token_from_form != $csrf_token_from_db) {
         setError($errors, 'csrf_error');
-        return;
     }
 
     // Retrieve information from html form:
@@ -193,8 +192,10 @@ if (isset($_POST['login'])) {
                 $session_token = bin2hex(random_bytes(32));
                 // Set the cookies to expiry in one day.
                 // Secure flag and httponly flag are set to true.
-                setcookie("login", $session_token, time() + (86400), "/", "", true, true);
-                setcookie("checker", $email, time() + (86400), "/", "", true, true);
+                setcookie("login", $session_token, time() + (86400),
+                    "/", "", true, true);
+                setcookie("checker", $email, time() + (86400),
+                    "/", "", true, true);
 
                 // Add the session token to the DB:
                 try {
@@ -235,10 +236,15 @@ if (isset($_POST['login'])) {
 ////////////////////////////////////////////////////////////////////////////////
 if (isset($_POST['reset_password'])) {
     // Retrieve information from html form:
-    $email = mysqli_real_escape_string(
-        $conn,
-        htmlspecialchars($_POST['email'])
-    );
+    $email = $_POST['email'];
+
+    // Check if the correct CSRF token is used:
+    $csrf_token_from_form = $_POST['csrf_token'];
+    $csrf_token_from_db = retrieve_csrf($conn);
+
+    if ($csrf_token_from_form != $csrf_token_from_db) {
+        setError($errors, 'csrf_error');
+    }
 
     // Error checking: email.
     if (basic_mail_error($email, $errors)) {
@@ -251,7 +257,8 @@ if (isset($_POST['reset_password'])) {
         }
     }
 
-    if (!$errors['mail_error'] && !$errors['main_error']) {
+    if (!$errors['csrf_error'] && !$errors['mail_error']
+        && !$errors['main_error']) {
         // Check if the account is not blocked:
         try {
             $status = retrieve_status($conn, $email);
@@ -268,8 +275,8 @@ if (isset($_POST['reset_password'])) {
 
     // If no error has occured, send an email with which the user can reset
     // it's password:
-    if (!$errors['mail_error'] && !$errors['main_error']
-        && !$errors['status_error']) {
+    if (!$errors['csrf_error'] &&  !$errors['mail_error']
+        && !$errors['main_error'] && !$errors['status_error']) {
         // Retrieve the username:
         try {
             $username = retrieve_username($conn, $email);
@@ -290,9 +297,9 @@ if (isset($_POST['reset_password'])) {
         }
 
         // Generate and send the email:
-        $email_link = "http://webtech-in01.webtech-uva.nl/~marcob/" .
+        $email_link = "https://webtech-in01.webtech-uva.nl/" .
         "reset_password.php?token=$email_token";
-        generate_email($username, $email, $email_token, $email_link, false);
+        generate_email($username, $email, $email_link, false);
         $email_sent = true;
     }
 
@@ -302,14 +309,6 @@ if (isset($_POST['reset_password'])) {
 if (isset($_POST['to_register'])) {
     header("location: registration.php");
     close_connection($conn);
-    exit(0);
-}
-
-if (isset($_POST['to_register'])) {
-    if (is_resource($conn)) {
-        mysqli_close($conn);
-    }
-    header("location: registration.php");
     exit(0);
 }
 
@@ -339,8 +338,11 @@ if (isset($_POST['to_register'])) {
         <!-- Start confirmation messages -->
 
         <div id="reset_pw" class="email-confirmation">
-            <p class="confirmation-message">We sent you an email, with
-                which you can reset your password. Check your email.</p>
+            <p class="confirmation-message">
+                We sent you an email, with which you can reset your password.
+                Please check your email. If you receive no mail, please check
+                your spam.
+            </p>
         </div>
 
         <?php if ($email_sent) {
@@ -438,7 +440,8 @@ if (isset($_POST['to_register'])) {
             <div class="form-sub-message">
                 <?php if ($errors['csrf_error']) : ?>
                     <div class="error-message">
-                        <p> Invalid CSRF token! </p>
+                        <p> Invalid/Expired CSRF token!
+                            Please refresh the page. </p>
                     </div>
                 <?php endif; ?>
                 <?php if ($errors['status_error']) : ?>
@@ -468,9 +471,9 @@ if (isset($_POST['to_register'])) {
             </div>
         </form>
 
-            </div>
-        </div>
+        <!-- End login form -->
 
-        <?php require_once("footer.php")?>
-    </body>
+    </div>
+</body>
+
 </html>
