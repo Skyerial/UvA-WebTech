@@ -110,21 +110,21 @@ function display_card($movie, $playlist) {
             <div class="hover-content">
                 <?php if ($playlist == "future watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
+                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
                 <?php
                 } else if ($playlist == "currently watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">Watched</a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
+                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
                 <?php
                 } else if ($playlist == "finished watching") {
                 ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">Future</a>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">Current</a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">Delete</a>
+                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
+                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
+                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
                 <?php
                 }
                 ?>
@@ -190,13 +190,18 @@ function display_playlist($conn, $playlist) {
         //echo($conn);
         retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
         global $displayed_cards;
+        if (!$displayed_cards) {
+            return 1;
+        }
         $_SESSION['displayed_cards'][1] = $displayed_cards;
+        return 0;
         //print_r($displayed_cards);
         //echo json_encode($displayed_cards);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+        return 0;
     }
 }
 ?>

@@ -11,6 +11,7 @@
         <script type="text/javascript" src="switch.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body onload="showFooter()">
 
@@ -41,15 +42,21 @@
 
             <div class="tabrow">
                 <div class="tab">
-                    <a><button class="tablinks" style="background-color: #B8DBD9; color: black;">Future Watching</button></a>
-                    <a href="current.php"><button class="tablinks" href="current.php">Currently Watching</button></a>
-                    <a href="watched.php"><button class="tablinks" href="watched.php">Finished Watching</button></a>
+                    <a><button class="tablinks" style="background-color: #B8DBD9; color: #2f4550;">Future <i class="fa-solid fa-eye"></i></button></a>
+                    <a href="current.php"><button class="tablinks" href="current.php">Current <i class="fa-solid fa-clock"></i></button></a>
+                    <a href="watched.php"><button class="tablinks" href="watched.php">Finished <i class="fa-solid fa-eye-slash"></i></button></a>
                 </div>
             </div>
 
             <div class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <?php display_playlist($conn, "future watching"); ?>
+
+                    <?php if (display_playlist($conn, "future watching") == 1) {
+                        ?>   <div class="banner">
+                                <img src="streaming_img/watchlist.png">
+                                <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
+                            </div>
+                    <?php }?>
                 </div>
             </div>
         </div>

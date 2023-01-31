@@ -10,6 +10,9 @@
     transition-duration: 1.5s;
 }
 
+.cardcontainer {
+    min-height: 64vh !important;
+}
 .tab {
     display: flex;
     align-items: center;
@@ -36,12 +39,12 @@
 
 .tab button:hover {
     background-color: #B8DBD9;
-    color: black;
+    color: #2f4550 !important;
 }
 
 .tab button.active {
     background-color: #B8DBD9;
-    color: black;
+    color: #2f4550 !important;
 }
 
 .tabcontent{
@@ -50,10 +53,11 @@
 
 /* Empty message */
 .banner {
-    position: relative;
+    position: absolute;
     text-align: center;
-    height: 50vw;
-    width: 50vw;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .banner img {
@@ -63,5 +67,5 @@
 }
 
 h3 {
-    font-size: calc(1em + 1vmin);
+    font-size: calc(15px + 0.390625vw);
 }
