@@ -186,6 +186,7 @@ body {
 .card .hover-content {
     display: flex;
     justify-content: left;
+    padding-top: 11px;
 }
 .card .cardbutton {
     text-decoration: none;
@@ -208,7 +209,7 @@ body {
 .card .cardbutton .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
+    background-color: #5a6973;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -232,8 +233,8 @@ body {
     background-color: #B8DBD9;
 }
 
-i {
-    color: black;
+.card i {
+    color: #B8DBD9;
 }
 
 .card:hover {

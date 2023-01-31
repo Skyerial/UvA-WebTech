@@ -60,7 +60,7 @@ function searchbutton() {
         document.getElementById('textbar').value = '';
         // need to make sure that it shows search input was not valid...
         alert(
-            "Please enter a valid serach iput ocntaining only letter, numbers, and spaces."
+            "Please enter a valid search input containing only letter, numbers, and spaces."
         )
         return;
     }

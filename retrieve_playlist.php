@@ -190,13 +190,18 @@ function display_playlist($conn, $playlist) {
         //echo($conn);
         retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
         global $displayed_cards;
+        if (!$displayed_cards) {
+            return 1;
+        }
         $_SESSION['displayed_cards'][1] = $displayed_cards;
+        return 0;
         //print_r($displayed_cards);
         //echo json_encode($displayed_cards);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
         fclose($err_file);
+        return 0;
     }
 }
 ?>
