@@ -320,7 +320,7 @@ if (isset($_POST['to_register'])) {
     </script>
 </head>
 
-<body onload="showFooter()">
+<body onload="showFooter(); showLogo()">
     <?php include "nav.php"; ?>
 
     <main id="mainID" class="reg-form">

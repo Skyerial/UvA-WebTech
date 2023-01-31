@@ -133,6 +133,7 @@ footer {
     color: #B8DBD9;
     padding-top: 10px;
     opacity: 0;
+    z-index: 5;
 }
 footer.open {
     visibility: visible !important;

@@ -10,4 +10,9 @@ function showMenu() {
 
 function showFooter() {
     document.getElementById('footerID').style.visibility = 'visible';
+    document.getElementById('footerID').style.opacity = '1';
+}
+
+function showLogo() {
+    document.getElementById('logoID').classList.toggle('open');
 }

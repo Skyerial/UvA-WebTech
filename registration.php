@@ -147,11 +147,11 @@ if (isset($_POST['to_login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
         <link rel="stylesheet" href="styles/nav.css">
-        <script type="text/javascript" src="menuScript.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
-    <body onload="showFooter()">
+    <body onload="showFooter(); showLogo()">
         <?php require_once("nav.php");?>
 
         <main class="reg-form" id="mainID">

@@ -29,9 +29,9 @@ body {
     font-size: 5vw;
     font-family: sans-serif;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
     .titlerow {
-        padding-bottom: 2vh;
+        padding-bottom: 4vh;
     }
     .title {
         font-size: 8vw;

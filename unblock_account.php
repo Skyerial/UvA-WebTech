@@ -106,14 +106,16 @@ if (isset($_POST['reset_password'])) {
         <title>Unblock account</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="styles/nav.css">
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
-    <body>
+    <body onload="showFooter(); showLogo()">
         <?php include 'nav.php'; ?>
 
-        <div class="reg-form">
+        <main id="mainID" class="reg-form">
             <div class="reg-header">
                 <h2>Unblock account</h2>
                 <p>Enter a new password to unblock your account.</p>
@@ -139,6 +141,7 @@ if (isset($_POST['reset_password'])) {
                 <input type="submit" class="form-btn" name="reset_password"
                 value="Submit">
             </form>
-        </div>
+        </main>
+        <?php require_once("footer.php")?>
     </body>
 </html>
