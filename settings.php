@@ -303,7 +303,7 @@ if (isset($_POST['change_password'])) {
         <script type="text/javascript" src="menuScript.js" defer></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
-    <body onload="showFooter(); showLogo()">
+    <body>
         <!-- insert the nav bar -->
         <?php require_once("nav.php")?>
         

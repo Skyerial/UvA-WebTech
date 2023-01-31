@@ -112,7 +112,7 @@ if (isset($_POST['reset_password'])) {
         </script>
     </head>
 
-    <body onload="showFooter(); showLogo()">
+    <body>
         <?php include 'nav.php'; ?>
 
         <main id="mainID" class="reg-form">

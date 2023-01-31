@@ -151,7 +151,7 @@ if (isset($_POST['to_login'])) {
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
-    <body onload="showFooter(); showLogo()">
+    <body>
         <?php require_once("nav.php");?>
 
         <main class="reg-form" id="mainID">

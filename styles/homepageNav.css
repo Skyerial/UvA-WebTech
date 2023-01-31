@@ -16,10 +16,15 @@ nav {
 }
 
 .nav-logo {
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
     transition: 1s ease;
     font-size: 30px;
+}
+#logoID.open {
+    visibility: visible !important;
+    opacity: 1;
+    transition: 0s !important;
 }
 .nav-logo p a {
     font-weight: 1000;
@@ -119,7 +124,7 @@ main.open {
 
 /* footer stuff */
 footer {
-    visibility: visible;
+    visibility: hidden;
     background: #2F4550;
     /* this keeps the footer at the bottom of the page */
     position: sticky;
@@ -127,8 +132,11 @@ footer {
     width: 100vw;
     color: #B8DBD9;
     padding-top: 10px;
+    opacity: 0;
+}
+footer.open {
+    visibility: visible !important;
     opacity: 1;
-    z-index: 5;
 }
 .footer-content {
     text-align: center;

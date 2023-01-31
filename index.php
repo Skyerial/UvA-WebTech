@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" type="text/css" href="styles/homepage.css">
-        <link rel="stylesheet" type="text/css" href="styles/nav.css">
+        <link rel="stylesheet" type="text/css" href="styles/homepageNav.css">
         <link rel="stylesheet" type="text/css" href="styles/loading.css">
         <title>wheretowatch.com</title>
         <script type="text/javascript" src="scripts.js"></script>
@@ -26,7 +26,7 @@
 
             <div class="content" id="contentID">
                 <div class="searchrow" id="formID">
-                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();showLoadingAnimation();return false">
+                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();showLoadingAnimation();showFooter();return false">
                         <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
                         <button type="submit" id="buttonID"></button>
                     </form>
