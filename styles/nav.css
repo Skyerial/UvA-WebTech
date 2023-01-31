@@ -18,8 +18,13 @@ nav {
 .nav-logo {
     visibility: hidden;
     opacity: 0;
-    transition: 2s ease;
+    transition: 1s ease;
     font-size: 30px;
+}
+#logoID.open {
+    visibility: visible !important;
+    opacity: 1;
+    transition: 0s !important;
 }
 .nav-logo p a {
     font-weight: 1000;
@@ -127,6 +132,10 @@ footer {
     width: 100vw;
     color: #B8DBD9;
     padding-top: 10px;
+    transition-duration: 0s;
+}
+footer.open {
+    visibility: visible !important;
 }
 .footer-content {
     text-align: center;
