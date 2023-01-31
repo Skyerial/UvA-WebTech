@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="switch.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body>
 

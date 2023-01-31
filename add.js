@@ -17,8 +17,6 @@ async function sendData(id, playlist) {
         const text = await response.text();
         if (text == "not logged in") {
             alert("Log in to make use of this functionality");
-        } else {
-            deleteCard(id);
         }
         //console.log(text);
     } catch (error) {
@@ -26,19 +24,6 @@ async function sendData(id, playlist) {
     }
 
 }
-
-function deleteCard(id) {
-    var cardID = "card" + id;
-    var card = document.getElementById(cardID);
-    card.style.opacity = "0";
-
-    var delayInMilliseconds = 500;
-
-    setTimeout(function() {
-        card.remove();
-    }, delayInMilliseconds);
-}
-
 
 // addToPlaylist("future watching")
 function to_watch(id) { sendData(id, "future watching", "add"); }

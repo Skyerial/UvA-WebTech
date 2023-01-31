@@ -11,6 +11,7 @@
         <script type="text/javascript" src="menuScript.js" defer></script>
         <script type="text/javascript" src="add.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- insert the nav bar -->

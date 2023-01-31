@@ -50,8 +50,11 @@ function deleteCard(id) {
     var cardID = "card" + id;
     var card = document.getElementById(cardID);
     card.style.opacity = "0";
+    card.style.width = "0";
+    card.style.padding = "0";
+    card.style.margin = "0"
 
-    var delayInMilliseconds = 500;
+    var delayInMilliseconds = 700;
 
     setTimeout(function() {
         card.remove();
