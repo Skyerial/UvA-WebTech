@@ -108,7 +108,7 @@ nav ul li:hover::after {
 .mobile-menu .home-mobile {
     padding-top: 2vh;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
     .computer-menu {
         display: none;
     }
