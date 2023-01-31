@@ -23,7 +23,7 @@
             </div>
 
             <p class = "text">
-                This website is a project created regarding an assignment given by the University 
+                This website is a project commissioned by the University 
                 of Amsterdam. Our project group exists of five students who study 
                 computer science. <br><br>
                 WhereToWatch.com was created by

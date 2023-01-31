@@ -15,7 +15,8 @@ function input_pass() {
 }
 
 // This doesn't work, click anywhere and close dropdown again.
-document.addEventListener("click", classList.remove("show"));
+var test = document.body;
+document.addEventListener("click", document.classList.remove("show"));
 
 // Set new selected region and change region in database user.
 function new_region(region, email) {
