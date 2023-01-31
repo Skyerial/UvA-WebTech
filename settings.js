@@ -14,14 +14,13 @@ function input_pass() {
     x.classList.toggle("pass_appear");
 }
 
-// This doesn't work, click anywhere and close dropdown again.
-var test = document.body;
-document.addEventListener("click", document.classList.remove("show"));
-
 // Set new selected region and change region in database user.
 function new_region(region, email) {
     // Show the selected region.
     document.getElementById("selected-region").innerHTML = region;
+    // Hide the dropdown after choosing a region.
+    var x = document.body;
+    x.classList.remove("show");
 
     // Send the data to update_region.php:
     fetch('update_region.php', {

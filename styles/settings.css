@@ -74,9 +74,7 @@ select {
 /* Search bar. */
 .show #search-input {
     opacity: 1;
-    margin: auto;
-    /* width: 195; */
-    
+    margin: auto;    
     border-radius: 5px 5px 0 0;
     border-color: #B8DBD9;
     padding: 2px;
@@ -222,10 +220,7 @@ select {
     display: block;
 }
 
-.userchange {
-    text-align: right;
-}
-
+/* Hidden and shown submit buttons. */
 .hidden_pass {
     opacity: 0;
     margin-right: 55%;
@@ -244,6 +239,10 @@ select {
 }
 
 /* Inputs shown on click. */
+.userchange {
+    text-align: right;
+}
+
 .user_appear .userchange {
     opacity: 1;
 }

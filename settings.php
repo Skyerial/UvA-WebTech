@@ -345,9 +345,8 @@ if (isset($_POST['change_password'])) {
                         <?php endwhile; ?>
                     </div>
                 </div>
-            </div>
+            </div><br>
 
-            <br><br>
             <div>
                 <!-- Option to change password -->
                 <h2>User settings</h2>
@@ -454,11 +453,12 @@ if (isset($_POST['change_password'])) {
                                     </p>
                                 </div>
                             <?php endif; ?>
-                        </div><br><br>
+                        </div>
+                        <!-- <br><br> -->
 
                         <input type="submit" class="hidden_user buttons"
                         name="change_username" value="Submit username">
-                        <br>
+                        <!-- <br> -->
                         <input type="submit" class="hidden_pass buttons"
                         name="change_password" value="Submit password">
 
