@@ -390,7 +390,8 @@ if (isset($_POST['change_password'])) {
                         }
                     ?><br>
                     <!-- End confirmation messages -->
-
+                    
+                    <!-- Make the forms appear with buttons. -->
                     <div class = "container-buttons">
                         <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
                         &emsp;&emsp;&emsp;
@@ -404,7 +405,7 @@ if (isset($_POST['change_password'])) {
                         &nbsp;
                         <div class = "table">
 
-                            <div class = "column left passchange">    
+                            <div class = "column left passchange">
                                 <label>Current password</label>
                             </div>
                             <div class = "column right passchange">    
@@ -437,10 +438,10 @@ if (isset($_POST['change_password'])) {
                                 </div>
                             <?php endif; ?>
                             
-                            <div class = "column left passchange">    
+                            <div class = "column left passchange">
                                 <label>New Password</label>
                             </div>
-                            <div class = "column right passchange">    
+                            <div class = "column right passchange">
                                 <input type="password" name="new_password" class="#"
                                 value="" maxlength="255" required=""><br><br>
                             </div>
@@ -454,11 +455,12 @@ if (isset($_POST['change_password'])) {
                                 </div>
                             <?php endif; ?>
                         </div>
-                        <!-- <br><br> -->
-
+                        <br><br>
+                        
+                        <!-- Submit buttons. -->
                         <input type="submit" class="hidden_user buttons"
                         name="change_username" value="Submit username">
-                        <!-- <br> -->
+
                         <input type="submit" class="hidden_pass buttons"
                         name="change_password" value="Submit password">
 
