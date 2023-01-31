@@ -8,6 +8,7 @@ require_once "account_verification/close_connection.php";
 require_once "account_verification/csrf.php";
 require_once "account_verification/email.php";
 require_once "account_verification/recaptcha.php";
+require_once "account_verification/session_token.php";
 require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,8 +154,7 @@ if (isset($_POST['to_login'])) {
     <body onload="showFooter()">
         <?php require_once("nav.php");?>
 
-        <main id="mainID">
-        <div class="reg-form">
+        <main class="reg-form" id="mainID">
             <div class="reg-header">
                 <h2>Registration Form</h2>
                 <p>Please fill all fields in the form</p>
@@ -280,7 +280,6 @@ if (isset($_POST['to_login'])) {
                 </div>
             </form>
             <!-- End registration form -->
-            </div>
         </main>
 
         <?php require_once("footer.php");?>
