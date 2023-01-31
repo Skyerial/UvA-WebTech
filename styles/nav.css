@@ -1,3 +1,5 @@
+@import "colors.css";
+
 nav {
     transition-property: padding;
     position: sticky;
@@ -9,47 +11,137 @@ nav {
     height: auto;
     display: flex;
     align-items: center;
-    padding-bottom: 80px;
+    justify-content: space-between;
+    padding-bottom: 65px;
+}
+
+.nav-logo {
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s ease;
+    font-size: 30px;
+}
+#logoID.open {
+    visibility: visible !important;
+    opacity: 1;
+    transition: 0s !important;
+}
+.nav-logo p a {
+    font-weight: 1000;
+    text-decoration: none;
+    color: #B8DBD9;
+    font-family: sans-serif;
+}
+@media only screen and (max-width: 768px) {
+    .nav-logo {
+        font-size: 25px;
+    }
 }
 
 .navbar {
     text-align: right;
-    flex: 1;
+    /* flex: 1; */
 }
-
 nav ul li {
     list-style: none;
     display: inline-block;
     margin-left: 60px;
 }
-
-nav ul li a{
+nav ul li a {
     text-decoration: none;
     color: #B8DBD9;
     font-size: 20px;
 }
-
 nav ul li a:hover {
-    text-decoration: underline;
+    transition: 0.2s;
+    color: aliceblue;
+}
+nav ul li::after { 
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: aliceblue;
+    display: block;
+    margin: auto;
+    transition: 0.3s;
+}
+nav ul li:hover::after {
+    width: 103%;
+}
+.toggle-button {
+    width: fit-content;
+    margin: auto 0;
+    display: none;
+    cursor: pointer;
+    padding: 5px;
+}
+.toggle-button span {
+    width: 35px;
+    height: 5px;
+    background: #B8DBD9;
+    display: block;
+    margin: 4px;
+}
+.open .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #4d6a79;
+}
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 166px; /* this needs to be set to the height of the navbar
+                  same goes for the 50px in height
+                  by doing this the menu will appear under the navbar
+                  height wise */
+    left: 0;
+    height: calc(100vh - 166px);
+    width: 100%;
+}
+.mobile-menu li {
+    margin: 0;
+    padding: 1vh 0;
+    text-align: center;
+}
+.mobile-menu .home-mobile {
+    padding-top: 2vh;
+}
+@media only screen and (max-width: 850px) {
+    .computer-menu {
+        display: none;
+    }
+    .toggle-button {
+        display: block;
+        margin: 0;
+    }
+}
+
+main.open {
+    display: none;
 }
 
 /* footer stuff */
 footer {
+    visibility: hidden;
     background: #2F4550;
     /* this keeps the footer at the bottom of the page */
     position: sticky;
     top: 100%;
-    
     width: 100vw;
     color: #B8DBD9;
     padding-top: 10px;
+    opacity: 0;
 }
-
+footer.open {
+    visibility: visible !important;
+    opacity: 1;
+}
 .footer-content {
     text-align: center;
     margin: auto;
 }
-
 footer ul li {
     display: inline-block;
     list-style: none;
@@ -57,19 +149,16 @@ footer ul li {
     padding-left: 5px;
     padding-right: 5px;
 }
-
 footer ul li a {
     text-decoration: none;
     color: #B8DBD9;
 }
-
 .footer-bottom {
     background: #2F4550;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 20px;
 }
-
 .footer-bottom p {
     font-size: 14px;
 }
