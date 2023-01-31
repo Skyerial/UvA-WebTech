@@ -36,7 +36,6 @@
             }
 
         ?>
-
         <div class="content" id="contentID" style="background: rgb(108, 132, 140);">
 
             <div class="tabrow">
@@ -52,12 +51,11 @@
                     <?php if (display_playlist($conn, "finished watching") == 1) {
                         ?>   <div class="banner">
                                 <img src="streaming_img/watchlist.png">
-                                <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
+                                <h3> Your watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
                             </div>
                     <?php }?>
                 </div>
             </div>
         </div>
-
     </body>
 </html>
