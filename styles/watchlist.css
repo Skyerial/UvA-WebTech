@@ -21,16 +21,28 @@
     border-radius: 40px;
 }
 
+@media only screen and (max-width:600px) {
+    .tab {
+        width: 85vw;
+    }    
+}
+
+.fa-solid, .fas {
+    font-weight: 900;
+    width: fit-content;
+    height: fit-content;
+}
+
 .tab button {
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: 25px;
     color: #e5e5e5;
-    padding: 1.6vh 1.7vw;
+    padding: 1.5% 1.7vw;
     text-align: center;
     display: inline-block;
-    font-size: calc(1em + .1vmin);
-    margin: 1em 1em;
+    font-size: calc(15px + 0.390625vw);
+    margin: 1.2vw;
     cursor: pointer;
 }
 
@@ -42,11 +54,6 @@
 .tab button.active {
     background-color: #B8DBD9;
     color: black;
-}
-
-.tabcontent{
-    display: none;
-    padding: 6px 12px;
 }
 
 /* Empty message */
@@ -64,5 +71,8 @@
 }
 
 h3 {
-    font-size: calc(1em + 1vmin);
+    font-size: calc(15px + 0.390625vw);
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
 }

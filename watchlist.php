@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="styles/watchlist.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="watchlist.js" defer></script>
+        <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body>
@@ -45,9 +46,9 @@
 
                 <div class="tabrow">
                     <div class="tab">
-                        <button class="tablinks" onclick="openWatch(event, 'Future Watching')" id="defaultOpen">Future Watching</button>
-                        <button class="tablinks" onclick="openWatch(event, 'Currently Watching')">Currently Watching</button>
-                        <button class="tablinks" onclick="openWatch(event, 'Finished Watching')">Finished Watching</button>
+                        <button class="tablinks" onclick="openWatch(event, 'Future Watching')">Future <i class="fa-solid fa-clock"></i></button>
+                        <button class="tablinks" onclick="openWatch(event, 'Currently Watching')" id="defaultOpen">Current <i class="fa-solid fa-eye"></i></button>
+                        <button class="tablinks" onclick="openWatch(event, 'Finished Watching')">Finished <i class="fa-solid fa-eye-slash"></i></button>
                     </div>
                 </div>
 
@@ -63,6 +64,27 @@
 
                 <div id="Currently Watching" class ="tabcontent">
                     <div class="cardcontainer" id="cardcontainerID">
+                        <div class="card" id="card3" style="opacity: 1 !important;">
+                            <div class="imagebox">
+                                <img class="poster" src="https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg">
+                                <div class="streamingservicebox">
+                                    <a href="https://www.primevideo.com/detail/0OSFD03ISY4N0L55EX9B39PBC8/ref=atv_dp" target="_blank" class="streamingservice">
+                                        <img src="streaming_img/prime.png">
+                                    </a>
+                                    <a href="https://www.disneyplus.com/movies/avatar/2YOnkRN4LwZZ" target="_blank" class="streamingservice">
+                                        <img src="streaming_img/disney.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Upsim lipsum blablabla carpe diem enzo pecunia non olet<span class="tooltiptext">Upsim lipsum blablabla carpe diem enzo pecunia non olet</span></h3>
+                            </div>
+                            <div class="hover-content">
+                                <a href="javascript:void(0)" onclick="to_watch(3); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
+                                <a href="javascript:void(0)" onclick="watched(3); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
+                                <a href="javascript:void(0)" onclick="delete_item('3' , 'currently watching'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
+                            </div>
+                        </div>
                         <!-- <?php //retrieve_playlist($conn, $user_id, "currently watching"); ?> -->
                     </div>
                 </div>
