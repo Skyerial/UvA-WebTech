@@ -200,11 +200,7 @@ if (isset($_POST['login'])) {
                     $err_file = fopen(ERROR_LOG_FILE, "a");
                     fwrite($err_file, $err->getMessage() . "\n");
                     fclose($err_file);
-                }
-
-                // The user has succesfully logged in, reset the
-                // login_attempt counter:
-                reset_login_attempt($conn, $email);
+                };
 
                 // Close the connection to the database:
                 close_connection($conn);
@@ -327,8 +323,7 @@ if (isset($_POST['to_register'])) {
 <body onload="showFooter()">
     <?php include "nav.php"; ?>
 
-    <main id="mainID">
-    <div class="reg-form">
+    <main id="mainID" class="reg-form">
         <div class="reg-header">
             <h2>Login Form</h2>
             <p>Please fill all fields in the form</p>
@@ -471,8 +466,7 @@ if (isset($_POST['to_register'])) {
 
         </form>
 
-        </div>
-        </main>
+                </main>
 
         <?php require_once("footer.php")?>
     </body>
