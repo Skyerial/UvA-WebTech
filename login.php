@@ -327,8 +327,7 @@ if (isset($_POST['to_register'])) {
 <body onload="showFooter()">
     <?php include "nav.php"; ?>
 
-    <main id="mainID">
-    <div class="reg-form">
+    <main id="mainID" class="reg-form">
         <div class="reg-header">
             <h2>Login Form</h2>
             <p>Please fill all fields in the form</p>
@@ -471,8 +470,7 @@ if (isset($_POST['to_register'])) {
 
         </form>
 
-        </div>
-        </main>
+                </main>
 
         <?php require_once("footer.php")?>
     </body>
