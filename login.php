@@ -200,11 +200,7 @@ if (isset($_POST['login'])) {
                     $err_file = fopen(ERROR_LOG_FILE, "a");
                     fwrite($err_file, $err->getMessage() . "\n");
                     fclose($err_file);
-                }
-
-                // The user has succesfully logged in, reset the
-                // login_attempt counter:
-                reset_login_attempt($conn, $email);
+                };
 
                 // Close the connection to the database:
                 close_connection($conn);
