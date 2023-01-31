@@ -8,21 +8,36 @@ require_once "account_verification/close_connection.php";
 require_once "account_verification/csrf.php";
 require_once "account_verification/email.php";
 require_once "account_verification/recaptcha.php";
+require_once "account_verification/session_token.php";
 require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
 function add_user($conn, $username, $email, $hashed_password, $email_token) {
-    $add_user = $conn->prepare("INSERT INTO user(username, email, password,
-        activation_code) VALUES (?, ?, ?, ?)");
 
-    if (!$add_user->bind_param("ssss", $username, $email, $hashed_password,
-        $email_token)) {
-        throw new Exception ("[add_user] Could not bind parameters.");
-    }
-    if (!$add_user->execute()) {
-        throw new Exception ("[add_user] Could not execute query.");
+    // Generate a private API key:
+    $api_key = bin2hex(random_bytes(32));
+
+    // Prepare a SQL query to add the user to the database:
+    $add_user = $conn->prepare("INSERT INTO user(username, email, password,
+        activation_code, api_key) VALUES (?, ?, ?, ?, ?)");
+
+    // Start a loop to regenerate the API key when the key is not unique:
+    $result = false;
+    while (!$result) {
+        if (!$add_user->bind_param("sssss", $username, $email, $hashed_password,
+            $email_token, $api_key)) {
+            throw new Exception ("[add_user] Could not bind parameters.");
+        }
+
+        $result = $add_user->execute();
+        // Note: Error 1062 is the MYSQLI duplicate error.
+        if ($result === false && $conn->errno == 1062) {
+            $api_key = bin2hex(random_bytes(32));
+        } else if (!$result) {
+            throw new Exception ("[add_user] Could not execute query.");
+        }
     }
 
     $add_user->close();
@@ -153,8 +168,7 @@ if (isset($_POST['to_login'])) {
     <body onload="showFooter()">
         <?php require_once("nav.php");?>
 
-        <main id="mainID">
-        <div class="reg-form">
+        <main id="mainID" class="reg-form">
             <div class="reg-header">
                 <h2>Registration Form</h2>
                 <p>Please fill all fields in the form</p>
@@ -280,7 +294,6 @@ if (isset($_POST['to_login'])) {
                 </div>
             </form>
             <!-- End registration form -->
-            </div>
         </main>
 
         <?php require_once("footer.php");?>
