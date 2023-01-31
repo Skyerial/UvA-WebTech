@@ -14,6 +14,17 @@ require_once "/../../../conn/db.php";
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
+
+// add_user adds a user to the database.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//  $username: The username of the user.
+//  $email: The email of the user.
+//  $hashed_password: The hashed password of the user.
+//  $email_token: The email token of the user.
+//
+// Output: None.
 function add_user($conn, $username, $email, $hashed_password, $email_token) {
 
     // Generate a private API key:
