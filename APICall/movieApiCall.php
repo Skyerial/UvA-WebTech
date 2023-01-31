@@ -36,9 +36,11 @@ function apiCall($apiUrl) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: streaming-availability.p.rapidapi.com",
-            "X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
+            "X-RapidAPI-Key: cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3"
         ],
     ]);
+
+    //"X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -61,6 +63,7 @@ function apiCall($apiUrl) {
  */
 
 class movieDetails {
+    var $id;
     var $movieTitle;
     var $moviePoster;
     var $prime;
@@ -79,29 +82,34 @@ function condenseData($response) {
     foreach ($obj->result as $data) {
         $movie = new movieDetails;
         $movie->movieTitle = $data->title;
-        if(!empty($data->posterURLs->original)) {
-            $movie->moviePoster = $data->posterURLs->original;
+        if(!empty($data->posterURLs->{"500"})) {
+            $movie->moviePoster = $data->posterURLs->{"500"};
+        } else {
+            continue;
         }
         if(!empty($data->streamingInfo->nl)) {
             if(!empty($data->streamingInfo->nl->prime)) {
-                $movie->prime = $data->streamingInfo->nl->prime->link;
+                $movie->prime = $data->streamingInfo->nl->prime[0]->link;
             }
             if(!empty($data->streamingInfo->nl->netflix)) {
-                $movie->netflix = $data->streamingInfo->nl->netflix->link;
+                $movie->netflix = $data->streamingInfo->nl->netflix[0]->link;
             }
             if(!empty($data->streamingInfo->nl->disney)) {
-                $movie->disney = $data->streamingInfo->nl->disney->link;
+                $movie->disney = $data->streamingInfo->nl->disney[0]->link;
             }
             if(!empty($data->streamingInfo->nl->hbo)) {
-                $movie->hbo = $data->streamingInfo->nl->hbo->link;
+                $movie->hbo = $data->streamingInfo->nl->hbo[0]->link;
             }
             if(!empty($data->streamingInfo->nl->hulu)) {
-                $movie->hulu = $data->streamingInfo->nl->hulu->link;
+                $movie->hulu = $data->streamingInfo->nl->hulu[0]->link;
             }
             if(!empty($data->streamingInfo->nl->apple)) {
-                $movie->apple = $data->streamingInfo->nl->apple->link;
+                $movie->apple = $data->streamingInfo->nl->apple[0]->link;
             }
+        } else {
+            continue;
         }
+        $movie->id = $i;
         $result[$i] = $movie;
         $i++;
     }
@@ -110,8 +118,9 @@ function condenseData($response) {
 }
 
 $actualDataToSend = condenseData(apiCall(buildUrl($q)));
-//$actualDataToSend = apiCall(buildUrl($q));
 
+if(!isset($_SESSION)) { session_start(); }
+$_SESSION['displayed_cards'][0] = $actualDataToSend;
 
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($actualDataToSend);

@@ -7,13 +7,14 @@ require_once "account_verification/session_token.php";
 require_once "modify_playlist.php";
 require_once "/../../../conn/db.php";
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Error log file definement:
 ////////////////////////////////////////////////////////////////////////////////
 define("ERROR_LOG_FILE", "errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
-// Add item to playlist:
+// Remove an item from a playlist:
 ////////////////////////////////////////////////////////////////////////////////
 
 $body = file_get_contents('php://input');
@@ -21,59 +22,60 @@ $json = json_decode($body);
 $id = $json->id;
 $playlist = $json->playlist;
 
+
 if(!isset($_SESSION)) { session_start(); }
 
 // Check if the user is logged in, if not redirect the user to the login page.
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        exit("not logged in");
+        header("Location: login.php");
+        exit("conn");
     }
 } else {
     if (is_resource($conn)) { mysqli_close($conn); }
-    exit("not logged in");
+    header("Location: login.php");
+    exit("cookie");
 }
 
-//let file know what the class looks like
-class movieDetails {
-    // var $id;
-    var $movieTitle;
-    var $moviePoster;
-    var $prime;
-    var $netflix;
-    var $disney;
-    var $hbo;
-    var $hulu;
-    var $apple;
-}
+$data = $_SESSION['displayed_cards'][$id];
+//var_dump($data["movieTitle"]);
+$title = $data["movieTitle"];
+$picture = $data["moviePoster"];
 
-$data = $_SESSION['displayed_cards'][0][$id];
-$title = $data->movieTitle;
-$poster = $data->moviePoster;
-
-if($data->prime) {
-    $service_url = $data->prime;
-    addToPlaylist($title, $poster, $service_url, "prime", $playlist);
+if($data["prime"]) {
+    $service_url = $data["prime"];
+    remove_from_playlist($title, $picture, $service_url, $playlist);
 }
-if($data->netflix) {
-    $service_url = $data->netflix;
-    addToPlaylist($title, $poster, $service_url, "netflix", $playlist);
+//sleep(1);
+if($data["netflix"]) {
+    //sleep(1);
+    $service_url = $data["netflix"];
+    remove_from_playlist($title, $picture, $service_url, $playlist);
 }
-if($data->disney) {
-    $service_url = $data->disney;
-    addToPlaylist($title, $poster, $service_url, "disney", $playlist);
+//sleep(1);
+if($data["disney"]) {
+    //sleep(1);
+    $service_url = $data["disney"];
+    remove_from_playlist($title, $picture, $service_url, $playlist);
 }
-if($data->hbo) {
-    $service_url = $data->hbo;
-    addToPlaylist($title, $poster, $service_url, "hbo", $playlist);
+//sleep(1);
+if($data["hbo"]) {
+    //sleep(1);
+    $service_url = $data["hbo"];
+    remove_from_playlist($title, $picture, $service_url,  $playlist);
 }
-if($data->hulu) {
-    $service_url = $data->hulu;
-    addToPlaylist($title, $poster, $service_url, "hulu", $playlist);
+//sleep(1);
+if($data["hulu"]) {
+    //sleep(1);
+    $service_url = $data["hulu"];
+    remove_from_playlist($title, $picture, $service_url, $playlist);
 }
-if($data->apple) {
-    $service_url = $data->apple;
-    addToPlaylist($title, $poster, $service_url, "apple", $playlist);
+//sleep(1);
+if($data["apple"]) {
+    //sleep(1);
+    $service_url = $data["apple"];
+    remove_from_playlist($title, $picture, $service_url, $playlist);
 }
 
 ?>

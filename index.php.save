@@ -6,27 +6,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" type="text/css" href="styles/homepage.css">
         <link rel="stylesheet" type="text/css" href="styles/nav.css">
-        <link rel="stylesheet" type="text/css" href="styles/loading.css">
         <title>wheretowatch.com</title>
+        <script type="text/javascript" src="watchlistadd.js"></script>
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
-        <script type="text/javascript" src="homepageScript.js" defer></script>
         <script type="text/javascript" src="add.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- insert the nav bar -->
         <?php require_once("nav.php"); ?>
 
-        <main id="mainID">
+        <main>
             <div class="titlerow" id="title">
-                <h1 class="title" id="titletext">wheretowatch.com</h1>
+                <h1 class="title" id="titletext">HACK ONS NIET</h1>
             </div>
 
             <div class="content" id="contentID">
                 <div class="searchrow" id="formID">
-                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();showLoadingAnimation();return false">
+                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();return false">
                         <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
                         <button type="submit" id="buttonID"></button>
                     </form>
