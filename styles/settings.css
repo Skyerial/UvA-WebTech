@@ -146,7 +146,7 @@ select {
     background-color: #B8DBD9;
 }
 
-/* The buttons */
+/* All buttons */
 .buttons {
     padding: 8px;
     border-radius: 25px;
@@ -158,6 +158,20 @@ select {
 
 .buttons:hover {
     background-color: black;
+}
+
+/* Buttons to drop down the settings. */
+.container-buttons {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.userbutton {
+    width: 30%;
+}
+
+.passbutton {
+    width: 30%;
 }
 
 /* Columns for input forms. */
@@ -174,28 +188,27 @@ select {
     box-sizing: border-box;
     text-align: left;
     opacity: 0;
+    /* max-height: 0; */
+    display: none;
 }
 
 .left {
     width: 20%;
     box-sizing: border-box;
+    display: block;
 }
 
 .right {
-    width: 30%;
+    width: 28%;
     box-sizing: border-box;
+    display: block;
 }
-
-/* 
-.appear {
-    /* display: hidden; */
-    /* color: #5a6973 */
 
 .email-confirmation {
     margin-left: auto;
     margin-right: auto;
-    width: 90%;
-    height: 50px;
+    width: 60%;
+    height: 40px;
     background: rgba(14, 222, 87, 0.369);
     display: none;
     border-radius: 5px;
@@ -205,8 +218,12 @@ select {
 .confirmation-message {
     text-align: center;
     margin-top: auto;
-    line-height: 50px;
+    line-height: 40px;
     display: block;
+}
+
+.userchange {
+    text-align: right;
 }
 
 .hidden_pass {
@@ -233,17 +250,4 @@ select {
 
 .pass_appear .passchange {
     opacity: 1;
-}
-
-.container-buttons {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.userbutton {
-    width: 30%;
-}
-
-.passbutton {
-    width: 30%;
 }

@@ -26,6 +26,10 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     exit(0);
 }
 
+// Set confirm messages:
+$changed_username = false;
+$changed_password = false;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
@@ -197,10 +201,6 @@ $errors = [
 // Define log file:
 define("ERROR_LOG_FILE", "errorLog/error.txt");
 
-// Set confirm messages:
-$changed_username = false;
-$changed_password = false;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Retrieve region information:
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,6 +227,7 @@ if (isset($_POST['change_username'])) {
     if (!(in_array(true, $errors))) {
         try {
             change_username($conn, $_COOKIE['checker'], $username);
+            $changed_username = true;
         } catch (Exception $err) {
             $err_file = fopen(ERROR_LOG_FILE, "a");
             fwrite($err_file, $err->getMessage() . "\n");
@@ -273,6 +274,7 @@ if (isset($_POST['change_password'])) {
         if (password_verify($cur_password, $re_password)) {
             try {
                 change_password($conn, $_COOKIE['checker'], $new_password);
+                $changed_password = true;
             } catch (Exception $err) {
                 $err_file = fopen(ERROR_LOG_FILE, "a");
                 fwrite($err_file, $err->getMessage() . "\n");
@@ -353,13 +355,6 @@ if (isset($_POST['change_password'])) {
                     <p>Change your settings:</p>
                 </div>
 
-                <div class = "container-buttons">
-                    <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
-                    &emsp;&emsp;&emsp;
-                    <button class = "buttons userbutton" onclick = input_user()>Change username</button>
-                </div>
-
-
                 <div>
                     <!-- Start confirmation messages -->
 
@@ -368,6 +363,7 @@ if (isset($_POST['change_password'])) {
                             Your username has been successfully changed!
                         </p>
                     </div>
+
 
                     <?php if($changed_username) {
                         echo "
@@ -393,9 +389,15 @@ if (isset($_POST['change_password'])) {
                         </script>
                         ";
                         }
-                    ?>
-
+                    ?><br>
                     <!-- End confirmation messages -->
+
+                    <div class = "container-buttons">
+                        <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
+                        &emsp;&emsp;&emsp;
+                        <button class = "buttons userbutton" onclick = input_user()>Change username</button>
+                    </div>
+
                     <form method = "post" action = "settings.php"
                     autocomplete="off" novalidate>
                         <input type="hidden" name="csrf_token"
