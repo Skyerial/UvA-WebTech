@@ -54,7 +54,7 @@
                     <?php if (display_playlist($conn, "future watching") == 1) {
                         ?>   <div class="banner">
                                 <img src="streaming_img/watchlist.png">
-                                <h3> Your current watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
+                                <h3> Your watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
                             </div>
                     <?php }?>
                 </div>
