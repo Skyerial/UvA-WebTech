@@ -52,6 +52,8 @@ function retrieve_api($conn, $email) {
         throw new Exception ("[retrieve_api] Could not fetch result.");
     }
 
+    $retrieve_api->close();
+
     return $api_key;
 }
 
