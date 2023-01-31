@@ -91,30 +91,4 @@ function generate_email($username, $email, $email_link, $act) {
     mail($email, $subject, $email_message, $headers);
 }
 
-function unblock_mail($username, $email, $email_link) {
-    // Create a html email:
-    $headers  = "From: noreply@WhereToWatch2.com\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-    $subject = "Reset account";
-    $email_message = file_get_contents(
-        'email_templates/email_block.html'
-    );
-
-    $email_message =  str_replace(
-        "{{USERNAME}}",
-        htmlspecialchars($username),
-        $email_message
-    );
-    $email_message =  str_replace(
-        "{{ACTIVATION_LINK}}",
-        htmlspecialchars($email_link),
-        $email_message
-    );
-
-    // Send the activation mail:
-    mail($email, $subject, $email_message, $headers);
-}
-
 ?>

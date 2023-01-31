@@ -8,67 +8,34 @@ require_once "/../../../../conn/db.php";
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAV</title>
-
-    <link rel="stylesheet" href="../css/nav.css">
-</head>
-
-<body>
-    <nav>
-        <div class="nav-center-links">
-            <ul>
-                <li><a href="add.php"><b>Tab 1</b></a></li>
-                <li><a href="index.php"><b>Home</b></a></li>
-                <li><a href="#"><b>Tab 2</b></a></li>
-            </ul>
+<nav id="navID">
+    <div class="nav-logo" id="logoID">
+        <p><a href="index.php">wheretowatch.com</a></p>
+    </div>
+    <div class="navbar" id="sidebar">
+        <div class="toggle-button" id="toggleButtonID">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+        <ul>
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="about.php">ABOUT</a></li>
+            <?php
+                if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
+                && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
+                <li><a href="future.php">WATCHLIST</a></li>
+                <li><a href="settings.php">SETTINGS</a></li>
+                <li><a href="account_verification/logout.php">LOGOUT</a></li>
+            <!-- <li>
+                <div id="container">
+                    <div id="name"></div>
+                </div>
+            </li> -->
 
-        <?php
-            if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
-            && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])):
-        ?>
-        <div class="nav-register-links">
-            <ul>
-                <li>
-                    <a href="account_verification/logout.php"><b>Logout</b></a>
-                </li>
-            </ul>
-        </div>
-
-        <?php else: ?>
-        <div class="nav-register-links">
-            <ul>
-                <li>
-                    <a href="login.php"><b>Login</b></a>
-                </li>
-                <li>
-                    <a href="registration.php">
-                        <b>Register</b>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <?php endif; ?>
-
-        <button onclick="switch_mode()">
-            <img src="" alt="M" id="logo" onclick="change_logo()">
-        </button>
-    </nav>
-
-    <form action="" class="search-bar">
-        <input type="text" placeholder="search a title" name="name">
-        <button type="submit"></button>
-    </form>
-
-    <script src="../js/nav.js"></script>
-</body>
-
-</html>
+            <?php else: ?>
+            <li><a href="login.php">LOGIN</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</nav>
