@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" type="text/css" href="styles/homepage.css">
         <link rel="stylesheet" type="text/css" href="styles/nav.css">
+        <link rel="stylesheet" type="text/css" href="styles/loading.css">
         <title>wheretowatch.com</title>
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>

@@ -173,6 +173,7 @@ function streamingdiv(service, servicelink) {
 
 // generates all the cards based on incoming data
 function displayCards(data){
+    removeLoadingAnimation();
     const container = document.getElementById('cardcontainerID');
 
     data.forEach(data => {
