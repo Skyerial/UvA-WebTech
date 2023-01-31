@@ -12,8 +12,6 @@
 /* Background website */
 body {
     background-color: #5a6973;
-    /* -webkit-transition: .5s;
-    transition: .5s; */
 }
 
 div {
@@ -45,8 +43,6 @@ p {
     border-radius: 25px;
     width : 60%;
     background-color: #6c848c;
-    /* padding-left: 25%;
-    padding-right: 25%; */
     padding-bottom: 18px;
 }
 
@@ -129,19 +125,11 @@ select {
     opacity: 1;
 }
 
-
 /* rgb(181, 244, 247) */
 
 /* Remove visibility checkpoint. */
 .input_php {
     display: none;
-}
-
-.form {
-    border-radius: 5px;
-    border: 1px;
-    padding: 5px;
-    background-color: #B8DBD9;
 }
 
 /* All buttons */
@@ -186,7 +174,6 @@ select {
     box-sizing: border-box;
     text-align: left;
     opacity: 0;
-    /* max-height: 0; */
     display: none;
 }
 
