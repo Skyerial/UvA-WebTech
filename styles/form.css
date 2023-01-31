@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@
 }
 
 body {
-    background: #5a6973;
+    background: var(--color1);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -19,13 +21,13 @@ a {
 }
 
 .content {
-    background-color: #5a6973;
+    background-color: var(--color1);
     width: 100%;
 }
 
 .text {
     text-align: center;
-    color: #e0f3f2;
+    color: var(--color2);
     width: 75%;
     padding: 20px;
     border-radius: 25px;
@@ -38,15 +40,15 @@ a {
     margin: auto;
     border-radius: 10px;
     border: 2px solid;
-    border-color: #B8DBD9;
-    background-color: #6c848c;
+    border-color: var(--color3);
+    background-color: var(--color4);
     margin-top: 10px;
 }
 
 .reg-header {
-    background-color: #2F4550;
+    background-color: var(--color5);
     text-align: center;
-    color: #B8DBD9;
+    color: var(--color3);
     width: 100%;
     border-radius: 10px 10px 0 0;
     margin-bottom: 5px;
@@ -58,7 +60,7 @@ a {
     margin-right: auto;
     width: 90%;
     height: fit-content;
-    background: rgba(14, 222, 87, 0.369);
+    background: #0ede575e;
     display: none;
     border-radius: 5px;
     color: darkgreen;
@@ -83,23 +85,11 @@ a {
 .form-btn {
     margin-left: 40px;
     padding: 10px;
-    background-color: #2F4550;
+    background-color: var(--color5);
     border: none;
     border-radius: 5px;
     font-size: 15px;
-    color: #B8DBD9;
-}
-
-.back-btn {
-    background-color: #D3E3EF;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    color: white;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 50%;
+    color: var(--color3);
 }
 
 .left-float {
@@ -114,7 +104,7 @@ a {
 }
 
 .error-message {
-    color: red;
+    color: var(--error);
     font-weight: bold;
     padding: 5px 0 0 0;
 }

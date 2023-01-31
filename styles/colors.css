@@ -1,7 +1,27 @@
 :root {
-    --color1: #2274a5;
-    --color2: #e7dfc6;
-    --color3: #e9f1f7;
-    --color4: #131b23;
-    --color5: #816c61;
+    /* original colors */
+    /* --color1: #5a6973;
+    --color2: #e0f3f2;
+    --color3: #B8DBD9;
+    --color4: #6c848c;
+    --color5: #2F4550; */
+    --color6: #D3E3EF;
+    --color7: #4d6a79;
+    --color8: #acebee;
+
+    --error: #ff0000;
+
+
+    /* experimental colors */
+    --color3: #acebee;
+    --color4: #E7DFC6;
+    --color2: #E9F1F7;
+    --color5: #131B23;
+    --color1: #816C61;
+
+    /* --color1: #C38D9E;
+    --color2: #E27D60;
+    --color5: #41B3A3;
+    --color3: #E8A87C;
+    --color4: #85dcd2; */
 }

@@ -4,7 +4,7 @@ nav {
     transition-property: padding;
     position: sticky;
     bottom: 100%;
-    background: #2F4550;
+    background: var(--color5);
     padding-top: 60px;
     padding-left: 8%;
     padding-right: 8%;
@@ -29,7 +29,7 @@ nav {
 .nav-logo p a {
     font-weight: 1000;
     text-decoration: none;
-    color: #B8DBD9;
+    color: var(--color3);
     font-family: sans-serif;
 }
 @media only screen and (max-width: 768px) {
@@ -56,7 +56,7 @@ nav ul li a:hover {
     transition: 0.2s;
     color: aliceblue;
 }
-nav ul li::after { 
+nav ul li::after {
     content: '';
     width: 0%;
     height: 2px;
@@ -78,7 +78,7 @@ nav ul li:hover::after {
 .toggle-button span {
     width: 35px;
     height: 5px;
-    background: #B8DBD9;
+    background: var(--color3);
     display: block;
     margin: 4px;
 }
@@ -87,7 +87,7 @@ nav ul li:hover::after {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: #4d6a79;
+    background-color: var(--color7);
 }
 .mobile-menu {
     display: none;
@@ -125,12 +125,12 @@ main.open {
 /* footer stuff */
 footer {
     visibility: hidden;
-    background: #2F4550;
+    background: var(--color5);
     /* this keeps the footer at the bottom of the page */
     position: sticky;
     top: 100%;
     width: 100vw;
-    color: #B8DBD9;
+    color: var(--color3);
     padding-top: 10px;
     opacity: 0;
 }
@@ -151,10 +151,10 @@ footer ul li {
 }
 footer ul li a {
     text-decoration: none;
-    color: #B8DBD9;
+    color: var(--color3);;
 }
 .footer-bottom {
-    background: #2F4550;
+    background: var(--color5);
     text-align: center;
     padding-top: 10px;
     padding-bottom: 20px;

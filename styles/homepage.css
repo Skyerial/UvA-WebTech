@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +8,13 @@
 }
 
 body {
-    background: #2F4550;
+    background: var(--color5);
     min-height: 100vh;
 }
 
 /* TITLE OPTIONS */
 .titlerow{
-    background-color: #2F4550;
+    background-color: var(--color5);
     transition-property: all;
     display: flex;
     width: 100%;
@@ -25,7 +27,7 @@ body {
 }
 .title {
     transition-duration: 0.2s;
-    color: #B8DBD9;
+    color: var(--color3);
     font-size: 5vw;
     font-family: sans-serif;
 }
@@ -53,13 +55,13 @@ body {
 .search-bar {
     width: 100%;
     max-width: 45vw;
-    background: #5a6973;
+    background: var(--color1);
     display: flex;
     align-items: center;
     border-radius: 60px;
     padding: 10px 20px;
     border: 10px solid;
-    border-color: #2F4550;
+    border-color: var(--color5);
 }
 .search-bar input {
     background: transparent;
@@ -68,10 +70,10 @@ body {
     outline: none;
     padding: 24px 0px 24px 20px;
     font-size: 20px;
-    color: #B8DBD9;
+    color: var(--color3);
 }
 ::placeholder {
-    color: #B8DBD9;
+    color: var(--color3);
 }
 .search-bar button {
     transition-duration: 1.5s;
@@ -79,15 +81,15 @@ body {
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    background: #2F4550;
+    background: var(--color5);
     cursor: pointer;
 }
 .search-bar button:hover {
-    background: #B8DBD9;
+    background: var(--color3);
 }
 .content {
     transition-duration: 1.5s;
-    background: #2F4550;
+    background: var(--color5);
     display: flex;
     width: 100%;
     height: 100%;
@@ -134,7 +136,7 @@ body {
     border-radius: 8px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #2F4550;
+    background-color: var(--color5);
 }
 .card * {
     transition: 0.3s ease all;
@@ -153,7 +155,7 @@ body {
     padding: 6px;
     margin: 0 5px 10px 5px;
     height: 20px;
-    background-color: #5a6973;
+    background-color: var(--color1);
     border: none;
     border-radius: 12px;
     display: block;
@@ -185,7 +187,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #B8DBD9;
+    color: var(--color3);
 
 }
 .card .hover-content {
@@ -198,12 +200,12 @@ body {
     padding: 15px;
     height: 20px;
     margin: 10px 10px 10px 0;
-    background-color: #5a6973;
+    background-color: var(--color1);
     border: none;
     border-radius: 12px;
     display: inline-block;
     font-size: 15px;
-    color: white;
+    color: var(--color3);
 }
 .card p {
     margin: 0;
@@ -214,8 +216,8 @@ body {
 .card .cardbutton .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: #5a6973;
-    color: #fff;
+    background-color: var(--color1);
+    color: var(--color3);
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
@@ -235,11 +237,11 @@ body {
 }
 
 .card .cardbutton:active {
-    background-color: #B8DBD9;
+    background-color: var(--color3);
 }
 
 .card i {
-    color: #B8DBD9;
+    color: var(--color3);
 }
 
 .card:hover {
@@ -256,87 +258,3 @@ body {
     padding: 8px 0 8px;
 }
 
-/** CSS VAN LOGIN PAGES TIJN **/
-
-.reg-form {
-    width: 50%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    border-radius: 25px;
-    padding: 0 0 10px 0;
-    border: 2px solid;
-    border-color: #D3E3EF;
-}
-
-.reg-header {
-    background: #D3E3EF;
-    border-radius: 25px 25px 0 0;
-    text-align: center;
-    padding: 20px;
-    color: white;
-    margin-bottom: 10px;
-}
-
-.input-box {
-    padding: 10px 40px 10px 40px;
-}
-
-.input-box input {
-    width: 100%;
-    height: 25px;
-    margin-top: 5px;
-}
-
-.form-btn {
-    margin-left: 40px;
-    padding: 5px 10px 5px 10px;
-    background-color: #D3E3EF;
-    border: none;
-    border-radius: 25px;
-    font-size: 15px;
-    color: white;
-}
-
-.form-btn {
-    margin-left: 40px;
-    padding: 5px 10px 5px 10px;
-    background-color: #D3E3EF;
-    border: none;
-    border-radius: 25px;
-    font-size: 15px;
-    color: white;
-}
-
-.back-btn {
-    background-color: #D3E3EF;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    color: white;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 50%;
-}
-
-.left-float {
-    float: left;
-}
-
-.form-sub-message {
-    margin-left: 40px;
-    margin-bottom: 10px;
-}
-
-.error-message {
-    color: red;
-    font-weight: bold;
-    padding: 5px 0 0 0;
-}
-
-.recaptcha {
-    margin-left: 40px;
-    margin-bottom: 10px;
-}
