@@ -26,6 +26,10 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     exit(0);
 }
 
+// Set confirm messages:
+$changed_username = false;
+$changed_password = false;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
@@ -197,10 +201,6 @@ $errors = [
 // Define log file:
 define("ERROR_LOG_FILE", "errorLog/error.txt");
 
-// Set confirm messages:
-$changed_username = false;
-$changed_password = false;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Retrieve region information:
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,6 +227,7 @@ if (isset($_POST['change_username'])) {
     if (!(in_array(true, $errors))) {
         try {
             change_username($conn, $_COOKIE['checker'], $username);
+            $changed_username = true;
         } catch (Exception $err) {
             $err_file = fopen(ERROR_LOG_FILE, "a");
             fwrite($err_file, $err->getMessage() . "\n");
@@ -273,6 +274,7 @@ if (isset($_POST['change_password'])) {
         if (password_verify($cur_password, $re_password)) {
             try {
                 change_password($conn, $_COOKIE['checker'], $new_password);
+                $changed_password = true;
             } catch (Exception $err) {
                 $err_file = fopen(ERROR_LOG_FILE, "a");
                 fwrite($err_file, $err->getMessage() . "\n");
@@ -326,7 +328,7 @@ if (isset($_POST['change_password'])) {
                 <div class = "region" id = "selected-region"
                 onclick = "dropdown()">
                     <?= $region?>
-                </div>
+                </div><br>
 
                 <div class = "view">
                     <!-- Search bar to look up regions. -->
@@ -338,30 +340,32 @@ if (isset($_POST['change_password'])) {
                     <!-- Get all regions from database and put them in a dropdown -->
                     <div id = "regions" class = "all-options">
                         <?php while ($line = mysqli_fetch_array($receive)):;?>
-                        <div class = "option" onclick = "new_region('<?php echo $line[1];?>', '<?php echo$_COOKIE['checker'] ?>')">
+                        <div class = "option" onclick = "new_region('<?php echo $line[1];?>', 
+                        '<?php echo$_COOKIE['checker'] ?>')">
                             <input type = "radio" class = "input_php">
                             <label><?php echo $line[1];?></label>
                         </div>
                         <?php endwhile; ?>
                     </div>
                 </div>
-            </div>
+            </div><br>
 
-            <br><br>
             <div>
                 <!-- Option to change password -->
                 <h2>User settings</h2>
                 <div>
                     <p>Change your settings:</p>
                 </div>
+
                 <div>
                     <!-- Start confirmation messages -->
 
                     <div id="un-con" class="email-confirmation">
-                        <p class="#">
+                        <p class="confirmation-message">
                             Your username has been successfully changed!
                         </p>
                     </div>
+
 
                     <?php if($changed_username) {
                         echo "
@@ -374,7 +378,7 @@ if (isset($_POST['change_password'])) {
                     ?>
 
                     <div id="pw-con" class="email-confirmation">
-                        <p class="#">
+                        <p class="confirmation-message">
                             Your password has been successfully changed!
                         </p>
                     </div>
@@ -387,23 +391,45 @@ if (isset($_POST['change_password'])) {
                         </script>
                         ";
                         }
-                    ?>
-
+                    ?><br>
                     <!-- End confirmation messages -->
+
+                    <div class = "container-buttons">
+                        <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
+                        &emsp;&emsp;&emsp;
+                        <button class = "buttons userbutton" onclick = input_user()>Change username</button>
+                    </div>
+
                     <form method = "post" action = "settings.php"
                     autocomplete="off" novalidate>
                         <input type="hidden" name="csrf_token"
                         value="<?=retrieve_csrf($conn)?>">
-
+                        &nbsp;
                         <div class = "table">
-                            <div class = "column left">    
+
+                            <div class = "column left passchange">    
+                                <label>Current password</label>
+                            </div>
+                            <div class = "column right passchange">    
+                                <input type="password" name="cur_password" class="#"
+                                value="" maxlength="255" required=""><br>
+                            </div>
+
+                            <?php if($errors['curpw_error']): ?>
+                                <div class="appear">
+                                    <p>
+                                        Please enter your current password.
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class = "column left userchange">    
                                 <label>Username</label>
                             </div>
-                            <div class = "column right">    
+                            <div class = "column right userchange"> 
                                 <input type="text" name="username" class="#"
                                 value="" maxlength="30" required=""><br>
                             </div>
-                            <br><br>
 
                             <?php if($errors['username_error']): ?>
                                 <div class="appear">
@@ -413,26 +439,11 @@ if (isset($_POST['change_password'])) {
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <div class = "column left">    
-                                <label>Current password</label>
-                            </div>
-                            <div class = "column right">    
-                                <input type="password" name="cur_password" class="#"
-                                value="" maxlength="255" required=""><br>
-                            </div><br><br>
-
-                            <?php if($errors['curpw_error']): ?>
-                                <div class="appear">
-                                    <p>
-                                        Please enter your current password
-                                    </p>
-                                </div>
-                            <?php endif; ?>
                             
-                            <div class = "column left">    
+                            <div class = "column left passchange">    
                                 <label>New Password</label>
                             </div>
-                            <div class = "column right">    
+                            <div class = "column right passchange">    
                                 <input type="password" name="new_password" class="#"
                                 value="" maxlength="255" required=""><br><br>
                             </div>
@@ -446,11 +457,13 @@ if (isset($_POST['change_password'])) {
                                 </div>
                             <?php endif; ?>
                         </div>
+                        <!-- <br><br> -->
 
-                        <input type="submit" class="submit"
-                        name="change_username" value="Change username">
-                        <input type="submit" class="submit"
-                        name="change_password" value="Change password">
+                        <input type="submit" class="hidden_user buttons"
+                        name="change_username" value="Submit username">
+                        <!-- <br> -->
+                        <input type="submit" class="hidden_pass buttons"
+                        name="change_password" value="Submit password">
 
                         <?php if($errors['csrf_error']): ?>
                             <div class="appear">
