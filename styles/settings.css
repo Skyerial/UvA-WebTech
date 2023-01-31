@@ -117,32 +117,6 @@ select {
 
 .dropdown .option:hover {
     background: rgb(172, 235, 238);
-
-}
-/* rgb(181, 244, 247) */
-
-/* Remove visibility checkpoint. */
-.input_php {
-    display: none;
-}
-
-.form {
-    border-radius: 5px;
-    border: 1px;
-    padding: 5px;
-    background-color: #B8DBD9;
-}
-
-.buttons {
-    padding: 8px;
-    border-radius: 25px;
-    border: 1px;
-    background-color: #2F4550;
-    color: #B8DBD9;
-}
-
-.submit:hover {
-    background-color: black;
 }
 
 .view {
@@ -157,12 +131,48 @@ select {
     opacity: 1;
 }
 
+
+/* rgb(181, 244, 247) */
+
+/* Remove visibility checkpoint. */
+.input_php {
+    display: none;
+}
+
+.form {
+    border-radius: 5px;
+    border: 1px;
+    padding: 5px;
+    background-color: #B8DBD9;
+}
+
+/* The buttons */
+.buttons {
+    padding: 8px;
+    border-radius: 25px;
+    border: 1px;
+    background-color: #2F4550;
+    color: #B8DBD9;
+    opacity: 1;
+}
+
+.buttons:hover {
+    background-color: black;
+}
+
 /* Columns for input forms. */
+.table {
+    width: 66%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .column {
     float: left;
     padding: 3px;
+    width: 100%;
     box-sizing: border-box;
-    height: 1px;
+    text-align: left;
     opacity: 0;
 }
 
@@ -172,14 +182,7 @@ select {
 }
 
 .right {
-    width: 20%;
-    box-sizing: border-box;
-}
-
-.column:after {
-    content: "";
-    display: table;
-    clear: both;
+    width: 30%;
     box-sizing: border-box;
 }
 
@@ -206,10 +209,41 @@ select {
     display: block;
 }
 
-.go .userchange {
+.hidden_pass {
+    opacity: 0;
+    margin-right: 55%;
+}
+
+.hidden_user {
+    opacity: 0;
+}
+
+.user_appear .hidden_user {
     opacity: 1;
 }
 
-.lol .passchange {
+.pass_appear .hidden_pass {
     opacity: 1;
+}
+
+/* Inputs shown on click. */
+.user_appear .userchange {
+    opacity: 1;
+}
+
+.pass_appear .passchange {
+    opacity: 1;
+}
+
+.container-buttons {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.userbutton {
+    width: 30%;
+}
+
+.passbutton {
+    width: 30%;
 }

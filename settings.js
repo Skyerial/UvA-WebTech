@@ -6,12 +6,12 @@ function dropdown() {
 
 function input_user() {
     var x = document.body;
-    x.classList.toggle("go");
+    x.classList.toggle("user_appear");
 }
 
 function input_pass() {
     var x = document.body;
-    x.classList.toggle("lol");
+    x.classList.toggle("pass_appear");
 }
 
 // This doesn't work, click anywhere and close dropdown again.

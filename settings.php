@@ -323,9 +323,7 @@ if (isset($_POST['change_password'])) {
                 <div class = "region" id = "selected-region"
                 onclick = "dropdown()">
                     <?= $region?>
-                </div>
-                <!-- There needs to be a space -->
-                <p></p>
+                </div><br>
 
                 <div class = "view">
                     <!-- Search bar to look up regions. -->
@@ -355,9 +353,10 @@ if (isset($_POST['change_password'])) {
                     <p>Change your settings:</p>
                 </div>
 
-                <div>
-                    <button class = "buttons" onclick = input_user()>Change username</button>
-                    <button class = "buttons" onclick = input_pass()>Change password</button>
+                <div class = "container-buttons">
+                    <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
+                    &emsp;&emsp;&emsp;
+                    <button class = "buttons userbutton" onclick = input_user()>Change username</button>
                 </div>
 
 
@@ -401,25 +400,8 @@ if (isset($_POST['change_password'])) {
                     autocomplete="off" novalidate>
                         <input type="hidden" name="csrf_token"
                         value="<?=retrieve_csrf($conn)?>">
-
+                        &nbsp;
                         <div class = "table">
-                            <div class = "column left userchange">    
-                                <label>Username</label>
-                            </div>
-                            <div class = "column right userchange"> 
-                                <input type="text" name="username" class="#"
-                                value="" maxlength="30" required=""><br>
-                            </div>
-                            <br><br>
-
-                            <?php if($errors['username_error']): ?>
-                                <div class="appear">
-                                    <p>
-                                        Please enter a valid username. A username
-                                        cannot contain spaces.
-                                    </p>
-                                </div>
-                            <?php endif; ?>
 
                             <div class = "column left passchange">    
                                 <label>Current password</label>
@@ -427,12 +409,29 @@ if (isset($_POST['change_password'])) {
                             <div class = "column right passchange">    
                                 <input type="password" name="cur_password" class="#"
                                 value="" maxlength="255" required=""><br>
-                            </div><br><br>
+                            </div>
 
                             <?php if($errors['curpw_error']): ?>
                                 <div class="appear">
                                     <p>
-                                        Please enter your current password
+                                        Please enter your current password.
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class = "column left userchange">    
+                                <label>Username</label>
+                            </div>
+                            <div class = "column right userchange"> 
+                                <input type="text" name="username" class="#"
+                                value="" maxlength="30" required=""><br>
+                            </div>
+
+                            <?php if($errors['username_error']): ?>
+                                <div class="appear">
+                                    <p>
+                                        Please enter a valid username. A username
+                                        cannot contain spaces.
                                     </p>
                                 </div>
                             <?php endif; ?>
@@ -453,12 +452,13 @@ if (isset($_POST['change_password'])) {
                                     </p>
                                 </div>
                             <?php endif; ?>
-                        </div>
+                        </div><br><br>
 
-                        <input type="submit" class="buttons"
+                        <input type="submit" class="hidden_user buttons"
                         name="change_username" value="Submit username">
-                        <input type="submit" class="buttons"
-                        name="change_password" value="Change password">
+                        <br>
+                        <input type="submit" class="hidden_pass buttons"
+                        name="change_password" value="Submit password">
 
                         <?php if($errors['csrf_error']): ?>
                             <div class="appear">
