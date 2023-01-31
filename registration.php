@@ -14,16 +14,41 @@ require_once "/../../../conn/db.php";
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
-function add_user($conn, $username, $email, $hashed_password, $email_token) {
-    $add_user = $conn->prepare("INSERT INTO user(username, email, password,
-        activation_code) VALUES (?, ?, ?, ?)");
 
-    if (!$add_user->bind_param("ssss", $username, $email, $hashed_password,
-        $email_token)) {
-        throw new Exception ("[add_user] Could not bind parameters.");
-    }
-    if (!$add_user->execute()) {
-        throw new Exception ("[add_user] Could not execute query.");
+// add_user adds a user to the database.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//  $username: The username of the user.
+//  $email: The email of the user.
+//  $hashed_password: The hashed password of the user.
+//  $email_token: The email token of the user.
+//
+// Output: None.
+function add_user($conn, $username, $email, $hashed_password, $email_token) {
+
+    // Generate a private API key:
+    $api_key = bin2hex(random_bytes(32));
+
+    // Prepare a SQL query to add the user to the database:
+    $add_user = $conn->prepare("INSERT INTO user(username, email, password,
+        activation_code, api_key) VALUES (?, ?, ?, ?, ?)");
+
+    // Start a loop to regenerate the API key when the key is not unique:
+    $result = false;
+    while (!$result) {
+        if (!$add_user->bind_param("sssss", $username, $email, $hashed_password,
+            $email_token, $api_key)) {
+            throw new Exception ("[add_user] Could not bind parameters.");
+        }
+
+        $result = $add_user->execute();
+        // Note: Error 1062 is the MYSQLI duplicate error.
+        if ($result === false && $conn->errno == 1062) {
+            $api_key = bin2hex(random_bytes(32));
+        } else if (!$result) {
+            throw new Exception ("[add_user] Could not execute query.");
+        }
     }
 
     $add_user->close();
@@ -147,11 +172,11 @@ if (isset($_POST['to_login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
         <link rel="stylesheet" href="styles/nav.css">
-        <script type="text/javascript" src="menuScript.js"></script>
+        <script type="text/javascript" src="menuScript.js" defer></script>
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
-    <body onload="showFooter()">
+    <body>
         <?php require_once("nav.php");?>
 
         <main class="reg-form" id="mainID">

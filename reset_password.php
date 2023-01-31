@@ -90,7 +90,7 @@ if (isset($_POST['reset_password'])) {
 
     <body>
         <?php include 'nav.php'; ?>
-        <div class="content">
+        <main id="mainID" class="content">
             <div class="reg-form">
                 <div class="reg-header">
                     <h2>Login Form</h2>
@@ -118,6 +118,7 @@ if (isset($_POST['reset_password'])) {
                     value="Submit">
                 </form>
             </div>
-        </div>
+        </main>
+        <?php require_once("footer.php")?>
     </body>
 </html>

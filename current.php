@@ -14,7 +14,7 @@
         <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
 
-    <body onload="showFooter()">
+    <body>
 
         <!-- insert the nav bar -->
         <?php

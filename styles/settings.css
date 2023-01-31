@@ -12,8 +12,6 @@
 /* Background website */
 body {
     background-color: #5a6973;
-    /* -webkit-transition: .5s;
-    transition: .5s; */
 }
 
 div {
@@ -45,8 +43,6 @@ p {
     border-radius: 25px;
     width : 60%;
     background-color: #6c848c;
-    /* padding-left: 25%;
-    padding-right: 25%; */
     padding-bottom: 18px;
 }
 
@@ -67,16 +63,14 @@ select {
 #search-input {
     position: flex;
     opacity: 0;
-    width: 190px;
+    width: 185px;
     transition: 0.2s;
 }
 
 /* Search bar. */
 .show #search-input {
     opacity: 1;
-    margin: auto;
-    /* width: 195; */
-    
+    margin: auto;    
     border-radius: 5px 5px 0 0;
     border-color: #B8DBD9;
     padding: 2px;
@@ -93,7 +87,6 @@ select {
     opacity: 0;
     border-radius: 0 0 5px 5px;
     overflow: hidden;
-    transition: all 0.2s;
 }
 
 .show .all-options {
@@ -118,32 +111,6 @@ select {
 
 .dropdown .option:hover {
     background: rgb(172, 235, 238);
-
-}
-/* rgb(181, 244, 247) */
-
-/* Remove visibility checkpoint. */
-.input_php {
-    display: none;
-}
-
-.form {
-    border-radius: 5px;
-    border: 1px;
-    padding: 5px;
-    background-color: #B8DBD9;
-}
-
-.submit {
-    padding: 8px;
-    border-radius: 25px;
-    border: 1px;
-    background-color: #2F4550;
-    color: #B8DBD9;
-}
-
-.submit:hover {
-    background-color: black;
 }
 
 .view {
@@ -151,37 +118,122 @@ select {
     border-color: #2F4550;
     border-radius: 5px;
     opacity: 0;
+    transition: all 0.2s;
 }
 
 .show .view {
     opacity: 1;
 }
 
+/* rgb(181, 244, 247) */
+
+/* Remove visibility checkpoint. */
+.input_php {
+    display: none;
+}
+
+/* All buttons */
+.buttons {
+    padding: 8px;
+    border-radius: 25px;
+    border: 1px;
+    background-color: #2F4550;
+    color: #B8DBD9;
+    opacity: 1;
+}
+
+.buttons:hover {
+    background-color: black;
+}
+
+/* Buttons to drop down the settings. */
+.container-buttons {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.userbutton {
+    width: 30%;
+}
+
+.passbutton {
+    width: 30%;
+}
+
 /* Columns for input forms. */
+.table {
+    width: 66%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .column {
     float: left;
     padding: 3px;
+    width: 100%;
     box-sizing: border-box;
+    text-align: left;
+    opacity: 0;
+    display: none;
 }
 
 .left {
     width: 20%;
     box-sizing: border-box;
+    display: block;
 }
 
 .right {
-    width: 20%;
+    width: 28%;
     box-sizing: border-box;
+    display: block;
 }
 
-/* .column:after {
-    content: "";
-    display: table;
-    clear: both;
-    box-sizing: border-box;
-} */
+.email-confirmation {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    height: 40px;
+    background: rgba(14, 222, 87, 0.369);
+    display: none;
+    border-radius: 5px;
+    color: green;
+}
 
-/* 
-.appear {
-    /* display: hidden; */
-    /* color: #5a6973 */
+.confirmation-message {
+    text-align: center;
+    margin-top: auto;
+    line-height: 40px;
+    display: block;
+}
+
+/* Hidden and shown submit buttons. */
+.hidden_pass {
+    opacity: 0;
+    margin-right: 55%;
+}
+
+.hidden_user {
+    opacity: 0;
+}
+
+.user_appear .hidden_user {
+    opacity: 1;
+}
+
+.pass_appear .hidden_pass {
+    opacity: 1;
+}
+
+/* Inputs shown on click. */
+.userchange {
+    text-align: right;
+}
+
+.user_appear .userchange {
+    opacity: 1;
+}
+
+.pass_appear .passchange {
+    opacity: 1;
+}

@@ -64,7 +64,7 @@ function retrieve_status($conn, $email) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Miscellaneous:
+// Miscellaneous: 
 ////////////////////////////////////////////////////////////////////////////////
 // Check if the user is logged in, if yes redirect the user to the index page.
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
@@ -320,7 +320,7 @@ if (isset($_POST['to_register'])) {
     </script>
 </head>
 
-<body onload="showFooter()">
+<body>
     <?php include "nav.php"; ?>
 
     <main id="mainID" class="reg-form">

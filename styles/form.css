@@ -1,8 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    transition-duration: 1.5s;
-    transition-delay: 0s;
     font-family: 'Roboto';
 }
 
@@ -41,6 +39,7 @@ a {
     border-color: #B8DBD9;
     background-color: #6c848c;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .reg-header {
@@ -88,6 +87,10 @@ a {
     border-radius: 5px;
     font-size: 15px;
     color: #B8DBD9;
+}
+
+.form-btn:hover {
+    background-color: #383f43;
 }
 
 .back-btn {

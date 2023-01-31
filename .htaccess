@@ -1,1 +1,4 @@
 RedirectMatch 404 /\.git
+
+RewriteEngine On 
+RewriteRule ^v1 apiEndpoint.php

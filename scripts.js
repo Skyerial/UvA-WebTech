@@ -233,19 +233,3 @@ function displayCards(data){
     }
 
 }
-
-function buildURL() {
-    var startURL = 'https://streaming-availability.p.rapidapi.com/v2/search/title?title=';
-    const countrySetting = '&country=';
-    const typeSetting = '&type=';
-    const languageSetting = '&output_language='
-    var country = 'nl';
-    var type = 'all';
-    var language = 'en'
-    // bit extra since it is already in searchButton, but that can be fixed later...
-    var search = document.getElementById('textbar').value;
-    document.getElementById('textbar').value = search;
-    const searchURL = search.replace(/\s/g, '%20');
-
-    return startURL + searchURL + countrySetting + country + typeSetting + type + languageSetting + language;
-}
