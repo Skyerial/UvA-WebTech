@@ -130,6 +130,12 @@ if (isset($_POST['register'])) {
     }
 }
 
+if (isset($_POST['to_login'])) {
+    header("location: login.php");
+    close_connection($conn);
+    exit(0);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -239,9 +245,8 @@ if (isset($_POST['register'])) {
                     <?php endif; ?>
                 </div>
 
-                <div class = "recaptcha">
-                    <div class = "g-recaptcha" data-sitekey =
-                    "6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom"></div>
+                <div class="g-recaptcha"
+                    data-sitekey="6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom">
                 </div>
 
                 <div class="form-sub-message">
@@ -265,15 +270,17 @@ if (isset($_POST['register'])) {
 
                 <input type="submit" class="form-btn" name="register"
                 value="Submit">
+
+                <br><br>
+
+                <div class="left-float">
+                    <p class="form-sub-message">Already have an account?</p>
+                    <input type="submit" class="form-btn" name="to_login"
+                    value="Login here">
+                </div>
             </form>
-
             <!-- End registration form -->
-
-            <br><br>
-
-            <p class="form-sub-message">Already have an account?</p>
-            <a href="login.php" class="form-btn">Login</a>
-        </div>
+            </div>
         </main>
 
         <?php require_once("footer.php");?>

@@ -18,8 +18,13 @@ nav {
 .nav-logo {
     visibility: hidden;
     opacity: 0;
-    transition: 2s ease;
+    transition: 1s ease;
     font-size: 30px;
+}
+#logoID.open {
+    visibility: visible !important;
+    opacity: 1;
+    transition: 0s !important;
 }
 .nav-logo p a {
     font-weight: 1000;
@@ -103,7 +108,7 @@ nav ul li:hover::after {
 .mobile-menu .home-mobile {
     padding-top: 2vh;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
     .computer-menu {
         display: none;
     }
@@ -127,6 +132,11 @@ footer {
     width: 100vw;
     color: #B8DBD9;
     padding-top: 10px;
+    opacity: 0;
+}
+footer.open {
+    visibility: visible !important;
+    opacity: 1;
 }
 .footer-content {
     text-align: center;

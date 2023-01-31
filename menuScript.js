@@ -2,8 +2,10 @@
 document.getElementById('toggleButtonID').addEventListener('click', showMenu);
 
 function showMenu() {
+    document.getElementById('footerID').classList.toggle('open');
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('mainID').classList.toggle('open');
+    document.getElementById('logoID').classList.toggle('open');
 }
 
 function showFooter() {

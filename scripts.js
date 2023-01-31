@@ -59,6 +59,9 @@ function searchbutton() {
     if(!specialChar(search)) {
         document.getElementById('textbar').value = '';
         // need to make sure that it shows search input was not valid...
+        alert(
+            "Please enter a valid search input containing only letter, numbers, and spaces."
+        )
         return;
     }
 
@@ -206,11 +209,11 @@ function displayCards(data){
                         ${divs}
                     </div>
                 </div>
-                <h3">${data.movieTitle}</h3>
+                <h3>${data.movieTitle}</h3>
                 <div class="hover-content">
-                    <a href="javascript:void(0)" onclick="to_watch(${data.id}); return false;" class="cardbutton">Future</a>
-                    <a href="javascript:void(0)" onclick="cur_watching(${data.id}); return false;" class="cardbutton">Current</a>
-                    <a href="javascript:void(0)" onclick="watched(${data.id}); return false;" class="cardbutton">Watched</a>
+                    <a href="javascript:void(0)" onclick="to_watch(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
+                    <a href="javascript:void(0)" onclick="cur_watching(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
+                    <a href="javascript:void(0)" onclick="watched(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
                 </div>
             </div>
         `;
