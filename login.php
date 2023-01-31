@@ -6,7 +6,6 @@ require_once "account_verification/basic_error_checks.php";
 require_once "account_verification/close_connection.php";
 require_once "account_verification/csrf.php";
 require_once "account_verification/email.php";
-require_once "account_verification/login_attempt.php";
 require_once "account_verification/recaptcha.php";
 require_once "account_verification/session_token.php";
 require_once "/../../../conn/db.php";
@@ -112,7 +111,6 @@ if (isset($_GET['token'])) {
 // The following variables are used to show different error messages in html.
 // An specific error message is shown if the variable is true.
 $errors = [
-    'block' => false, // The users account is blocked.
     'captcha_empty' => false, // The user has not done the captcha test.
     'captcha_error' => false,
     'csrf_error' => false,
@@ -153,8 +151,6 @@ if (isset($_POST['login'])) {
             fclose($err_file);
         }
     }
-    // Error checking: login attempts.
-    if (login_attempt_check($conn, $email)) { setError($errors, 'block'); }
 
     // Error checking: password.
     basic_password_error($password, $errors);
@@ -419,10 +415,8 @@ if (isset($_POST['to_register'])) {
                 <?php endif; ?>
             </div>
 
-            <div class="recaptcha">
-                <div class="g-recaptcha"
-                    data-sitekey="6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom">
-                </div>
+            <div class="g-recaptcha"
+                data-sitekey="6LeFivEjAAAAAMCHBdjCxO4-TQ-IHxfMFJF3hWom">
             </div>
 
             <div class="form-sub-message">
@@ -441,15 +435,6 @@ if (isset($_POST['to_register'])) {
             <input type="submit" class="form-btn" name="login" value="Submit">
 
             <div class="form-sub-message">
-                <?php if ($errors['block']) : ?>
-                    <div class="error-message">
-                        <p>
-                            Your account has been blocked. We've send you an
-                            email with which you can reset your password.
-                            Doing so, will also unblock your account.
-                        </p>
-                    </div>
-                <?php endif; ?>
                 <?php if ($errors['csrf_error']) : ?>
                     <div class="error-message">
                         <p> Invalid/Expired CSRF token!
@@ -458,8 +443,10 @@ if (isset($_POST['to_register'])) {
                 <?php endif; ?>
                 <?php if ($errors['status_error']) : ?>
                     <div class="error-message">
-                        <p> You have not yet verificated your email adress.
-                            Please check your inbox. </p>
+                        <p>
+                            You have not yet verificated your email adress.
+                            Please check your inbox.
+                        </p>
                     </div>
                 <?php endif; ?>
                 <?php if ($errors['main_error']) : ?>
@@ -481,6 +468,7 @@ if (isset($_POST['to_register'])) {
                 <input type="submit" class="form-btn" name="to_register"
                 value="Register here">
             </div>
+
         </form>
 
         </div>

@@ -132,10 +132,11 @@ footer {
     width: 100vw;
     color: #B8DBD9;
     padding-top: 10px;
-    transition-duration: 0s;
+    opacity: 0;
 }
 footer.open {
     visibility: visible !important;
+    opacity: 1;
 }
 .footer-content {
     text-align: center;
