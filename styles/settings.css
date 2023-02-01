@@ -1,4 +1,13 @@
-@import "colors.css";
+* {
+    margin: 0;
+    padding: 0;
+    transition-duration: 0.8s;
+    font-family: 'Roboto';
+}
+
+#center {
+    text-align: center;
+}
 
 /* Background website */
 body {
@@ -39,6 +48,13 @@ p {
     /* padding-left: 25%;
     padding-right: 25%; */
     padding-bottom: 18px;
+}
+
+select {
+    text-align: center;
+    background-color: #B8DBD9;
+    border-style: solid;
+    border-radius: 5px;
 }
 
 /* Drop down regions */
@@ -93,6 +109,13 @@ p {
     overflow-y: scroll;
 }
 
+/* The selected region. */
+.region {
+    background: #B8DBD9;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 .dropdown .option .label {
     cursor: pointer;
 }
@@ -118,7 +141,7 @@ p {
     display: none;
 }
 
-/* Style of all buttons. */
+/* All buttons */
 .buttons {
     padding: 8px;
     border-radius: 25px;
