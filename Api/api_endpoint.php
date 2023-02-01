@@ -1,4 +1,10 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////
+// this is the api endpoint. It handles the requests that start with v1 after
+// the website url. Calling this endpoint gives access to the api we use for
+// getting the movie data and can return that same data to the caller.
+////////////////////////////////////////////////////////////////////////////////
+
 require_once "api_selfmade.php";
 require_once "../APICall/movie_api_call.php";
 
@@ -13,17 +19,10 @@ require_once "../APICall/movie_api_call.php";
 // webtech-uva.nl/v1/playlist?name="<name of playlist>"
 
 $parts = explode('/', $_SERVER["REQUEST_URI"]);
-
-// if first part isnt ~danielo give 404
-// this needs to be changed if this goes live on main
 if ($parts[1] != "v1") {
     http_response_code(404);
     exit;
 }
-// if ($parts[1] != "~danielo") {
-//     http_response_code(404);
-//     exit;
-// }
 
 // get headers
 $headers = array();
@@ -45,6 +44,10 @@ $option = $query_parts[0];
 $title = explode('title=', $query_options[0]);
 $country = explode('country=', $query_options[1]);
 
+// based on the first part of query a function gets called to give the appropriate
+// data as a response
+// DISCLAIMER! 
+// at the moment only the api we use can be called to get the same results as shown on the homepage
 switch ($query_parts[0]) {
     case "movie":
         $response_data = condense_data(api_call(build_url($title[1], $conn, $country[1])), $country[1]);

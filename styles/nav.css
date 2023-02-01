@@ -15,6 +15,7 @@ nav {
     padding-bottom: 65px;
 }
 
+/* nav logo in top left of webpage */
 .nav-logo {
     visibility: visible;
     opacity: 1;
@@ -33,6 +34,7 @@ nav {
     }
 }
 
+/* rest of navbar styling */
 .navbar {
     text-align: right;
     /* flex: 1; */
@@ -117,7 +119,7 @@ main.open {
     display: none;
 }
 
-/* footer stuff */
+/* footer styling */
 footer {
     visibility: visible;
     background: var(--color5);

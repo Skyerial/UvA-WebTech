@@ -58,8 +58,9 @@ $services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
 foreach ($services as $service) {
     if ($data->{$service}) {
         $service_url = $data->{$service};
-        add_to_playlist($title, $poster, $service_url, $service, $playlist);
+        add_to_playlist($conn, $title, $poster, $service_url, $service, $playlist);
     }
 }
 
+if (is_resource($conn)) { mysqli_close($conn); }
 ?>

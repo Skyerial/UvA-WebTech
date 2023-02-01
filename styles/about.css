@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@
 }
 
 body {
-    background: #5a6973;
+    background: var(--color4);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -39,7 +41,7 @@ a {
     border-radius: 10px;
     border: 2px solid;
     border-color: #B8DBD9;
-    background-color: #6c848c;
+    background-color: var(--color7);
     margin-top: 10px;
 }
 

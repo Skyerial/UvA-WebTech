@@ -7,7 +7,7 @@
 }
 
 body {
-    background: var(--color1);
+    background: var(--color4);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@ a {
     border-radius: 10px;
     border: 2px solid;
     border-color: var(--color3);
-    background-color: var(--color4);
+    background-color: var(--color7);
     margin-top: 10px;
     margin-bottom: 10px;
 }

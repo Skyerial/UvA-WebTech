@@ -1,5 +1,8 @@
 <?php
-// title needs to be checked before it is used anywhere...
+// Builds the request url which can be used to ask data from the api
+//
+// IN:
+//  $title
 function build_url($title, $conn, $country) {
     if(!preg_match('/^\w+( \w+)*$/', $title)) {
         return NULL;
@@ -19,7 +22,6 @@ function build_url($title, $conn, $country) {
     return "{$startUrl}{$title}{$countrySetting}{$country}{$typeSetting}{$type}{$languageSetting}{$language}";
 }
 
-// 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07
 // This code is taken from the rapid-api website
 // They provide code snippets for the apis available on their website
 // basically their way of documentation since it isnt always available
@@ -41,7 +43,8 @@ function api_call($apiUrl) {
         ],
     ]);
 
-    //"X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
+    // different API keys to use if calls on one are empty for the day
+    // 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
     // cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3
     // 1f4f387fb7msh9026d962fb7b4d6p161790jsn6a3628cbcf9b
 

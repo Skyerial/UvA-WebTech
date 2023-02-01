@@ -336,10 +336,7 @@ function remove_from_playlist($title, $picture, $service_url, $playlist) {
 //     $service_url: Url to streaming service.
 //     $service: Name of the streaming service.
 //     $playlist: Name of the playlist where item should be added.
-function add_to_playlist($title, $picture, $service_url, $service, $playlist) {
-    // check if $playlist stores a valid value.
-    global $conn;
-
+function add_to_playlist($conn, $title, $picture, $service_url, $service, $playlist) {
     // Check if the user is logged in, if not redirect the user to the login page.
     if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
         if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
@@ -434,9 +431,5 @@ function add_to_playlist($title, $picture, $service_url, $service, $playlist) {
 
     // If code reaches this point without errors then commit the data in the database
     $conn->commit();
-
-    // The code has successfully executed. Close the connection to the database and
-    // exit with succes code '0':
-    if (is_resource($conn)) { mysqli_close($conn); }
-    exit(0);
+    return;
 }

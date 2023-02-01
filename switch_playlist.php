@@ -60,12 +60,12 @@ foreach ($services as $service) {
     if ($data->{$service}) {
         $service_url = $data->{$service};
         if ($action == "add") {
-            add_to_playlist($title, $poster, $service_url, $service, $playlist);
+            add_to_playlist($conn, $title, $poster, $service_url, $service, $playlist);
         } elseif ($action == "remove") {
             remove_from_playlist($title, $poster, $service_url, $playlist);
         }
     }
 }
 
-
+if (is_resource($conn)) { mysqli_close($conn); }
 ?>
