@@ -64,6 +64,8 @@ function searchbutton() {
         )
         return;
     }
+    showLoadingAnimation();
+    showFooter();
 
     // handle animations
     var titlebox = document.getElementById("title");
