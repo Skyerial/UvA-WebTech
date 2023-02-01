@@ -15,7 +15,7 @@ function getCardData(search){
 
     // START XMLHttpRequest
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "APICall/movieApiCall.php", true);
+    xhttp.open("POST", "APICall/retrieveRegionApi.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhttp.onreadystatechange = function () {

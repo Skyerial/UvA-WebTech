@@ -3,26 +3,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/close_connection.php";
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+// require_once "/../account_verification/close_connection.php";
+// require_once "/../account_verification/session_token.php";
+require_once "/../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Check session:
 ////////////////////////////////////////////////////////////////////////////////
 
 // Check if the user is logged in, if not redirect the user to the login page.
-if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
-    if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
-        close_connection($conn);
-        header("Location: login.php");
-        exit(0);
-    }
-} else {
-    close_connection($conn);
-    header("Location: login.php");
-    exit(0);
-}
+// if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
+//     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
+//         close_connection($conn);
+//         header("Location: login.php");
+//         exit(0);
+//     }
+// } else {
+//     close_connection($conn);
+//     header("Location: login.php");
+//     exit(0);
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -69,10 +69,10 @@ function check_api($conn, $api_key) {
         "SELECT api_key FROM user WHERE api_key = ?"
     );
 
-    if (!$retrieve_api->bind_param("s", $api_key)) {
+    if (!$check_api->bind_param("s", $api_key)) {
         throw new Exception ("[check_api] Could not bind parameters.");
     }
-    if (!$retrieve_api->execute()) {
+    if (!$check_api->execute()) {
         throw new Exception ("[check_api] Could not execute query.");
     }
 
