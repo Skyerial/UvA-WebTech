@@ -2,7 +2,11 @@
 // Builds the request url which can be used to ask data from the api
 //
 // IN:
-//  $title
+//  $title: title of the film or serie
+//  $conn: connection to the database
+//  $country: country for the services
+// OUT:
+//  the url needed for the request to check where the film or serie is watchable 
 function build_url($title, $conn, $country) {
     if(!preg_match('/^\w+( \w+)*$/', $title)) {
         return NULL;
@@ -22,9 +26,17 @@ function build_url($title, $conn, $country) {
     return "{$startUrl}{$title}{$countrySetting}{$country}{$typeSetting}{$type}{$languageSetting}{$language}";
 }
 
-// This code is taken from the rapid-api website
+// This code is taken from the rapid-api website 
+// https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability
 // They provide code snippets for the apis available on their website
 // basically their way of documentation since it isnt always available
+//
+// Call the api and return all the movie data that the api provides
+//
+// IN:
+//  $apiUrl: url needed for the request to check where the film or serie is watchable
+// OUT:
+//  json string with all movie or series information from the api
 function api_call($apiUrl) {
     $curl = curl_init();
 
@@ -60,14 +72,6 @@ function api_call($apiUrl) {
     }
 }
 
-/**
- * 1. turn json string in php object
- * 2. get relevant data per movie
- * 3. add relevant movie data to new php object
- * 4. return new object once all relevant movie data is added for all the
- *      movies
- */
-
 class movie_details {
     var $id;
     var $movieTitle;
@@ -80,6 +84,13 @@ class movie_details {
     var $apple;
 }
 
+// Takes json string and takes out the useful information and outputs it as json
+//
+// IN:
+//  $response: json string with all available information
+//  $country: country of where the the movie or series is available on what services
+// OUT:
+//  condensed form of the json string with only the relevant information as json
 function condense_data($response, $country) {
     $obj = json_decode($response);
     $result = array();
