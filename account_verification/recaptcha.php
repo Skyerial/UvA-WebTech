@@ -10,7 +10,7 @@ function captcha_check(&$errors) {
     $captcha = $_POST['g-recaptcha-response'] ?? NULL;
 
     if (!$captcha){
-        setError($errors, 'captcha_empty');
+        set_error($errors, 'captcha_empty');
     } else {
         $response = json_decode(file_get_contents("https://www.google.com/" .
         "recaptcha/api/siteverify?secret=6LeFivEjAAAAAJt8rR6WIOdokUvPM" .
@@ -18,7 +18,7 @@ function captcha_check(&$errors) {
         true);
 
         if($response['success'] == false) {
-            setError($errors, 'captcha_error');
+            set_error($errors, 'captcha_error');
         }
     }
 }

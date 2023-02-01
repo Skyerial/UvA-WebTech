@@ -44,8 +44,8 @@
 
             <div class="tabrow">
                 <div class="tab">
-                    <a href="future.php"><button class="tablinks" href="future.php">Future <i class="fa-solid fa-eye"></i></button></a>
-                    <a><button class="tablinks" style="background-color: #B8DBD9; color: #2f4550;">Current <i class="fa-solid fa-clock"></i></button></a>
+                    <a href="future.php"><button class="tablinks" href="future.php">Future <i class="fa-solid fa-clock"></i></button></a>
+                    <a><button class="tablinks" style="background-color: #B8DBD9; color: #2f4550;">Current <i class="fa-solid fa-eye"></i></button></a>
                     <a href="watched.php"><button class="tablinks" href="watched.php">Finished <i class="fa-solid fa-eye-slash"></i></button></a>
                 </div>
             </div>

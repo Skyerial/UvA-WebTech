@@ -15,7 +15,7 @@ function getCardData(search){
 
     // START XMLHttpRequest
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "APICall/movieApiCall.php", true);
+    xhttp.open("POST", "APICall/movie_api_call.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhttp.onreadystatechange = function () {
@@ -54,7 +54,7 @@ function animations() {
     titlebox.style.paddingBottom = '0';
 }
 
-function searchbutton() {
+function searchButton() {
     var search = document.getElementById('textbar').value;
     if(!specialChar(search)) {
         document.getElementById('textbar').value = '';

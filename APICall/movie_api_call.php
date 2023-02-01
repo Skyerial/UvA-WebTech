@@ -2,7 +2,7 @@
 $q = $_POST['movieTitle'];
 
 // title needs to be checked before it is used anywhere...
-function buildUrl($title) {
+function build_URL($title) {
     if(!preg_match('/^\w+( \w+)*$/', $title)) {
         return NULL;
     }
@@ -22,7 +22,7 @@ function buildUrl($title) {
 // This code is taken from the rapid-api website
 // They provide code snippets for the apis available on their website
 // basically their way of documentation since it isnt always available
-function apiCall($apiUrl) {
+function api_call($apiUrl) {
     $curl = curl_init();
 
     curl_setopt_array($curl, [
@@ -36,11 +36,13 @@ function apiCall($apiUrl) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: streaming-availability.p.rapidapi.com",
-            "X-RapidAPI-Key: cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3"
+            "X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
         ],
     ]);
 
     //"X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
+
+    //"X-RapidAPI-Key: cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3"
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -62,7 +64,7 @@ function apiCall($apiUrl) {
  *      movies
  */
 
-class movieDetails {
+class movie_details {
     var $id;
     var $movieTitle;
     var $moviePoster;
@@ -74,13 +76,13 @@ class movieDetails {
     var $apple;
 }
 
-function condenseData($response) {
+function condense_data($response) {
     $obj = json_decode($response);
     $result = array();
     $i = 0;
 
     foreach ($obj->result as $data) {
-        $movie = new movieDetails;
+        $movie = new movie_details;
         $movie->movieTitle = $data->title;
         if(!empty($data->posterURLs->{"500"})) {
             $movie->moviePoster = $data->posterURLs->{"500"};
@@ -117,7 +119,7 @@ function condenseData($response) {
     return $result;
 }
 
-$actualDataToSend = condenseData(apiCall(buildUrl($q)));
+$actualDataToSend = condense_data(api_call(build_URL($q)));
 
 if(!isset($_SESSION)) { session_start(); }
 $_SESSION['displayed_cards'][0] = $actualDataToSend;

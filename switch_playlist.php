@@ -38,10 +38,10 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
 }
 
 //let file know what the class looks like
-class movieDetails {
+class movie_details {
     //var $id;
-    var $movieTitle;
-    var $moviePoster;
+    var $movie_title;
+    var $movie_poster;
     var $prime;
     var $netflix;
     var $disney;
@@ -51,34 +51,34 @@ class movieDetails {
 }
 
 $data = $_SESSION['displayed_cards'][1][$id];
-$title = $data->movieTitle;
-$poster = $data->moviePoster;
+$title = $data->movie_title;
+$poster = $data->movie_poster;
 
 
 if($action == "add") {
     if($data->prime) {
         $service_url = $data->prime;
-        addToPlaylist($title, $poster, $service_url, "prime", $playlist);
+        add_to_playlist($title, $poster, $service_url, "prime", $playlist);
     }
     if($data->netflix) {
         $service_url = $data->netflix;
-        addToPlaylist($title, $poster, $service_url, "netflix", $playlist);
+        add_to_playlist($title, $poster, $service_url, "netflix", $playlist);
     }
     if($data->disney) {
         $service_url = $data->disney;
-        addToPlaylist($title, $poster, $service_url, "disney", $playlist);
+        add_to_playlist($title, $poster, $service_url, "disney", $playlist);
     }
     if($data->hbo) {
         $service_url = $data->hbo;
-        addToPlaylist($title, $poster, $service_url, "hbo", $playlist);
+        add_to_playlist($title, $poster, $service_url, "hbo", $playlist);
     }
     if($data->hulu) {
         $service_url = $data->hulu;
-        addToPlaylist($title, $poster, $service_url, "hulu", $playlist);
+        add_to_playlist($title, $poster, $service_url, "hulu", $playlist);
     }
     if($data->apple) {
         $service_url = $data->apple;
-        addToPlaylist($title, $poster, $service_url, "apple", $playlist);
+        add_to_playlist($title, $poster, $service_url, "apple", $playlist);
     }
 } else if ($action == "remove") {
     if($data->prime) {

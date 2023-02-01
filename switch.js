@@ -61,10 +61,10 @@ function deleteCard(id) {
     }, delayInMilliseconds);
 }
 
-function to_watch(id) { sendData(id, "future watching", "add"); deleteCard(id);  }
+function toWatch(id) { sendData(id, "future watching", "add"); deleteCard(id);  }
 
-function cur_watching(id) { sendData(id, "currently watching", "add"); deleteCard(id); }
+function curWatching(id) { sendData(id, "currently watching", "add"); deleteCard(id); }
 
 function watched(id) { sendData(id, "finished watching", "add"); deleteCard(id); }
 
-function delete_item(id, playlist) { deleteData(id, playlist, "remove"); deleteCard(id); }
+function deleteItem(id, playlist) { deleteData(id, playlist, "remove"); deleteCard(id); }

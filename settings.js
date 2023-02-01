@@ -8,7 +8,7 @@ function dropdown() {
 document.addEventListener("click", classList.remove("show"));
 
 // Set new selected region and change region in database user.
-function new_region(region, email) {
+function newRegion(region, email) {
     // Show the selected region.
     document.getElementById("selected-region").innerHTML = region;
 

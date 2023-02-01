@@ -26,8 +26,8 @@ async function sendData(id, playlist) {
 }
 
 // addToPlaylist("future watching")
-function to_watch(id) { sendData(id, "future watching", "add"); }
+function toWatch(id) { sendData(id, "future watching", "add"); }
 
-function cur_watching(id) { sendData(id, "currently watching", "add"); }
+function curWatching(id) { sendData(id, "currently watching", "add"); }
 
 function watched(id) { sendData(id, "finished watching", "add"); }

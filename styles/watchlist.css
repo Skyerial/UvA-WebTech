@@ -1,3 +1,8 @@
+.cardcontainer {
+    min-height: 64vh !important;
+}
+
+/* Stying of the tabs to switch between watchlists */
 .tabrow {
     margin-top: -6.7vh;
     position: absolute;
@@ -9,10 +14,6 @@
     justify-content: center;
     transition-duration: 1.5s;
 }
-
-.cardcontainer {
-    min-height: 64vh !important;
-}
 .tab {
     display: flex;
     align-items: center;
@@ -23,19 +24,11 @@
     height: 8vh;
     border-radius: 40px;
 }
-
 @media only screen and (max-width:600px) {
     .tab {
         width: 85vw;
     }    
 }
-
-.fa-solid, .fas {
-    font-weight: 900;
-    width: fit-content;
-    height: fit-content;
-}
-
 .tab button {
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
@@ -48,22 +41,19 @@
     margin: 1.2vw;
     cursor: pointer;
 }
-
 .tab button:hover {
     background-color: #B8DBD9;
     color: #2f4550 !important;
 }
-
 .tab button.active {
     background-color: #B8DBD9;
     color: #2f4550 !important;
 }
-
 .tabcontent{
     padding: 6px 12px;
 }
 
-/* Empty message */
+/* Styling of the empty message */
 .banner {
     position: absolute;
     text-align: center;
@@ -78,6 +68,6 @@
     width: 30%;
 }
 
-h3 {
+.banner h3 {
     font-size: calc(15px + 0.390625vw);
 }

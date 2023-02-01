@@ -26,7 +26,7 @@
 
             <div class="content" id="contentID">
                 <div class="searchrow" id="formID">
-                    <form class="search-bar" name="search" action="#" onsubmit="searchbutton();showLoadingAnimation();return false">
+                    <form class="search-bar" name="search" action="#" onsubmit="searchButton();showLoadingAnimation();return false">
                         <input type="text" autocomplete="off" placeholder="search a title" name="name" id="textbar">
                         <button type="submit" id="buttonID"></button>
                     </form>

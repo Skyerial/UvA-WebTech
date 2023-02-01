@@ -329,7 +329,7 @@ function remove_from_playlist($title, $picture, $service_url, $playlist) {
     }
 }
 
-function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
+function add_to_playlist($title, $picture, $service_url, $service, $playlist) {
     // check if $playlist stores a valid value.
     global $conn;
     if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
