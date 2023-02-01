@@ -1,11 +1,11 @@
 // Show regions on click.
 function dropdown() {
-    var x = document.body;
+    var x = document.getElementById('mainID');
     x.classList.toggle("show");
 }
 
 function input_user() {
-    var x = document.body;
+    var x = document.getElementById('mainID');
     x.classList.toggle("user_appear");
     x.classList.remove("pass_appear");
     x.classList.remove("error-message");
@@ -13,7 +13,7 @@ function input_user() {
 }
 
 function input_pass() {
-    var x = document.body;
+    var x = document.getElementById('mainID');
     x.classList.toggle("pass_appear");
     x.classList.remove("user_appear");
     x.classList.remove("error-message");
