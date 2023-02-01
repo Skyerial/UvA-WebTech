@@ -117,6 +117,7 @@ select {
 
 .dropdown .option:hover {
     background: var(--color8);
+}
 
 .view {
     border: 3px solid;

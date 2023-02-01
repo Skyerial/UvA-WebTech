@@ -296,6 +296,7 @@ if (isset($_POST['change_password'])) {
         <?php require_once("headtags.php") ?>
         <title>Settings</title>
         <link rel="stylesheet" href="styles/settings.css">
+        <link rel="stylesheet" href="styles/form.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="settings.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>

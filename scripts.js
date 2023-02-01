@@ -85,12 +85,6 @@ function deleteCards() {
     amountofCards = 0;
 }
 
-// creates dummy cards
-function testCard(){
-    const container = document.getElementById('cardcontainerID');
-    const moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
-    const movieTitle = "avatar avatar avatar avatar";
-
 // Changes card opacity so that the cards will appear smoothly
 function changeOpacity(card) {
     setTimeout(() => {
