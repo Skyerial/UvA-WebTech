@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 require_once "account_verification/basic_error_checks.php";
 require_once "account_verification/close_connection.php";
+require_once "account_verification/csrf.php";
 require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -12,6 +13,7 @@ require_once "/../../../conn/db.php";
 ////////////////////////////////////////////////////////////////////////////////
 $errors = [
     'pw_error' => false, // Password error.
+    'csrf_error' => false,
 ];
 
 // Define log file:
@@ -20,6 +22,14 @@ define("ERROR_LOG_FILE", "errorLog/error.txt");
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
 ////////////////////////////////////////////////////////////////////////////////
+
+// reset_password changes the password in the database corresponding to
+// $token to $hashed_password.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//
+// Output: None
 function reset_password($conn, $hashed_password, $token) {
     $reset_pw = $conn->prepare("UPDATE user
                                 SET password = ?
@@ -52,6 +62,14 @@ if (isset($_POST['reset_password'])) {
 
     // Error checking: password.
     basic_password_error($password, $errors);
+
+    // Check if the correct CSRF token is used:
+    $csrf_token_from_form = $_POST['csrf_token'];
+    $csrf_token_from_db = retrieve_csrf($conn);
+
+    if ($csrf_token_from_form != $csrf_token_from_db) {
+        setError($errors, 'csrf_error');
+    }
 
     // If no errors occured, change the password from in the database:
     if (!(in_array(true, $errors))) {
@@ -91,31 +109,50 @@ if (isset($_POST['reset_password'])) {
     <body>
         <?php include 'nav.php'; ?>
         <div class="content">
+            <!-- The main container for the reset password form -->
             <div class="reg-form">
+                <!-- The header with the title -->
                 <div class="reg-header">
-                    <h2>Login Form</h2>
-                    <p>Please fill all fields in the form</p>
+                    <h2>Reset password</h2>
                 </div>
 
                 <form method = "post" action = "reset_password.php"
                 autocomplete="off" novalidate>
 
-                <div class="input-box">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control"
-                    value="" maxlength="255" required="">
-                    <?php if($errors['pw_error']): ?>
-                        <div class="error-message">
-                            <p>
-                            Please enter a valid password with a minimum of 6
-                            characters.
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    <!-- Enter the (correct) generated CSRF token: -->
+                    <input type="hidden" name="csrf_token"
+                    value="<?=retrieve_csrf($conn)?>">
+
+                    <!-- The password input box -->
+                    <div class="input-box">
+                        <label>Password</label>
+                        <input type="password" name="password"
+                        class="form-control" value="" maxlength="255"
+                        required="">
+                    </div>
 
                     <input type="submit" class="form-btn" name="reset_password"
                     value="Submit">
+
+                    <!-- The error messages -->
+                    <div class="form-sub-message">
+                        <?php if($errors['pw_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                Please enter a valid password with a minimum of
+                                6 characters.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors['csrf_error']): ?>
+                            <div class="error-message">
+                                <p>
+                                    Invalid/Expired CSRF token!
+                                    Please refresh the page.
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </form>
             </div>
         </div>
