@@ -50,8 +50,8 @@ class movie_details {
 
 // Get backend data for homepage cards.
 $data = $_SESSION['displayed_cards'][0][$id];
-$title = $data->movie_title;
-$poster = $data->movie_poster;
+$title = $data->movieTitle;
+$poster = $data->moviePoster;
 
 $services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
 

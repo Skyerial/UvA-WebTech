@@ -44,8 +44,8 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
             display_card($movie, $playlist);
             $movie = new movie_details;
         }
-        $movie->movie_title = $movie_title;
-        $movie->movie_poster = $movie_poster;
+        $movie->movieTitle = $movieTitle;
+        $movie->moviePoster = $moviePoster;
     }
 
     if ($service == "prime") {
@@ -83,7 +83,7 @@ function display_card($movie, $playlist) {
     ?>
         <div class="card" id="card<?=$card_counter?>" style="opacity: 1 !important;">
             <div class="imagebox">
-                <img class="poster" src="<?=$movie->movie_poster?>"/>
+                <img class="poster" src="<?=$movie->moviePoster?>"/>
                 <div class="streamingservicebox">
                     <?php if($movie->prime) {?>
                         <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
@@ -113,11 +113,11 @@ function display_card($movie, $playlist) {
                 </div>
             </div>
             <div>
-                <h3><?=$movie->movie_title?><span class="tooltiptext"><?=$movie->movie_title?></span></h3>
+                <h3><?=$movie->movieTitle?><span class="tooltiptext"><?=$movie->movieTitle?></span></h3>
             </div>
             <div class="hover-content">
                 <?php if ($playlist == "future watching") { ?>
-                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="curWatching(<?=$card_counter?>); return false;" class="cardbutton">
                         <i class="fa-solid fa-eye"></i>
                         <span class="tooltiptext">Currently Watching</span>
                     </a>
@@ -125,12 +125,12 @@ function display_card($movie, $playlist) {
                         <i class="fa-solid fa-eye-slash"></i>
                         <span class="tooltiptext">Finished Watching</span>
                     </a>
-                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="deleteItem('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">
                         <i style = "color: red;" class="fa-solid fa-trash"></i>
                         <span class="tooltiptext">Delete</span>
                     </a>
                 <?php } else if ($playlist == "currently watching") { ?>
-                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="toWatch(<?=$card_counter?>); return false;" class="cardbutton">
                         <i class="fa-solid fa-clock"></i>
                         <span class="tooltiptext">Future Watching</span>
                     </a>
@@ -138,20 +138,20 @@ function display_card($movie, $playlist) {
                         <i class="fa-solid fa-eye-slash"></i>
                         <span class="tooltiptext">Finished Watching</span>
                     </a>
-                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="deleteItem('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">
                         <i style = "color: red;" class="fa-solid fa-trash"></i>
                         <span class="tooltiptext">Delete</span>
                     </a>
                 <?php } else if ($playlist == "finished watching") { ?>
-                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="toWatch(<?=$card_counter?>); return false;" class="cardbutton">
                         <i class="fa-solid fa-clock"></i>
                         <span class="tooltiptext">Future Watching</span>
                     </a>
-                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="curWatching(<?=$card_counter?>); return false;" class="cardbutton">
                         <i class="fa-solid fa-eye"></i>
                         <span class="tooltiptext">Currently Watching</span>
                     </a>
-                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">
+                    <a href="javascript:void(0)" onclick="deleteItem('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">
                         <i style = "color: red;" class="fa-solid fa-trash"></i>
                         <span class="tooltiptext">Delete</span>
                     </a>
@@ -201,7 +201,7 @@ function retrieve_playlist($conn, $email, $playlist) {
 
     //display last card if no more data is coming in.
     global $movie;
-    if($movie->movie_poster) {
+    if($movie->moviePoster) {
         display_card($movie, $playlist);
     }
     $movie = new movie_details;

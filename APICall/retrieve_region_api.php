@@ -1,7 +1,7 @@
 <?php
 $q = $_POST['movieTitle'];
 
-require_once "movieApiCall.php";
+require_once "movie_api_call.php";
 require_once "../account_verification/session_token.php";
 require_once "/../../../../conn/db.php";
 

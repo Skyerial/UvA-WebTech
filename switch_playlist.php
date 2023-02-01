@@ -51,8 +51,8 @@ class movie_details {
 
 // Get backend data for watchlist cards.
 $data = $_SESSION['displayed_cards'][1][$id];
-$title = $data->movie_title;
-$poster = $data->movie_poster;
+$title = $data->movieTitle;
+$poster = $data->moviePoster;
 
 $services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
 

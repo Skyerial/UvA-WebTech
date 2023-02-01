@@ -37,7 +37,7 @@ if (check_api($conn, $headers['apiKey'])) {
     exit;
 }
 
-$api_query = $parts[3] ??  null;
+$api_query = $parts[2] ??  null;
 $query_parts = explode('?', $api_query);
 $query_options = explode('%26', $query_parts[1]);
 

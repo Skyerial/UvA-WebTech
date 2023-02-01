@@ -198,7 +198,7 @@ body {
     text-decoration: none;
     padding: 15px;
     height: 20px;
-    margin: 10px 15px;
+    margin: 10px 10px 10px 0;
     background-color: var(--color1);
     border: none;
     border-radius: 12px;
