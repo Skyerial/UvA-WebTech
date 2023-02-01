@@ -3,11 +3,11 @@ require_once "api_selfmade.php";
 require_once "../APICall/movie_api_call.php";
 
 // url for using our movie finder should come in like:
-// header= "apiKey:<your api key findable in settings"
+// header= "apiKey:<your api key findable in settings>"
 // webtech-uva.nl/v1/movie?title=<title>%26country=<country(optional)>
 // EXAMPLE
 // curl -v -H "apiKey:822d9746853668f907a5cd20eba5215d3a6b72c4a9452dfac502bc44e3951b2f" 
-// https://webtech-in01.webtech-uva.nl/~danielo/v1/movie?title=spiderman%26country=nl
+// https://webtech-in01.webtech-uva.nl/v1/movie?title=spiderman%26country=nl
 
 // url for getting a playlist from database should look like:
 // webtech-uva.nl/v1/playlist?name="<name of playlist>"
