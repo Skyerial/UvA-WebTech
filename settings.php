@@ -337,7 +337,7 @@ if (isset($_POST['change_password'])) {
                     <div id = "regions" class = "all-options">
                         <?php while ($line = mysqli_fetch_array($receive)):;?>
                         <div class = "option" onclick = "new_region('<?php echo $line[1];?>', 
-                        '<?php echo$_COOKIE['checker'] ?>')">
+                        '<?php echo $_COOKIE['checker'] ?>')">
                             <input type = "radio" class = "input_php">
                             <label><?php echo $line[1];?></label>
                         </div>
@@ -404,21 +404,13 @@ if (isset($_POST['change_password'])) {
                         &nbsp;
                         <div class = "table">
 
-                            <div class = "column left passchange">
+                            <div class = "column left passchange text">
                                 <label>Current password</label>
                             </div>
                             <div class = "column right passchange">    
                                 <input type="password" name="cur_password" class="#"
                                 value="" maxlength="255" required=""><br>
                             </div>
-
-                            <?php if($errors['curpw_error']): ?>
-                                <div class="appear">
-                                    <p>
-                                        Please enter your current password.
-                                    </p>
-                                </div>
-                            <?php endif; ?>
 
                             <div class = "column left userchange">    
                                 <label>Username</label>
@@ -427,44 +419,53 @@ if (isset($_POST['change_password'])) {
                                 <input type="text" name="username" class="#"
                                 value="" maxlength="30" required=""><br>
                             </div>
+                            
+                            <div class = "column left passchange text">
+                                <label>New Password</label>
+                            </div>
+                            <div class = "column left passchange">
+                                <input type="password" name="new_password" class="#"
+                                value="" maxlength="255" required=""><br><br>
+                            </div>
+
+                            </div>
+                            <br><br>
+
+                            <!-- Submit buttons. -->
+                            <input type="submit" class="hidden_user buttons"
+                            name="change_username" value="Submit username">
+                            <input type="submit" class="hidden_pass buttons"
+                            name="change_password" value="Submit password">
 
                             <?php if($errors['username_error']): ?>
-                                <div class="appear">
+                                <div class="error-message">
                                     <p>
                                         Please enter a valid username. A username
                                         cannot contain spaces.
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            
-                            <div class = "column left passchange">
-                                <label>New Password</label>
-                            </div>
-                            <div class = "column right passchange">
-                                <input type="password" name="new_password" class="#"
-                                value="" maxlength="255" required=""><br><br>
-                            </div>
+
+                            <?php if($errors['curpw_error']): ?>
+                                <div class="error-message">
+                                    <p>
+                                        Please enter your current password.
+                                    </p>
+                                </div>
+                            <?php endif; ?>
 
                             <?php if($errors['pw_error']): ?>
-                                <div class="appear">
+                                <div class="error-message">
                                     <p>
                                         Please enter a valid password with a
                                         minimum of 6 characters.
                                     </p>
                                 </div>
                             <?php endif; ?>
-                        </div>
-                        <br><br>
                         
-                        <!-- Submit buttons. -->
-                        <input type="submit" class="hidden_user buttons"
-                        name="change_username" value="Submit username">
-
-                        <input type="submit" class="hidden_pass buttons"
-                        name="change_password" value="Submit password">
 
                         <?php if($errors['csrf_error']): ?>
-                            <div class="appear">
+                            <div class="error-message">
                                 <p>
                                     Invalid/Expired CSRF token!
                                     Please refresh the page.

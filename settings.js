@@ -7,11 +7,17 @@ function dropdown() {
 function input_user() {
     var x = document.body;
     x.classList.toggle("user_appear");
+    x.classList.remove("pass_appear");
+    x.classList.remove("error-message");
+
 }
 
 function input_pass() {
     var x = document.body;
     x.classList.toggle("pass_appear");
+    x.classList.remove("user_appear");
+    x.classList.remove("error-message");
+
 }
 
 // Set new selected region and change region in database user.
