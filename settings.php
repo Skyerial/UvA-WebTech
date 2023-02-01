@@ -405,7 +405,7 @@ if (isset($_POST['change_password'])) {
                         &nbsp;
                         <div class = "table">
 
-                            <div class = "column left passchange">
+                            <div class = "column left passchange text">
                                 <label>Current password</label>
                             </div>
                             <div class = "column right passchange">    
@@ -421,7 +421,7 @@ if (isset($_POST['change_password'])) {
                                 value="" maxlength="30" required=""><br>
                             </div>
                             
-                            <div class = "column left passchange">
+                            <div class = "column left passchange text">
                                 <label>New Password</label>
                             </div>
                             <div class = "column left passchange">

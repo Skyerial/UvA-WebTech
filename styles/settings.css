@@ -1,7 +1,3 @@
-#center {
-    text-align: center;
-}
-
 /* Background website */
 body {
     background-color: #5a6973;
@@ -39,13 +35,6 @@ p {
     padding-bottom: 18px;
 }
 
-select {
-    text-align: center;
-    background-color: #B8DBD9;
-    border-style: solid;
-    border-radius: 5px;
-}
-
 /* Drop down regions */
 .dropdown {
     margin: auto;
@@ -53,6 +42,14 @@ select {
     position: flex;
 }
 
+/* The selected region. */
+.region {
+    background: #B8DBD9;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+/* Search bar. */
 #search-input {
     position: flex;
     opacity: 0;
@@ -60,7 +57,6 @@ select {
     transition: 0.2s;
 }
 
-/* Search bar. */
 .show #search-input {
     opacity: 1;
     margin: auto;    
@@ -91,13 +87,6 @@ select {
     overflow-y: scroll;
 }
 
-/* The selected region. */
-.region {
-    background: #B8DBD9;
-    border-radius: 5px;
-    padding: 3px;
-}
-
 .dropdown .option .label {
     cursor: pointer;
 }
@@ -118,14 +107,12 @@ select {
     opacity: 1;
 }
 
-/* rgb(181, 244, 247) */
-
 /* Remove visibility checkpoint. */
 .input_php {
     display: none;
 }
 
-/* All buttons */
+/* Style of all buttons. */
 .buttons {
     padding: 8px;
     border-radius: 25px;
@@ -153,40 +140,10 @@ select {
     width: 30%;
 }
 
-/* Columns for input forms. */
-.table {
-    width: 66%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.column {
-    float: left;
-    padding: 3px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: left;
-    opacity: 0;
-    display: none;
-}
-
-.left {
-    width: 20%;
-    box-sizing: border-box;
-    display: block;
-}
-
-.right {
-    width: 28%;
-    box-sizing: border-box;
-    display: block;
-}
-
 .email-confirmation {
     margin-left: auto;
     margin-right: auto;
     width: 60%;
-    /* height: 40px; */
     background: rgba(14, 222, 87, 0.369);
     display: none;
     border-radius: 5px;
@@ -196,19 +153,60 @@ select {
 .confirmation-message {
     text-align: center;
     margin-top: auto;
-    /* line-height: 30px; */
     display: block;
 }
 
 .error-message {
     text-align: center;
     color: red;
-    /* font-weight: bold; */
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
     width: 45%;
     background-color: rgba(133, 8, 8, 0.548);
+}
+
+/* Columns for input forms. */
+.table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column {
+    float: left;
+    padding: 3px;
+    box-sizing: border-box;
+    text-align: left;
+    opacity: 0;
+}
+
+.left {
+    width: 14%;
+}
+
+.right {
+    width: 10%;
+}
+
+/* Inputs shown on click. */
+.text {
+    margin-left: 17%;
+}
+
+.userchange {
+    text-align: right;
+    margin-left: 5%;
+}
+
+.user_appear .userchange {
+    opacity: 1;
+    max-height: 50px;
+}
+
+.pass_appear .passchange {
+    opacity: 1;
+    max-height: 50px;
 }
 
 /* Hidden and shown submit buttons. */
@@ -230,21 +228,7 @@ select {
     opacity: 1;
 }
 
-/* Inputs shown on click. */
-.userchange {
-    text-align: right;
-}
-
-.user_appear .userchange {
-    opacity: 1;
-    max-height: 50px;
-}
-
-.pass_appear .passchange {
-    opacity: 1;
-    max-height: 50px;
-}
-
+/* Responsive on smaller devices. */
 @media only screen and (max-width: 800px) {
     .title {
         font-size: 50px;
@@ -258,25 +242,31 @@ select {
         max-height: 0;
     }
 
+    .table {
+        width: 60%;
+    }
+
     .left {
-        width: 80%;
+        width: 100%;
     }
 
     .right {
-        width: 80%;
+        width: 100%;
     }
 
     .userchange {
-        margin-left: 8%;
+        margin-left: 0%;
         text-align: left;
     }
 
     .passchange {
-        margin-left: 8%;
+        margin-left: 0%;
+        margin-right: 0%;
+        text-align: left;
     }
 
     .hidden_pass {
-        margin-left: 31%;
+        margin-left: 30%;
     }
 
     .hidden_user {
@@ -290,5 +280,60 @@ select {
 
     .email-confirmation {
         width: 80%;
+    }
+}
+
+/* Responsive on iPads. */
+@media only screen and (min-width: 767px) and (max-width: 1024px) {
+    .table {
+        width: 70%;
+    }
+
+    .userchange {
+        margin-left: 58%;
+        text-align: left;
+    }
+
+    .hidden_user {
+        margin-left: 50%;
+    }
+}
+
+/* Bigger screens. */
+@media only screen and (min-width: 600px)  and (max-width: 1024px){
+    .border {
+        width: 80%;
+    }
+
+    .column {
+        max-height: 0;
+    }
+    .table {
+        width: 100%;
+    }
+
+    .text {
+        margin-left: 0%;
+    }
+
+    .left {
+        width: 100%;
+    }
+
+    .right {
+        width: 100%;
+    }
+
+    .passchange {
+        margin-left: 15%;
+    }
+
+    .hidden_pass {
+        margin-left: 12%;
+    }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1300px) {
+    .border {
+        width: 90%;
     }
 }
