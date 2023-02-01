@@ -10,8 +10,6 @@
     </head>
 
     <body onload="showFooter()">
-
-        <!-- insert the nav bar -->
         <?php
             require_once "nav.php";
             require_once "../../../conn/db.php";

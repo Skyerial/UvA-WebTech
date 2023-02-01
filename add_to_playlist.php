@@ -16,6 +16,8 @@ define("ERROR_LOG_FILE", "errorLog/error.txt");
 // Add item to playlist:
 ////////////////////////////////////////////////////////////////////////////////
 
+
+// Receive data from post request.
 $body = file_get_contents('php://input');
 $json = json_decode($body);
 $id = $json->id;
@@ -34,7 +36,7 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     exit("not logged in");
 }
 
-//let file know what the class looks like
+// Let file know what the class looks like.
 class movieDetails {
     var $movieTitle;
     var $moviePoster;
@@ -46,6 +48,7 @@ class movieDetails {
     var $apple;
 }
 
+// Get backend data for homepage cards.
 $data = $_SESSION['displayed_cards'][0][$id];
 $title = $data->movieTitle;
 $poster = $data->moviePoster;

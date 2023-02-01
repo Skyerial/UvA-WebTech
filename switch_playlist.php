@@ -49,6 +49,7 @@ class movieDetails {
     var $apple;
 }
 
+// Get backend data for watchlist cards.
 $data = $_SESSION['displayed_cards'][1][$id];
 $title = $data->movieTitle;
 $poster = $data->moviePoster;

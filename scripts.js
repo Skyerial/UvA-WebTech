@@ -1,19 +1,14 @@
 var amountofCards = 0;
 var data;
 
-// This string check found on:
-// https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-numbers/
-// and:
-// https://stackoverflow.com/questions/15472764/regular-expression-to-allow-spaces-between-words
-
 function specialChar(str) {
     return /^\w+( \w+)*$/.test(str);
 }
 
+// Get all data from api based on the search query
 function getCardData(search){
     const container = document.getElementById('cardcontainerID');
 
-    // START XMLHttpRequest
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "APICall/movieApiCall.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -28,9 +23,9 @@ function getCardData(search){
     };
 
     xhttp.send('movieTitle=' + search);
-    // END XMLHttpRequest
 }
 
+// Execute all visual changes when searching a title.
 function visualchanges() {
     var titlebox = document.getElementById("title");
     var titletext = document.getElementById("titletext");
@@ -60,11 +55,12 @@ function visualchanges() {
     titlebox.style.paddingBottom = '0';
 }
 
+
+// Retrieves search query and executes correct functions.
 function searchbutton() {
     var search = document.getElementById('textbar').value;
     if(!specialChar(search)) {
         document.getElementById('textbar').value = '';
-        // need to make sure that it shows search input was not valid...
         alert(
             "Please enter a valid search input containing only letter, numbers, and spaces."
         )
@@ -74,11 +70,10 @@ function searchbutton() {
     visualchanges();
 
     deleteCards();
-    // testCard();
     getCardData(search);
 }
 
-// removes old cards
+// Removes old cards if there are any present on the homepage.
 function deleteCards() {
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
@@ -88,61 +83,15 @@ function deleteCards() {
     amountofCards = 0;
 }
 
-// creates dummy cards
-function testCard(){
-    const container = document.getElementById('cardcontainerID');
-    const moviePoster = "https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg";
-    const movieTitle = "avatar avatar avatar avatar";
 
-    for(var i = 0; i < 1; i++) {
-
-            const content = `
-                <div class="card" id="card${i}">
-                    <div class="imagebox">
-                        <img class="poster" id="poster${i}" value="${moviePoster}" src="${moviePoster}"/>
-                        <div class="streamingservicebox">
-                            <div class="streamingservice">
-                                <img src="streaming_img/netflix.png">
-                            </div>
-                            <div class="streamingservice">
-                                <img src="streaming_img/netflix.png">
-                            </div>
-                            <div class="streamingservice">
-                                <img src="streaming_img/netflix.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="titlebox">
-                        <h3 id="title${i}" value="${movieTitle}">${movieTitle}</h3>
-                    </div>
-                    <div class="hover-content">
-                        <a href="javascript:void(0)" onclick="to_watch(${i}); return false;" class="cardbutton">Future</a>
-                        <a href="javascript:void(0)" onclick="cur_watching(${i}); return false;" class="cardbutton">Current</a>
-                        <a href="javascript:void(0)" onclick="watched(${i}); return false;" class="cardbutton">Watched</a>
-                    </div>
-                </div>
-            `;
-
-            // Append newly created card element to the container
-            container.innerHTML += content;
-            amountofCards++;
-    }
-
-    for (var j = 0; j < 35; j++) {
-        var cardid = "card" + j;
-        var card = document.getElementById(cardid);
-        changeOpacity(card);
-    }
-}
-
-//changes card opacity so that the cards will appear smoothly
+// Changes card opacity so that the cards will appear smoothly
 function changeOpacity(card) {
     setTimeout(() => {
         card.style.opacity = '1';
     }, 500);
 }
 
-// creates a html div module for the streamingservice
+// Creates a html div module for the streamingservice
 function streamingdiv(service, servicelink) {
 
     var div = `<a href="${servicelink}" target="_blank" class="streamingservice">
@@ -152,7 +101,7 @@ function streamingdiv(service, servicelink) {
     return div;
 }
 
-// generates all the cards based on incoming data
+// Generates all the cards based on incoming data
 function displayCards(data){
     removeLoadingAnimation();
     const container = document.getElementById('cardcontainerID');
@@ -202,8 +151,7 @@ function displayCards(data){
 
     })
 
-    //console.log(JSON.stringify(displayed));
-
+    // Change opacity for all cards so that they will appear smoothly
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
         var card = document.getElementById(cardid);
