@@ -10,7 +10,7 @@ function getCardData(search){
     const container = document.getElementById('cardcontainerID');
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "APICall/retrieveRegionApi.php", true);
+    xhttp.open("POST", "APICall/retrieve_region_api.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhttp.onreadystatechange = function () {
@@ -54,10 +54,8 @@ function visualchanges() {
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
 }
-
-
 // Retrieves search query and executes correct functions.
-function searchbutton() {
+function searchButton() {
     var search = document.getElementById('textbar').value;
     if(!specialChar(search)) {
         document.getElementById('textbar').value = '';

@@ -26,8 +26,8 @@ async function sendData(id, playlist) {
 }
 
 // Functions that get called by the buttons on the cards.
-function to_watch(id) { sendData(id, "future watching"); }
+function toWatch(id) { sendData(id, "future watching"); }
 
-function cur_watching(id) { sendData(id, "currently watching"); }
+function curWatching(id) { sendData(id, "currently watching"); }
 
 function watched(id) { sendData(id, "finished watching"); }

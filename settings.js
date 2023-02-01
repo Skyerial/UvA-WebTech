@@ -15,7 +15,7 @@ function input_pass() {
 }
 
 // Set new selected region and change region in database user.
-function new_region(region, email) {
+function newRegion(region, email) {
     // Show the selected region.
     document.getElementById("selected-region").innerHTML = region;
     // Hide the dropdown after choosing a region.

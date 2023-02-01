@@ -38,7 +38,7 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
 }
 
 //let file know what the class looks like
-class movieDetails {
+class movie_details {
     var $movieTitle;
     var $moviePoster;
     var $prime;
@@ -51,8 +51,8 @@ class movieDetails {
 
 // Get backend data for watchlist cards.
 $data = $_SESSION['displayed_cards'][1][$id];
-$title = $data->movieTitle;
-$poster = $data->moviePoster;
+$title = $data->movie_title;
+$poster = $data->movie_poster;
 
 $services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
 

@@ -1,6 +1,6 @@
 <?php
 require_once "api_selfmade.php";
-require_once "../APICall/movieApiCall.php";
+require_once "../APICall/movie_api_call.php";
 
 // url for using our movie finder should come in like:
 // header= "apiKey:<your api key findable in settings"

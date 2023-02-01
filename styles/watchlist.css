@@ -1,5 +1,10 @@
 @import "colors.css";
 
+.cardcontainer {
+    min-height: 64vh !important;
+}
+
+/* Stying of the tabs to switch between watchlists */
 .tabrow {
     margin-top: -6.7vh;
     position: absolute;
@@ -11,10 +16,6 @@
     justify-content: center;
     transition-duration: 1.5s;
 }
-
-.cardcontainer {
-    min-height: 64vh !important;
-}
 .tab {
     display: flex;
     align-items: center;
@@ -25,35 +26,36 @@
     height: 8vh;
     border-radius: 40px;
 }
-
+@media only screen and (max-width:600px) {
+    .tab {
+        width: 85vw;
+    }    
+}
 .tab button {
     background-color: var(--color1);
     border: none;
     border-radius: 25px;
     color: var(--color2);
-    padding: 1.6vh 1.7vw;
+    padding: 1.5% 1.7vw;
     text-align: center;
     display: inline-block;
-    font-size: calc(1em + .1vmin);
-    margin: 1em 1em;
+    font-size: calc(15px + 0.390625vw);
+    margin: 1.2vw;
     cursor: pointer;
 }
-
 .tab button:hover {
     background-color: var(--color3);
     color: var(--color5) !important;
 }
-
 .tab button.active {
     background-color: var(--color3);
     color: var(--color5) !important;
 }
-
 .tabcontent{
     padding: 6px 12px;
 }
 
-/* Empty message */
+/* Styling of the empty message */
 .banner {
     position: absolute;
     text-align: center;
@@ -68,6 +70,6 @@
     width: 30%;
 }
 
-h3 {
+.banner h3 {
     font-size: calc(15px + 0.390625vw);
 }

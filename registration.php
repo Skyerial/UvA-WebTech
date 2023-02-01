@@ -100,7 +100,7 @@ if (isset($_POST['register'])) {
     $csrf_token_from_db = retrieve_csrf($conn);
 
     if ($csrf_token_from_form != $csrf_token_from_db) {
-        setError($errors, 'csrf_error');
+        set_error($errors, 'csrf_error');
     }
 
     // Retrieve information from html form:

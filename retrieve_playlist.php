@@ -3,8 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Globals:
 ////////////////////////////////////////////////////////////////////////////////
-
-class movieDetails {
+class movie_details {
     var $movieTitle;
     var $moviePoster;
     var $prime;
@@ -15,7 +14,7 @@ class movieDetails {
     var $apple;
 }
 
-$movie = new movieDetails;
+$movie = new movie_details;
 $card_counter = 0;
 $displayed_cards = array();
 
@@ -43,10 +42,10 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
     if ($movie->moviePoster != $moviePoster) {
         if ($movie->moviePoster) {
             display_card($movie, $playlist);
-            $movie = new movieDetails;
+            $movie = new movie_details;
         }
-        $movie->movieTitle = $movieTitle;
-        $movie->moviePoster = $moviePoster;
+        $movie->movie_title = $movie_title;
+        $movie->movie_poster = $movie_poster;
     }
 
     if ($service == "prime") {
@@ -84,7 +83,7 @@ function display_card($movie, $playlist) {
     ?>
         <div class="card" id="card<?=$card_counter?>" style="opacity: 1 !important;">
             <div class="imagebox">
-                <img class="poster" src="<?=$movie->moviePoster?>"/>
+                <img class="poster" src="<?=$movie->movie_poster?>"/>
                 <div class="streamingservicebox">
                     <?php if($movie->prime) {?>
                         <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
@@ -114,7 +113,7 @@ function display_card($movie, $playlist) {
                 </div>
             </div>
             <div>
-                <h3><?=$movie->movieTitle?></h3>
+                <h3><?=$movie->movie_title?><span class="tooltiptext"><?=$movie->movie_title?></span></h3>
             </div>
             <div class="hover-content">
                 <?php if ($playlist == "future watching") { ?>
@@ -202,9 +201,10 @@ function retrieve_playlist($conn, $email, $playlist) {
 
     //display last card if no more data is coming in.
     global $movie;
-    if($movie->moviePoster) {
+    if($movie->movie_poster) {
         display_card($movie, $playlist);
     }
+    $movie = new movie_details;
 }
 
 // Push playlist cards to html and save the data in backend session.
