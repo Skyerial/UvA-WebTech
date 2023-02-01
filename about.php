@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <?php require_once("headtags.php") ?>
         <title>About</title>
-        <link rel="stylesheet" href="styles/homepage.css">
-        <link rel="stylesheet" href="styles/nav.css">
         <link rel="stylesheet" href="styles/form.css">
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     </head>
     <body onload="showFooter()">
         <!-- insert the nav bar -->

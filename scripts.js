@@ -31,7 +31,7 @@ function getCardData(search){
     // END XMLHttpRequest
 }
 
-function animations() {
+function visualchanges() {
     var titlebox = document.getElementById("title");
     var titletext = document.getElementById("titletext");
     var contentbox = document.getElementById("contentID");
@@ -49,6 +49,12 @@ function animations() {
 
         }, delayInMilliseconds);
     }
+
+    var footer = document.getElementById('footerID');
+    footer.style.visibility = 'visible';
+    var navLogo = document.getElementById('logoID');
+    navLogo.style.visibility = 'visible';
+    navLogo.style.opacity = 1;
 
     titlebox.style.paddingTop = '0';
     titlebox.style.paddingBottom = '0';
@@ -65,35 +71,7 @@ function searchbutton() {
         return;
     }
 
-    // handle animations
-    var titlebox = document.getElementById("title");
-    var titletext = document.getElementById("titletext");
-    var contentbox = document.getElementById("contentID");
-
-    if (titlebox.style.display === "none") {
-
-    } else {
-        titlebox.style.height = '0px'
-        titletext.style.fontSize = '0px'
-        contentbox.style.background = '#6c848c'
-        var delayInMilliseconds = 1500;
-
-        setTimeout(function() {
-            titlebox.style.display = "none";
-
-        }, delayInMilliseconds);
-    }
-
-    // maybe this should be done with display none, as to not make invisible
-    // buttons?...
-    var footer = document.getElementById('footerID');
-    footer.style.visibility = 'visible';
-    var navLogo = document.getElementById('logoID');
-    navLogo.style.visibility = 'visible';
-    navLogo.style.opacity = 1;
-
-    titlebox.style.paddingTop = '0';
-    titlebox.style.paddingBottom = '0';
+    visualchanges();
 
     deleteCards();
     // testCard();
@@ -234,18 +212,3 @@ function displayCards(data){
 
 }
 
-function buildURL() {
-    var startURL = 'https://streaming-availability.p.rapidapi.com/v2/search/title?title=';
-    const countrySetting = '&country=';
-    const typeSetting = '&type=';
-    const languageSetting = '&output_language='
-    var country = 'nl';
-    var type = 'all';
-    var language = 'en'
-    // bit extra since it is already in searchButton, but that can be fixed later...
-    var search = document.getElementById('textbar').value;
-    document.getElementById('textbar').value = search;
-    const searchURL = search.replace(/\s/g, '%20');
-
-    return startURL + searchURL + countrySetting + country + typeSetting + type + languageSetting + language;
-}

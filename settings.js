@@ -5,7 +5,7 @@ function dropdown() {
 }
 
 // This doesn't work, click anywhere and close dropdown again.
-document.addEventListener("click", classList.remove("show"));
+//document.addEventListener("click", classList.remove("show"));
 
 // Set new selected region and change region in database user.
 function new_region(region, email) {

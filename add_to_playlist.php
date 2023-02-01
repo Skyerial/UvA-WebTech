@@ -36,7 +36,6 @@ if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
 
 //let file know what the class looks like
 class movieDetails {
-    // var $id;
     var $movieTitle;
     var $moviePoster;
     var $prime;
@@ -51,29 +50,13 @@ $data = $_SESSION['displayed_cards'][0][$id];
 $title = $data->movieTitle;
 $poster = $data->moviePoster;
 
-if($data->prime) {
-    $service_url = $data->prime;
-    addToPlaylist($title, $poster, $service_url, "prime", $playlist);
-}
-if($data->netflix) {
-    $service_url = $data->netflix;
-    addToPlaylist($title, $poster, $service_url, "netflix", $playlist);
-}
-if($data->disney) {
-    $service_url = $data->disney;
-    addToPlaylist($title, $poster, $service_url, "disney", $playlist);
-}
-if($data->hbo) {
-    $service_url = $data->hbo;
-    addToPlaylist($title, $poster, $service_url, "hbo", $playlist);
-}
-if($data->hulu) {
-    $service_url = $data->hulu;
-    addToPlaylist($title, $poster, $service_url, "hulu", $playlist);
-}
-if($data->apple) {
-    $service_url = $data->apple;
-    addToPlaylist($title, $poster, $service_url, "apple", $playlist);
+$services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
+
+foreach ($services as $service) {
+    if ($data->{$service}) {
+        $service_url = $data->{$service};
+        add_to_playlist($title, $poster, $service_url, $service, $playlist);
+    }
 }
 
 ?>

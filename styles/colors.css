@@ -1,10 +1,10 @@
 :root {
     /* original colors */
-    /* --color1: #5a6973;
+    --color1: #5a6973;
     --color2: #e0f3f2;
     --color3: #B8DBD9;
     --color4: #6c848c;
-    --color5: #2F4550; */
+    --color5: #2F4550;
     --color6: #D3E3EF;
     --color7: #4d6a79;
     --color8: #acebee;
@@ -13,11 +13,11 @@
 
 
     /* experimental colors */
-    --color3: #acebee;
+    /* --color3: #acebee;
     --color4: #E7DFC6;
     --color2: #E9F1F7;
     --color5: #131B23;
-    --color1: #816C61;
+    --color1: #816C61; */
 
     /* --color1: #C38D9E;
     --color2: #E27D60;

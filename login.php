@@ -310,18 +310,16 @@ if (isset($_POST['to_register'])) {
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Login form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require_once("headtags.php") ?>
     <link rel="stylesheet" href="styles/form.css">
-    <link rel="stylesheet" href="styles/nav.css">
+    <title>Login</title>
     <script type="text/javascript" src="menuScript.js" defer></script>
     <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
     </script>
 </head>
 
 <body onload="showFooter()">
-    <?php include "nav.php"; ?>
+    <?php require_once("nav.php") ?>
 
     <main id="mainID" class="reg-form">
         <div class="reg-header">

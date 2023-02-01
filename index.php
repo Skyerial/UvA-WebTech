@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" type="text/css" href="styles/homepage.css">
-        <link rel="stylesheet" type="text/css" href="styles/nav.css">
+        <?php require_once("headtags.php") ?>
         <link rel="stylesheet" type="text/css" href="styles/loading.css">
         <title>wheretowatch.com</title>
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="menuScript.js" defer></script>
         <script type="text/javascript" src="homepageScript.js" defer></script>
         <script type="text/javascript" src="add.js"></script>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body>

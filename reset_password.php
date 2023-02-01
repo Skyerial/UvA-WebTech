@@ -79,17 +79,15 @@ if (isset($_POST['reset_password'])) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <title>Login form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php require_once("headtags.php") ?>
+        <title>Reset Password</title>
         <link rel="stylesheet" href="styles/form.css">
-        <link rel="stylesheet" href="styles/nav.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
     <body>
-        <?php include 'nav.php'; ?>
+        <?php require_once("nav.php") ?>
         <div class="content">
             <div class="reg-form">
                 <div class="reg-header">

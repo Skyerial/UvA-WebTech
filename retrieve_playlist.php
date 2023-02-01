@@ -108,26 +108,46 @@ function display_card($movie, $playlist) {
                 <h3><?=$movie->movieTitle?></h3>
             </div>
             <div class="hover-content">
-                <?php if ($playlist == "future watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                } else if ($playlist == "currently watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                } else if ($playlist == "finished watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                }
-                ?>
+                <?php if ($playlist == "future watching") { ?>
+                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="tooltiptext">Currently Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span class="tooltiptext">Finished Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } else if ($playlist == "currently watching") { ?>
+                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-clock"></i>
+                        <span class="tooltiptext">Future Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span class="tooltiptext">Finished Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } else if ($playlist == "finished watching") { ?>
+                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-clock"></i>
+                        <span class="tooltiptext">Future Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="tooltiptext">Currently Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     <?php

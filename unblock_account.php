@@ -102,16 +102,15 @@ if (isset($_POST['reset_password'])) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <?php require_once("headtags.php") ?>
         <title>Unblock account</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/form.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
     <body>
-        <?php include 'nav.php'; ?>
+        <?php require_once("nav.php") ?>
 
         <div class="reg-form">
             <div class="reg-header">

@@ -9,12 +9,6 @@
                 <li><a href="watchlist.php">Watchlist</a></li>
                 <li><a href="settings.php">Settings</a></li>
                 <li><a href="account_verification/logout.php">Logout</a></li>
-            <!-- <li>
-                <div id="container">
-                    <div id="name"></div>
-                </div>
-            </li> -->
-
             <?php else: ?>
             <li><a href="login.php">Login</a></li>
             <?php endif; ?>
