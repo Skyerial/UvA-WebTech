@@ -117,6 +117,7 @@ body {
     flex-direction: row;
     justify-content: center;
     padding-top: 60px;
+    padding-bottom: 50px;
     row-gap: 20px;
     /* min-height: 60vw; */
     height: fit-content;

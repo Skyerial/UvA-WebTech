@@ -137,8 +137,8 @@ function displayCards(data){
                 </div>
                 <h3>${data.movieTitle}</h3>
                 <div class="hover-content">
-                    <a href="javascript:void(0)" onclick="to_watch(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
-                    <a href="javascript:void(0)" onclick="cur_watching(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
+                    <a href="javascript:void(0)" onclick="toWatch(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
+                    <a href="javascript:void(0)" onclick="curWatching(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
                     <a href="javascript:void(0)" onclick="watched(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
                 </div>
             </div>

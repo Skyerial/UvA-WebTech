@@ -37,12 +37,13 @@ function api_call($apiUrl) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: streaming-availability.p.rapidapi.com",
-            "X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
+            "X-RapidAPI-Key: cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3"
         ],
     ]);
 
     //"X-RapidAPI-Key: 4a90c0cc84mshe4455be523837acp163521jsnc5e366760b07"
     // cf82865596msh45d9207f056c08dp141eedjsn61b1f53b4bd3
+    // 1f4f387fb7msh9026d962fb7b4d6p161790jsn6a3628cbcf9b
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -115,7 +116,7 @@ function condense_data($response, $country) {
         $result[$i] = $movie;
         $i++;
     }
-    // var_dump($result);
+    // print_r($result);
     return $result;
 }
 ?>
