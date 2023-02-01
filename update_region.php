@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "../../../conn/db.php";
+require_once "/../../../../conn/db.php";
 
 // Define log file:
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "pages/errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -122,10 +122,15 @@ $json = json_decode($body);
 
 try {
     update_region($conn, $json->email, $json->region);
+
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true]);
 } catch (Exception $err) {
     $err_file = fopen(ERROR_LOG_FILE, "a");
     fwrite($err_file, $err->getMessage() . "\n");
     fclose($err_file);
-}
 
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'error' => $err->getMessage()]);
+}
 ?>

@@ -1,5 +1,15 @@
 <?php
 
+// add_session_token adds the $session_token to the database by the
+// user corresponding to $email.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//  $session_token: The session token to be added.
+//  $email: To the corresponding user of this email, the session token must
+//          be added.
+//
+// Output: None
 function add_session_token($conn, $session_token, $email) {
     // Hash the session token:
     $hashed_token = password_hash($session_token, PASSWORD_BCRYPT);
@@ -18,6 +28,14 @@ function add_session_token($conn, $session_token, $email) {
     $add_session_token->close();
 }
 
+// retrieve_token retrieves the session token of the user corresponding
+// to $email.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//  $email: The email whose corresponding session token must be retrieved.
+//
+// Output: False if the email doesn't exist, none otherwise.
 function retrieve_token($conn, $email) {
     // Prepare SQL statement to check if the email exists:
     $mail_query = $conn->prepare(
@@ -38,7 +56,7 @@ function retrieve_token($conn, $email) {
     }
     $mail_query->close();
 
-    // The email exists:
+    // The email exists, retrieve the corresponding session token:
     $token_query = $conn->prepare(
         "SELECT session_token FROM user WHERE email = ?"
     );
@@ -57,6 +75,15 @@ function retrieve_token($conn, $email) {
     return $re_token;
 }
 
+// retrieve_token retrieves the session token of the user corresponding
+// to $email.
+//
+// Input:
+//  $conn: Variable, with which connection can be laid with the database.
+//  $email: The email whose corresponding session token must be checked.
+//  $session_token: The session token which must be checked.
+//
+// Output: True if the token is valid, false otherwise.
 function check_token($conn, $email, $session_token) {
     // Retrieve token corresponding to email from the database:
     $re_token = retrieve_token($conn, $email);

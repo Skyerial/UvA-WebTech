@@ -178,6 +178,7 @@ if (isset($_POST['to_login'])) {
         <?php require_once("nav.php") ?>
 
         <main class="reg-form" id="mainID">
+            <!-- The header with the title -->
             <div class="reg-header">
                 <h2>Registration Form</h2>
                 <p>Please fill all fields in the form</p>
