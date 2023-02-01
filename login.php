@@ -189,9 +189,9 @@ if (isset($_POST['login'])) {
                 // Set the cookies to expiry in one day.
                 // Secure flag and httponly flag are set to true.
                 setcookie("login", $session_token, time() + (86400),
-                    "/", "", true, true);
+                    "/", "", false, true);
                 setcookie("checker", $email, time() + (86400),
-                    "/", "", true, true);
+                    "/", "", false, true);
 
                 // Add the session token to the DB:
                 try {
