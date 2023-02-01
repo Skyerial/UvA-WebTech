@@ -167,17 +167,15 @@ if (isset($_POST['to_login'])) {
 <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <title>Registration form</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration</title>
+        <?php require_once("headtags.php") ?>
         <link rel="stylesheet" href="styles/form.css">
-        <link rel="stylesheet" href="styles/nav.css">
         <script type="text/javascript" src="menuScript.js" defer></script>
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
     <body>
-        <?php require_once("nav.php");?>
+        <?php require_once("nav.php") ?>
 
         <main class="reg-form" id="mainID">
             <div class="reg-header">

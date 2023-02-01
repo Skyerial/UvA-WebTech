@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +13,9 @@
 
 /* Background website */
 body {
-    background-color: #5a6973;
+    background-color: var(--color1);;
+    /* -webkit-transition: .5s;
+    transition: .5s; */
 }
 
 div {
@@ -31,7 +35,7 @@ p {
 
 .title {
     transition-duration: 0.2s;
-    color: #B8DBD9;
+    color: var(--color3);
     font-size: 75px;
     font-family: sans-serif;
 }
@@ -39,16 +43,18 @@ p {
 .border {
     margin: auto;
     border: 2px solid;
-    border-color: #B8DBD9;
+    border-color: var(--color3);
     border-radius: 25px;
     width : 60%;
-    background-color: #6c848c;
+    background-color: var(--color4);
+    /* padding-left: 25%;
+    padding-right: 25%; */
     padding-bottom: 18px;
 }
 
 select {
     text-align: center;
-    background-color: #B8DBD9;
+    background-color: var(--color3);
     border-style: solid;
     border-radius: 5px;
 }
@@ -72,12 +78,12 @@ select {
     opacity: 1;
     margin: auto;    
     border-radius: 5px 5px 0 0;
-    border-color: #B8DBD9;
+    border-color: var(--color3);
     padding: 2px;
 }
 
 ::placeholder {
-    color: black;
+    color: var(--color5);
 }
 
 /* Drop down select, invisible and shown. */
@@ -90,8 +96,8 @@ select {
 }
 
 .show .all-options {
-    background: #B8DBD9;
-    color: black;
+    background: var(--color3);
+    color: var(--color5);
     width: 100%;
     max-height: 210px;
     opacity: 1;
@@ -100,7 +106,7 @@ select {
 
 /* The selected region. */
 .region {
-    background: #B8DBD9;
+    background: var(--color3);
     border-radius: 5px;
     padding: 3px;
 }
@@ -110,8 +116,7 @@ select {
 }
 
 .dropdown .option:hover {
-    background: rgb(172, 235, 238);
-}
+    background: var(--color8);
 
 .view {
     border: 3px solid;
@@ -132,13 +137,19 @@ select {
     display: none;
 }
 
-/* All buttons */
-.buttons {
+.form {
+    border-radius: 5px;
+    border: 1px;
+    padding: 5px;
+    background-color: var(--color3);
+}
+
+.submit {
     padding: 8px;
     border-radius: 25px;
     border: 1px;
-    background-color: #2F4550;
-    color: #B8DBD9;
+    background-color: var(--color5);
+    color: var(--color3);
     opacity: 1;
 }
 
@@ -146,10 +157,11 @@ select {
     background-color: black;
 }
 
-/* Buttons to drop down the settings. */
-.container-buttons {
-    box-sizing: border-box;
-    width: 100%;
+.view {
+    border: 3px solid;
+    border-color: var(--color5);
+    border-radius: 5px;
+    opacity: 0;
 }
 
 .userbutton {

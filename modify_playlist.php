@@ -312,12 +312,12 @@ function remove_item($conn, $title, $picture_url, $ss_link, $email, $name) {
     $remove_item->close();
 }
 
+// calls the right function to execute item removal
 function remove_from_playlist($title, $picture, $service_url, $playlist) {
-    print_r($title);
-    print_r($picture);
-    print_r($service_url);
-    print_r($playlist);
     global $conn;
+    if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
+        exit("Invalid playlist");
+    }
     try {
         remove_item(
             $conn, $title, $picture, $service_url, $_COOKIE['checker'], $playlist
@@ -329,12 +329,16 @@ function remove_from_playlist($title, $picture, $service_url, $playlist) {
     }
 }
 
-function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
+// calls the right functions to add an item to the playlist
+//
+// in: $title: Title of the movie/serie.
+//     $picture: Picture url.
+//     $service_url: Url to streaming service.
+//     $service: Name of the streaming service.
+//     $playlist: Name of the playlist where item should be added.
+function add_to_playlist($title, $picture, $service_url, $service, $playlist) {
     // check if $playlist stores a valid value.
     global $conn;
-    if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
-        exit("Invalid playlist");
-    }
 
     // Check if the user is logged in, if not redirect the user to the login page.
     if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
@@ -347,7 +351,6 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         exit("You are not logged in");
     }
 
-        /* Start transaction */
     $conn->begin_transaction();
 
     // Retrieve necessary variable to add item to the database:
@@ -429,7 +432,7 @@ function addToPlaylist($title, $picture, $service_url, $service, $playlist) {
         $conn->rollback();
     }
 
-    /* If code reaches this point without errors then commit the data in the database */
+    // If code reaches this point without errors then commit the data in the database
     $conn->commit();
 
     // The code has successfully executed. Close the connection to the database and

@@ -27,12 +27,6 @@ require_once "/../../../conn/db.php";
                 <li><a href="future.php">WATCHLIST</a></li>
                 <li><a href="settings.php">SETTINGS</a></li>
                 <li><a href="account_verification/logout.php">LOGOUT</a></li>
-            <!-- <li>
-                <div id="container">
-                    <div id="name"></div>
-                </div>
-            </li> -->
-
             <?php else: ?>
             <li><a href="login.php">LOGIN</a></li>
             <?php endif; ?>
@@ -46,12 +40,6 @@ require_once "/../../../conn/db.php";
                 <li><a href="future.php">WATCHLIST</a></li>
                 <li><a href="settings.php">SETTINGS</a></li>
                 <li><a href="account_verification/logout.php">LOGOUT</a></li>
-            <!-- <li>
-                <div id="container">
-                    <div id="name"></div>
-                </div>
-            </li> -->
-
             <?php else: ?>
             <li><a href="login.php">LOGIN</a></li>
             <?php endif; ?>

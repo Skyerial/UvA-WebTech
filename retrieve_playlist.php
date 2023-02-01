@@ -1,15 +1,8 @@
 <?php
 
 ////////////////////////////////////////////////////////////////////////////////
-// Imported files:
+// Globals:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
-
-////////////////////////////////////////////////////////////////////////////////
-// Error log file definement:
-////////////////////////////////////////////////////////////////////////////////
-define("ERROR_LOG_FILE", "errorLog/error.txt");
 
 class movieDetails {
     var $movieTitle;
@@ -26,11 +19,27 @@ $movie = new movieDetails;
 $card_counter = 0;
 $displayed_cards = array();
 
+////////////////////////////////////////////////////////////////////////////////
+// Imported files:
+////////////////////////////////////////////////////////////////////////////////
+require_once "account_verification/session_token.php";
+require_once "/../../../conn/db.php";
 
+////////////////////////////////////////////////////////////////////////////////
+// Error log file definement:
+////////////////////////////////////////////////////////////////////////////////
+define("ERROR_LOG_FILE", "errorLog/error.txt");
+
+////////////////////////////////////////////////////////////////////////////////
+// Functions:
+////////////////////////////////////////////////////////////////////////////////
+
+// Collects the data for a card and dynamically stores it in a global.
+// Displays the card if all data is collected.
 function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
     global $movie;
 
-    // new card
+    // Create new card if all data for prev. card is collected.
     if ($movie->moviePoster != $moviePoster) {
         if ($movie->moviePoster) {
             display_card($movie, $playlist);
@@ -55,6 +64,7 @@ function fill_class($movieTitle, $moviePoster, $ssLink, $service, $playlist) {
     }
 }
 
+// display_card pushes a card into html and stores the data in a global array.
 function display_card($movie, $playlist) {
     global $card_counter;
     global $displayed_cards;
@@ -71,7 +81,6 @@ function display_card($movie, $playlist) {
     $current = "currently watching";
     $future = "future watching";
     $finished = "finished watching";
-    //var_dump($displayed_cards);
     ?>
         <div class="card" id="card<?=$card_counter?>" style="opacity: 1 !important;">
             <div class="imagebox">
@@ -108,26 +117,46 @@ function display_card($movie, $playlist) {
                 <h3><?=$movie->movieTitle?></h3>
             </div>
             <div class="hover-content">
-                <?php if ($playlist == "future watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                } else if ($playlist == "currently watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
-                <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye-slash"></i><span class="tooltiptext">Finished Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                } else if ($playlist == "finished watching") {
-                ?>
-                <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
-                <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
-                <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton"><i style = "color: red;" class="fa-solid fa-trash"></i><span class="tooltiptext">Delete</span></a>
-                <?php
-                }
-                ?>
+                <?php if ($playlist == "future watching") { ?>
+                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="tooltiptext">Currently Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span class="tooltiptext">Finished Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$future?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } else if ($playlist == "currently watching") { ?>
+                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-clock"></i>
+                        <span class="tooltiptext">Future Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="watched(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span class="tooltiptext">Finished Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>' , '<?=$current?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } else if ($playlist == "finished watching") { ?>
+                    <a href="javascript:void(0)" onclick="to_watch(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-clock"></i>
+                        <span class="tooltiptext">Future Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="cur_watching(<?=$card_counter?>); return false;" class="cardbutton">
+                        <i class="fa-solid fa-eye"></i>
+                        <span class="tooltiptext">Currently Watching</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="delete_item('<?=$card_counter?>','<?=$finished?>'); return false;" class="cardbutton">
+                        <i style = "color: red;" class="fa-solid fa-trash"></i>
+                        <span class="tooltiptext">Delete</span>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     <?php
@@ -145,7 +174,6 @@ function display_card($movie, $playlist) {
 // Side effect:
 //  All items of the playlist are pushed to HTML.
 function retrieve_playlist($conn, $email, $playlist) {
-    // Prepare SQL statement to retrieve all items with their characteristics:
     // Prepare SQL statement to retrieve all items with their characteristics:
     $retrieve = "SELECT DISTINCT
                 item.title, item.picture_url, item_ssid.ss_link,
@@ -167,27 +195,21 @@ function retrieve_playlist($conn, $email, $playlist) {
     if (!$retrieve->execute()) {
     throw new Exception ("[retrieve_playlist] Could not execute query.");
     }
-    // Push all items to HTML:
     $result = $retrieve->get_result();
     while ($row = $result->fetch_assoc()) {
-        // Note: the variables are arrays, so title = $row['title'];
-        // Note: $row['streaming_service'] is all lowercase (e.g. netflix);
-        // Note: after the close-statement, the variables no longer exist!
-        //echo $row['title'] . " " . $row['streaming_service'];
         fill_class($row['title'], $row['picture_url'], $row['ss_link'], $row['streaming_service'], $playlist);
     }
-    //display last card
+
+    //display last card if no more data is coming in.
     global $movie;
     if($movie->moviePoster) {
         display_card($movie, $playlist);
     }
-    $movie = new MovieDetails;
 }
 
-//Show playlist:
+// Push playlist cards to html and save the data in backend session.
 function display_playlist($conn, $playlist) {
     try {
-        //echo($conn);
         retrieve_playlist($conn, $_COOKIE['checker'], $playlist);
         global $displayed_cards;
         if (!$displayed_cards) {
@@ -195,8 +217,6 @@ function display_playlist($conn, $playlist) {
         }
         $_SESSION['displayed_cards'][1] = $displayed_cards;
         return 0;
-        //print_r($displayed_cards);
-        //echo json_encode($displayed_cards);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
@@ -205,4 +225,3 @@ function display_playlist($conn, $playlist) {
     }
 }
 ?>
-

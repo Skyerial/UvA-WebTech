@@ -1,8 +1,0 @@
-//delay
-echo date('h:i:s') . "<br>";
-
-//sleep for 1 seconds
-sleep(1);
-
-//start again
-echo date('h:i:s');
