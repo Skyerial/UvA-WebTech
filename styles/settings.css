@@ -81,7 +81,7 @@ select {
 
 .show #search-input {
     opacity: 1;
-    margin: auto;    
+    margin: auto;
     border-radius: 5px 5px 0 0;
     border-color: var(--color3);
     padding: 2px;
@@ -201,12 +201,11 @@ select {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
 }
 
 .column {
-    float: left;
     padding: 3px;
-    box-sizing: border-box;
     text-align: left;
     opacity: 0;
 }
@@ -258,112 +257,12 @@ select {
     opacity: 1;
 }
 
-/* Responsive on smaller devices. */
-@media only screen and (max-width: 800px) {
-    .title {
-        font-size: 50px;
-    }
-
-    .border {
-        width: 80%;
-    }
-
-    .column {
-        max-height: 0;
-    }
-
-    .table {
-        width: 60%;
-    }
-
-    .left {
-        width: 100%;
-    }
-
-    .right {
-        width: 100%;
-    }
-
-    .userchange {
-        margin-left: 0%;
-        text-align: left;
-    }
-
-    .passchange {
-        margin-left: 0%;
-        margin-right: 0%;
-        text-align: left;
-    }
-
-    .hidden_pass {
-        margin-left: 30%;
-    }
-
-    .hidden_user {
-        margin-left: 0%;
-    }
-
-    .error-message {
-        margin-top: 2%;
-        width: 80%;
-    }
-
-    .email-confirmation {
-        width: 80%;
-    }
+.changepassword {
+    display: flex;
 }
 
-/* Responsive on iPads. */
-@media only screen and (min-width: 767px) and (max-width: 1024px) {
-    .table {
-        width: 70%;
-    }
-
-    .userchange {
-        margin-left: 58%;
-        text-align: left;
-    }
-
-    .hidden_user {
-        margin-left: 50%;
-    }
-}
-
-/* Bigger screens. */
-@media only screen and (min-width: 600px)  and (max-width: 1024px){
-    .border {
-        width: 80%;
-    }
-
-    .column {
-        max-height: 0;
-    }
-    .table {
-        width: 100%;
-    }
-
-    .text {
-        margin-left: 0%;
-    }
-
-    .left {
-        width: 100%;
-    }
-
-    .right {
-        width: 100%;
-    }
-
-    .passchange {
-        margin-left: 15%;
-    }
-
-    .hidden_pass {
-        margin-left: 12%;
-    }
-}
-@media only screen and (min-width: 1100px) and (max-width: 1300px) {
-    .border {
-        width: 90%;
-    }
+.help {
+    min-height: 5vh;
+    display: flex;
+    flex-direction: column;
 }

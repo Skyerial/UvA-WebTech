@@ -106,7 +106,7 @@ function display_card($movie, $playlist) {
                             <img src="streaming_img/hulu.png">
                         </a>
                     <?php } if($movie->apple) {?>
-                        <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
+                        <a href="<?=$movie->apple?>" target="_blank" class="streamingservice">
                             <img src="streaming_img/apple.png">
                         </a>
                     <?php }?>
