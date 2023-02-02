@@ -13,7 +13,7 @@
         <?php
             require_once "nav.php";
             require_once "../../../conn/db.php";
-            require_once "retrieve_playlist.php";
+            require_once "retrieve_watchlist.php";
 
             if(!isset($_SESSION)) { session_start(); }
 
@@ -45,7 +45,7 @@
 
             <div class ="tabcontent">
                 <div class="cardcontainer" id="cardcontainerID">
-                    <?php if (display_playlist($conn, "currently watching") == 1) {
+                    <?php if (display_watchlist($conn, "currently watching") == 1) {
                         ?>   <div class="banner">
                                 <img src="streaming_img/watchlist.png">
                                 <h3> Your watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>

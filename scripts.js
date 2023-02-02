@@ -31,9 +31,7 @@ function visualchanges() {
     var titletext = document.getElementById("titletext");
     var contentbox = document.getElementById("contentID");
 
-    if (titlebox.style.display === "none") {
-
-    } else {
+    if (titlebox.style.display != "none") {
         titlebox.style.height = '0px'
         titletext.style.fontSize = '0px'
         contentbox.style.background = '#6c848c'
@@ -78,7 +76,11 @@ function deleteCards() {
     for (var i = 0; i < amountofCards; i++) {
         var cardid = "card" + i;
         var card = document.getElementById(cardid);
-        card.remove();
+        if (card) {
+            card.remove();
+        } else {
+            break;
+        }
     }
     amountofCards = 0;
 }

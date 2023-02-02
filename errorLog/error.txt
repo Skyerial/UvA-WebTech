@@ -1,0 +1,12 @@
+Table 'main.playlist_item' doesn't exist
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
+Unknown column 'piid' in 'field list'
