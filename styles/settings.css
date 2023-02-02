@@ -202,6 +202,16 @@ select {
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.one {
+    display: flex;
+    flex-direction: column;
+}
+.two {
+    display: flex;
+    flex-direction: column;
 }
 
 .column {
@@ -215,18 +225,20 @@ select {
 }
 
 .right {
-    width: 10%;
+    width: 14%;
 }
 
 /* Inputs shown on click. */
 .text {
+    padding: 5px 0 !important;
     margin-left: 17%;
 }
 
-.userchange {
+
+/* .userchange {
     text-align: right;
     margin-left: 5%;
-}
+} */
 
 .user_appear .userchange {
     opacity: 1;
@@ -241,12 +253,12 @@ select {
 /* Hidden and shown submit buttons. */
 .hidden_pass {
     opacity: 0;
-    margin-right: 55%;
+    margin: 2vw 1vw 2vw 1vw;
 }
 
 .hidden_user {
     opacity: 0;
-    margin-left: 6%;
+    margin: 2vw 1vw 2vw 1vw;
 }
 
 .user_appear .hidden_user {
