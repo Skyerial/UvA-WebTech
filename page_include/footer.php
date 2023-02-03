@@ -3,6 +3,7 @@
         <ul>
             <li><a href="../page_home/index.php">Home</a></li>
             <li><a href="../page_about/about.php">About</a></li>
+            <li><a href="../page_about/about.php">Privacy</a></li>
             <?php
                 if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
                 && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
