@@ -16,7 +16,6 @@ function getCardData(search){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status == 200) {
             var movieDetails = xhttp.responseText;
-            console.log(JSON.parse(movieDetails));
             data = JSON.parse(movieDetails);
             displayCards(data);
         }
@@ -137,7 +136,7 @@ function displayCards(data){
                         ${divs}
                     </div>
                 </div>
-                <h3>${data.movieTitle}</h3>
+                <h3><span class="tooltiptext">${data.movieTitle}</span>${data.movieTitle}</h3>
                 <div class="hover-content">
                     <a href="javascript:void(0)" onclick="toWatch(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-clock"></i><span class="tooltiptext">Future Watching</span></a>
                     <a href="javascript:void(0)" onclick="curWatching(${data.id}); return false;" class="cardbutton"><i class="fa-solid fa-eye"></i><span class="tooltiptext">Currently Watching</span></a>
