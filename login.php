@@ -214,7 +214,6 @@ if (isset($_POST['login'])) {
         } else {
             // The wrong password has been entered:
             $errors['main_error'] = true;
-            add_login_attempt($conn, $email);
         }
     } else {
         // Seperate closing connection to the database for errors. Because if an
