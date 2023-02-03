@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require_once("headtags.php") ?>
+        <?php require_once("../page_include/headtags.php") ?>
         <title>About</title>
-        <link rel="stylesheet" href="styles/nav.css">
-        <link rel="stylesheet" href="styles/about.css">
-        <script type="text/javascript" src="scripts.js"></script>
-        <script type="text/javascript" src="menuScript.js" defer></script>
+        <link rel="stylesheet" href="../styles/nav.css">
+        <link rel="stylesheet" href="../styles/about.css">
+        <script type="text/javascript" src="../page_home/scripts.js"></script>
+        <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
     </head>
     <body>
         <!-- insert the nav bar -->
-        <?php require_once("nav.php")?>
+        <?php require_once("../page_include/nav.php")?>
 
         <main id="mainID" class="reg-form">
             <div class="reg-header">
@@ -27,6 +27,6 @@
         </main>
 
 
-        <?php require_once("footer.php")?>
+        <?php require_once("../page_include/footer.php")?>
     </body>
 </html>

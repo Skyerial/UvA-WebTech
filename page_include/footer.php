@@ -1,16 +1,16 @@
 <footer id="footerID">
     <div class="footer-content">
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="about.php">About</a></li>
+            <li><a href="../page_home/index.php">Home</a></li>
+            <li><a href="../page_about/about.php">About</a></li>
             <?php
                 if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
                 && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
-                <li><a href="watchlist.php">Watchlist</a></li>
-                <li><a href="settings.php">Settings</a></li>
-                <li><a href="account_verification/logout.php">Logout</a></li>
+                <li><a href="../page_watchlist/watchlist.php">Watchlist</a></li>
+                <li><a href="../page_settings/settings.php">Settings</a></li>
+                <li><a href="../account_verification/logout.php">Logout</a></li>
             <?php else: ?>
-            <li><a href="login.php">Login</a></li>
+            <li><a href="../page_login/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>

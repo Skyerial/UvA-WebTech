@@ -2,13 +2,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/basic_error_checks.php";
-require_once "account_verification/close_connection.php";
-require_once "account_verification/csrf.php";
-require_once "account_verification/email.php";
-require_once "account_verification/recaptcha.php";
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+require_once "../account_verification/basic_error_checks.php";
+require_once "../account_verification/close_connection.php";
+require_once "../account_verification/csrf.php";
+require_once "../account_verification/email.php";
+require_once "../account_verification/recaptcha.php";
+require_once "../account_verification/session_token.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -70,7 +70,7 @@ function retrieve_status($conn, $email) {
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        header("Location: index.php");
+        header("Location: ../page_home/index.php");
         exit(0);
     }
 }
@@ -121,7 +121,7 @@ $errors = [
 ];
 
 // Define log file:
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Handling login form:
@@ -205,7 +205,7 @@ if (isset($_POST['login'])) {
                 // Close the connection to the database:
                 close_connection($conn);
 
-                header("location: index.php");
+                header("location: ../home_page/index.php");
                 exit(0);
             } else {
                 // The account is blocked, the user cannot login;
@@ -309,16 +309,16 @@ if (isset($_POST['to_register'])) {
 <html lang="en">
 
 <head>
-    <?php require_once("headtags.php") ?>
-    <link rel="stylesheet" href="styles/form.css">
+    <?php require_once("../page_include/headtags.php") ?>
+    <link rel="stylesheet" href="../styles/form.css">
     <title>Login</title>
-    <script type="text/javascript" src="menuScript.js" defer></script>
+    <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
     <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
     </script>
 </head>
 
 <body>
-    <?php require_once("nav.php") ?>
+    <?php require_once("../page_include/nav.php") ?>
 
     <main id="mainID" class="reg-form">
         <div class="reg-header">
@@ -465,6 +465,6 @@ if (isset($_POST['to_register'])) {
 
                 </main>
 
-        <?php require_once("footer.php")?>
+        <?php require_once("../page_include/footer.php")?>
     </body>
 </html>

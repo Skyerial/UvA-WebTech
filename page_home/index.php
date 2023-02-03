@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require_once("headtags.php") ?>
-        <link rel="stylesheet" type="text/css" href="styles/homepageNav.css">
-        <link rel="stylesheet" type="text/css" href="styles/loading.css">
+        <?php require_once("../page_include/headtags.php") ?>
+        <link rel="stylesheet" type="text/css" href="../styles/homepageNav.css">
+        <link rel="stylesheet" type="text/css" href="../styles/loading.css">
         <title>wheretowatch.com</title>
         <script type="text/javascript" src="scripts.js"></script>
-        <script type="text/javascript" src="menuScript.js" defer></script>
+        <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
         <script type="text/javascript" src="homepageScript.js" defer></script>
-        <script type="text/javascript" src="add.js"></script>
+        <script type="text/javascript" src="../page_watchlist/add.js"></script>
         <script src="https://kit.fontawesome.com/817fab420e.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <?php require_once("nav.php"); ?>
+        <?php require_once("../page_include/nav.php"); ?>
 
         <main id="mainID">
             <div class="titlerow" id="title">
@@ -31,7 +31,7 @@
             </div>
         </main>
 
-        <?php require_once("footer.php"); ?>
+        <?php require_once("../page_include/footer.php"); ?>
 
     </body>
 </html>

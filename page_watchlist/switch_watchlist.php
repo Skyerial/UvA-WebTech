@@ -2,14 +2,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/session_token.php";
+require_once "../account_verification/session_token.php";
 require_once "modify_watchlist.php";
-require_once "/../../../conn/db.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Error log file definement:
 ////////////////////////////////////////////////////////////////////////////////
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Add item to watchlist:
@@ -28,12 +28,12 @@ if(!isset($_SESSION)) { session_start(); }
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        header("Location: login.php");
+        header("Location: ../page_home/login.php");
         exit("conn");
     }
 } else {
     if (is_resource($conn)) { mysqli_close($conn); }
-    header("Location: login.php");
+    header("Location: ../page_home/login.php");
     exit("cookie");
 }
 
