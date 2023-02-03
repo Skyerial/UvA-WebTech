@@ -20,12 +20,12 @@
             if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
                 if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
                     if (is_resource($conn)) { mysqli_close($conn); }
-                    header("Location: ../page_home/login.php");
+                    header("Location: ../page_login/login.php");
                     exit(0);
                 }
             } else {
                 if (is_resource($conn)) { mysqli_close($conn); }
-                header("Location: ../page_home/login.php");
+                header("Location: ../page_login/login.php");
                 exit(0);
             }
 
@@ -37,7 +37,7 @@
                 <div class="tab">
                     <a><button class="tablinks" style="background-color: #B8DBD9; color: #2f4550;">Future <i class="fa-solid fa-clock"></i></button></a>
                     <a href="current.php"><button class="tablinks" href="current.php">Current <i class="fa-solid fa-eye"></i></button></a>
-                    <a href="watched.php"><button class="tablinks" href="watched.php">Finished <i class="fa-solid fa-eye-slash"></i></button></a>
+                    <a href="finished.php"><button class="tablinks" href="finished.php">Finished <i class="fa-solid fa-eye-slash"></i></button></a>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
 
                     <?php if (display_watchlist($conn, "future watching") == 1) {
                         ?>   <div class="banner">
-                                <img src="../streaming_img/watchlist.png">
+                                <a href="../page_home/index.php"><img src="../streaming_img/watchlist.png"></a>
                                 <h3> Your watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
                             </div>
                     <?php }?>

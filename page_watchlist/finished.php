@@ -20,12 +20,12 @@
             if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
                 if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
                     if (is_resource($conn)) { mysqli_close($conn); }
-                    header("Location: ../page_home/login.php");
+                    header("Location: ../page_login/login.php");
                     exit(0);
                 }
             } else {
                 if (is_resource($conn)) { mysqli_close($conn); }
-                header("Location: ../page_home/login.php");
+                header("Location: ../page_login/login.php");
                 exit(0);
             }
 
@@ -45,7 +45,7 @@
                 <div class="cardcontainer" id="cardcontainerID">
                     <?php if (display_watchlist($conn, "finished watching") == 1) {
                         ?>   <div class="banner">
-                                <img src="../streaming_img/watchlist.png">
+                                <a href="../page_home/index.php"><img src="../streaming_img/watchlist.png"></a>
                                 <h3> Your watchlist is emtpy, please click the "icon" to add to your current watchlist. </h3>
                             </div>
                     <?php }?>
@@ -54,6 +54,6 @@
         </div>
         </main>
 
-        <?php require_once("../page_incluce/footer.php")?>
+        <?php require_once("../page_include/footer.php")?>
     </body>
 </html>

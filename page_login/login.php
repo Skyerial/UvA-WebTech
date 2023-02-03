@@ -205,7 +205,7 @@ if (isset($_POST['login'])) {
                 // Close the connection to the database:
                 close_connection($conn);
 
-                header("location: ../home_page/index.php");
+                header("location: ../page_home/index.php");
                 exit(0);
             } else {
                 // The account is blocked, the user cannot login;

@@ -17,12 +17,12 @@ require_once "../../../../conn/db.php";
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         close_connection($conn);
-        header("Location: ../page_home/login.php");
+        header("Location: ../page_login/login.php");
         exit(0);
     }
 } else {
     close_connection($conn);
-    header("Location: ../page_home/login.php");
+    header("Location: ../page_login/login.php");
     exit(0);
 }
 

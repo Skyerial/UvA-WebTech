@@ -157,7 +157,7 @@ if (isset($_POST['register'])) {
 }
 
 if (isset($_POST['to_login'])) {
-    header("location: ../page_home/login.php");
+    header("location: ../page_login/login.php");
     close_connection($conn);
     exit(0);
 }

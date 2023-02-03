@@ -38,7 +38,7 @@ require_once "../../../../conn/db.php";
                 if (isset($_COOKIE['checker']) && isset($_COOKIE['login'])
                 && check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])): ?>
                 <li><a href="../page_watchlist/future.php">WATCHLIST</a></li>
-                <li><a href=".//page_Settings/settings.php">SETTINGS</a></li>
+                <li><a href="../page_settings/settings.php">SETTINGS</a></li>
                 <li><a href="../account_verification/logout.php">LOGOUT</a></li>
             <?php else: ?>
             <li><a href="../page_login/login.php">LOGIN</a></li>

@@ -90,7 +90,7 @@ if (isset($_POST['reset_password'])) {
         close_connection($conn);
         session_destroy();
         unset($_SESSION['token']);
-        header("Location: ../page_home/login.php?success=true");
+        header("Location: ../page_login/login.php?success=true");
         exit(0);
     }
 

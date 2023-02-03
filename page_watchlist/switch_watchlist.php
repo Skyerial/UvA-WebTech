@@ -28,12 +28,12 @@ if(!isset($_SESSION)) { session_start(); }
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        header("Location: ../page_home/login.php");
+        header("Location: ../page_login/login.php");
         exit("conn");
     }
 } else {
     if (is_resource($conn)) { mysqli_close($conn); }
-    header("Location: ../page_home/login.php");
+    header("Location: ../page_login/login.php");
     exit("cookie");
 }
 
