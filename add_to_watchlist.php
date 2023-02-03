@@ -1,9 +1,10 @@
 <?php
+
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
 require_once "account_verification/session_token.php";
-require_once "modify_playlist.php";
+require_once "modify_watchlist.php";
 require_once "/../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -12,15 +13,15 @@ require_once "/../../../conn/db.php";
 define("ERROR_LOG_FILE", "errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
-// Add item to playlist:
+// Add item to watchlist:
 ////////////////////////////////////////////////////////////////////////////////
 
+
+// Receive data from post request.
 $body = file_get_contents('php://input');
 $json = json_decode($body);
 $id = $json->id;
-$playlist = $json->playlist;
-$action = $json->action;
-
+$watchlist = $json->watchlist;
 
 if(!isset($_SESSION)) { session_start(); }
 
@@ -28,16 +29,14 @@ if(!isset($_SESSION)) { session_start(); }
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        header("Location: login.php");
-        exit("conn");
+        exit("not logged in");
     }
 } else {
     if (is_resource($conn)) { mysqli_close($conn); }
-    header("Location: login.php");
-    exit("cookie");
+    exit("not logged in");
 }
 
-//let file know what the class looks like
+// Let file know what the class looks like.
 class movie_details {
     var $movieTitle;
     var $moviePoster;
@@ -49,8 +48,8 @@ class movie_details {
     var $apple;
 }
 
-// Get backend data for watchlist cards.
-$data = $_SESSION['displayed_cards'][1][$id];
+// Get backend data for homepage cards.
+$data = $_SESSION['displayed_cards'][0][$id];
 $title = $data->movieTitle;
 $poster = $data->moviePoster;
 
@@ -59,11 +58,7 @@ $services = ["prime", "netflix", "disney", "hbo", "hulu", "apple"];
 foreach ($services as $service) {
     if ($data->{$service}) {
         $service_url = $data->{$service};
-        if ($action == "add") {
-            add_to_playlist($conn, $title, $poster, $service_url, $service, $playlist);
-        } elseif ($action == "remove") {
-            remove_from_playlist($title, $poster, $service_url, $playlist);
-        }
+        add_to_watchlist($conn, $title, $poster, $service_url, $service, $watchlist);
     }
 }
 

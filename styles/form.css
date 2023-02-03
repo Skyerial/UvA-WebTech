@@ -18,6 +18,15 @@ a {
     text-decoration: none;
 }
 
+label {
+    color: var(--color3);
+}
+
+p {
+    color: var(--color3);
+}
+
+
 .content {
     background-color: var(--color1);
     width: 100%;
@@ -92,7 +101,7 @@ a {
 }
 
 .form-btn:hover {
-    background-color: #383f43;
+    background-color: var(--color4);
 }
 
 .back-btn {

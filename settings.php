@@ -308,11 +308,12 @@ if (isset($_POST['change_password'])) {
         <main id="mainID">
         <p></p>
         <div class = "border">
-            <div class="titlerow" id="title">
-                <h1 class="title" id="titletext">Settings</h1>
+            <div class="reg-header">
+                <h2>Settings</h2>
+                <p>Change your settings.</p>
             </div>
 
-            <h2>Region</h2>
+            <h3 class="settings_text">Region</h3>
             <?php
                     $region_query = "SELECT * FROM `region`";
                     $receive = mysqli_query($conn, $region_query);
@@ -320,7 +321,7 @@ if (isset($_POST['change_password'])) {
 
             <div class = "dropdown">
                 <!-- Current region saved in database. -->
-                <p>Change your region:</p>
+                <p class="settings_text">Change your region:</p>
                 <div class = "region" id = "selected-region"
                 onclick = "dropdown()">
                     <?= $region?>
@@ -336,7 +337,7 @@ if (isset($_POST['change_password'])) {
                     <!-- Get all regions from database and put them in a dropdown -->
                     <div id = "regions" class = "all-options">
                         <?php while ($line = mysqli_fetch_array($receive)):;?>
-                        <div class = "option" onclick = "newRegion('<?php echo $line[1];?>', 
+                        <div class = "option" onclick = "newRegion('<?php echo $line[1];?>',
                         '<?php echo $_COOKIE['checker'] ?>')">
                             <input type = "radio" class = "input_php">
                             <label><?php echo $line[1];?></label>
@@ -348,10 +349,7 @@ if (isset($_POST['change_password'])) {
 
             <div>
                 <!-- Option to change password -->
-                <h2>User settings</h2>
-                <div>
-                    <p>Change your settings:</p>
-                </div>
+                <h3 class="settings_text">User settings</h3>
 
                 <div>
                     <!-- Start confirmation messages -->
@@ -389,7 +387,7 @@ if (isset($_POST['change_password'])) {
                         }
                     ?>
                     <!-- End confirmation messages -->
-                    
+
                     <!-- Make the forms appear with buttons. -->
                     <div class = "container-buttons">
                         <button class = "buttons passbutton" onclick = input_pass()>Change password</button>
@@ -404,34 +402,35 @@ if (isset($_POST['change_password'])) {
                         &nbsp;
                         <div class = "table">
                             <div class="one" id="passID">
-                            <div class = "column left passchange text">
-                                <label>Current password</label>
-                            </div>
-                            <div class = "column left passchange">    
-                                <input type="password" name="cur_password" class="#"
-                                value="" maxlength="255" required="">
-                            </div>
-                            <div class = "column left passchange text">
-                                <label>New Password</label>
-                            </div>
-                            <div class = "column left passchange">
-                                <input type="password" name="new_password" class="#"
-                                value="" maxlength="255" required="">
-                            </div>
-                            <input type="submit" class="hidden_pass buttons"
-                            name="change_password" value="Submit password">
+                                <div class = "column left passchange text">
+                                    <label>Current password</label>
+                                </div>
+                                <div class = "column left passchange">
+                                    <input type="password" name="cur_password" class="#"
+                                    value="" maxlength="255" required="">
+                                </div>
+                                <div class = "column left passchange text">
+                                    <label>New Password</label>
+                                </div>
+                                <div class = "column left passchange">
+                                    <input type="password" name="new_password" class="#"
+                                    value="" maxlength="255" required="">
+                                </div>
+                                <input type="submit" class="hidden_pass buttons"
+                                name="change_password" value="Submit password">
                             </div>
 
                             <div class="two" id="userID">
-                            <div class = "column right userchange text">    
-                                <label class="userLabel">Username</label>
-                            </div>
-                            <div class = "column right userchange"> 
-                                <input type="text" name="username" class="#"
-                                value="" maxlength="30" required="">
-                            </div>
-                            <input type="submit" class="hidden_user buttons"
-                            name="change_username" value="Submit username">
+                                <div class = "column right userchange text">
+                                    <label class="userLabel">Username</label>
+                                </div>
+                                <div class = "column right userchange">
+                                    <input type="text" name="username" class="#"
+                                    value="" maxlength="30" required="">
+                                </div>
+                                <input type="submit" class="hidden_user buttons"
+                                name="change_username" value="Submit username">
+
                             </div>
 
                             </div>
@@ -463,7 +462,7 @@ if (isset($_POST['change_password'])) {
                                     </p>
                                 </div>
                             <?php endif; ?>
-                        
+
 
                         <?php if($errors['csrf_error']): ?>
                             <div class="error-message">

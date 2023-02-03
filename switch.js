@@ -1,12 +1,12 @@
-async function sendData(id, playlist, action) {
+async function sendData(id, watchlist, action) {
     const body = JSON.stringify({
         id: id,
-        playlist: playlist,
+        watchlist: watchlist,
         action: action
     })
 
     //console.log(JSON.parse(body));
-    const request = new Request('switch_playlist.php', {
+    const request = new Request('switch_watchlist.php', {
         method: 'POST', body: body
     });
     //fetch(request).then(response => response.text()).then(result => console.log(result));
@@ -22,14 +22,14 @@ async function sendData(id, playlist, action) {
     }
 }
 
-async function deleteData(id, playlist, action) {
+async function deleteData(id, watchlist, action) {
     const body = JSON.stringify({
         id: id,
-        playlist: playlist,
+        watchlist: watchlist,
         action: action
     })
 
-    const request = new Request('switch_playlist.php', {
+    const request = new Request('switch_watchlist.php', {
         method: 'POST', body: body
     });
     //fetch(request).then(response => response.text()).then(result => console.log(result));
@@ -67,4 +67,4 @@ function curWatching(id) { sendData(id, "currently watching", "add"); deleteCard
 
 function watched(id) { sendData(id, "finished watching", "add"); deleteCard(id); }
 
-function deleteItem(id, playlist) { deleteData(id, playlist, "remove"); deleteCard(id); }
+function deleteItem(id, watchlist) { deleteData(id, watchlist, "remove"); deleteCard(id); }

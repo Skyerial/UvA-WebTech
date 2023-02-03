@@ -130,26 +130,26 @@ function retrieve_uid($conn, $email) {
     return $user_id;
 }
 
-// retrieve_pid finds the corresponding playlist id to $user_id and $playlist
+// retrieve_wid finds the corresponding watchlist id to $user_id and $watchlist
 // from the database.
 //
 // Input:
 //  $conn: Variable, with which connection can be laid with the database.
-//  $user_id: The id of the user whose playlist is to be found
-//  $playlist: Name of the playlist to be found
+//  $user_id: The id of the user whose watchlist is to be found
+//  $watchlist: Name of the watchlist to be found
 //
 // Output:
-//  The id of the playlist if it exists, otherwise a new playlist is created
-//  with the provided name and the id of the new playlist is returned.
-function retrieve_pid($conn, $user_id, $playlist) {
-    // Prepare SQL statement to retrieve the playlist id:
+//  The id of the watchlist if it exists, otherwise a new watchlist is created
+//  with the provided name and the id of the new watchlist is returned.
+function retrieve_wid($conn, $user_id, $watchlist) {
+    // Prepare SQL statement to retrieve the watchlist id:
     $list_exist = $conn->prepare(
-       "SELECT playlist_user.pid FROM playlist_user
-        JOIN playlist_name ON playlist_name.pid = playlist_user.pid
-        WHERE playlist_user.uid = ? AND playlist_name.name = ?"
+       "SELECT watchlist_user.wid FROM watchlist_user
+        JOIN watchlist_name ON watchlist_name.wid = watchlist_user.wid
+        WHERE watchlist_user.uid = ? AND watchlist_name.name = ?"
     );
 
-    if (!$list_exist->bind_param("is", $user_id, $playlist)) {
+    if (!$list_exist->bind_param("is", $user_id, $watchlist)) {
         throw new Exception ("[list_exist] Could not bind parameters.");
     }
     if (!$list_exist->execute()) {
@@ -158,66 +158,66 @@ function retrieve_pid($conn, $user_id, $playlist) {
 
     $list_exist->store_result();
     if ($list_exist->num_rows > 0) {
-        // Playlist already exists. Retrieve playlist id:
-        $list_exist->bind_result($playlist_id);
+        // watchlist already exists. Retrieve watchlist id:
+        $list_exist->bind_result($watchlist_id);
         $list_exist->fetch();
         $list_exist->close();
 
-        return $playlist_id;
+        return $watchlist_id;
     } else {
-        // No playlist exists, create a new one:
-        $add_playlist = $conn->prepare("INSERT INTO playlist_user(uid)
+        // No watchlist exists, create a new one:
+        $add_watchlist = $conn->prepare("INSERT INTO watchlist_user(uid)
                                         VALUES (?)");
 
-        if (!$add_playlist->bind_param("i", $user_id)) {
-            throw new Exception ("[add_playlist] Could not bind parameters.");
+        if (!$add_watchlist->bind_param("i", $user_id)) {
+            throw new Exception ("[add_watchlist] Could not bind parameters.");
         }
-        if (!$add_playlist->execute()) {
-            throw new Exception ("[add_playlist] Could not execute query.");
+        if (!$add_watchlist->execute()) {
+            throw new Exception ("[add_watchlist] Could not execute query.");
         }
 
-        $playlist_id = $conn->insert_id;
-        $add_playlist->close();
+        $watchlist_id = $conn->insert_id;
+        $add_watchlist->close();
 
-        // Give the playlist a name:
-        $playlist_name = $conn->prepare("INSERT INTO playlist_name(pid, name)
+        // Give the watchlist a name:
+        $watchlist_name = $conn->prepare("INSERT INTO watchlist_name(wid, name)
                                          VALUES (?, ?)");
 
-        if (!$playlist_name->bind_param("is", $playlist_id, $playlist)) {
-            throw new Exception ("[playlist_name] Could not bind parameters.");
+        if (!$watchlist_name->bind_param("is", $watchlist_id, $watchlist)) {
+            throw new Exception ("[watchlist_name] Could not bind parameters.");
         }
-        if (!$playlist_name->execute()) {
-            throw new Exception ("[playlist_name] Could not execute query.");
+        if (!$watchlist_name->execute()) {
+            throw new Exception ("[watchlist_name] Could not execute query.");
         }
 
-        $playlist_name->close();
+        $watchlist_name->close();
     }
 
-    return $playlist_id;
+    return $watchlist_id;
 }
 
-// update_playlists deletes all occurences where the item is added to other
-// playlists, than the playlist where the item needs to be added.
+// update_watchlists deletes all occurences where the item is added to other
+// watchlists, than the watchlist where the item needs to be added.
 //
 // Input:
 //  $conn: Variable, with which connection can be laid with the database.
-//  $user_id: The id of the user whose playlists will be updated.
-//  $item_id: The id of the item to be deleted from the playlists.
-//  $playlist_id: The id of the playlis that the item should not be deleted
+//  $user_id: The id of the user whose watchlists will be updated.
+//  $item_id: The id of the item to be deleted from the watchlists.
+//  $watchlist_id: The id of the watchlist that the item should not be deleted
 //                from
 //
 // Output: None
-function update_playlists($conn, $user_id, $item_id, $playlist_id) {
-    // Prepare SQL statement to delete the item in all other playlists:
+function update_watchlists($conn, $user_id, $item_id, $watchlist_id) {
+    // Prepare SQL statement to delete the item in all other watchlists:
     $delete_item = $conn->prepare(
-        "DELETE playlist_item FROM playlist_item
-        JOIN playlist_name ON playlist_item.pid = playlist_name.pid
-        JOIN playlist_user ON playlist_name.pid = playlist_user.pid
-        WHERE playlist_user.uid = ? AND playlist_item.iid = ?
-        AND playlist_item.pid != ?"
+        "DELETE watchlist_item FROM watchlist_item
+        JOIN watchlist_name ON watchlist_item.wid = watchlist_name.wid
+        JOIN watchlist_user ON watchlist_name.wid = watchlist_user.wid
+        WHERE watchlist_user.uid = ? AND watchlist_item.iid = ?
+        AND watchlist_item.wid != ?"
     );
 
-    if (!$delete_item->bind_param("iii", $user_id, $item_id, $playlist_id)) {
+    if (!$delete_item->bind_param("iii", $user_id, $item_id, $watchlist_id)) {
         throw new Exception ("[delete_item] Could not bind parameters.");
     }
     if (!$delete_item->execute()) {
@@ -227,23 +227,23 @@ function update_playlists($conn, $user_id, $item_id, $playlist_id) {
     $delete_item->close();
 }
 
-// add_item_to_playlist adds an item to the playlist with id: $playlist_id.
+// add_item_to_watchlist adds an item to the watchlist with id: $watchlist_id.
 //
 // Input:
 //  $conn: Variable, with which connection can be laid with the database.
-//  $playlist_id: The playlist to which the item should be added.
+//  $watchlist_id: The watchlist to which the item should be added.
 //  $item_id: The id of the item to be added.
 // Output:
 //  None
-function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
-    // Prepare SQL statement to check if the item is already in the playlist:
+function add_item_to_watchlist($conn, $watchlist_id, $item_id, $ss_link) {
+    // Prepare SQL statement to check if the item is already in the watchlist:
     $check_item = $conn->prepare(
-        "SELECT piid FROM playlist_item
-        JOIN item_ssid ON playlist_item.iid = item_ssid.iid
-        WHERE playlist_item.pid = ? and item_ssid.ss_link = ?"
+        "SELECT wiid FROM watchlist_item
+        JOIN item_ssid ON watchlist_item.iid = item_ssid.iid
+        WHERE watchlist_item.wid = ? and item_ssid.ss_link = ?"
     );
 
-    if (!$check_item->bind_param("is", $playlist_id, $ss_link)) {
+    if (!$check_item->bind_param("is", $watchlist_id, $ss_link)) {
         throw new Exception ("[check_item] Could not bind parameters.");
     }
     if (!$check_item->execute()) {
@@ -252,19 +252,19 @@ function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
 
     $check_item->store_result();
     if ($check_item->num_rows > 0) {
-        // The item is already in the playlist:
+        // The item is already in the watchlist:
         $check_item->free_result();
         $check_item->close();
     } else {
-        // The item is not in the playlist:
+        // The item is not in the watchlist:
         $check_item->free_result();
         $check_item->close();
 
-        // Prepare SQL statement to add the item to the playlist:
-        $add_item = $conn->prepare("INSERT INTO playlist_item(pid, iid)
+        // Prepare SQL statement to add the item to the watchlist:
+        $add_item = $conn->prepare("INSERT INTO watchlist_item(wid, iid)
                                     VALUES (?, ?)");
 
-        if (!$add_item->bind_param("ii", $playlist_id, $item_id)) {
+        if (!$add_item->bind_param("ii", $watchlist_id, $item_id)) {
             throw new Exception ("[add_item] Could not bind parameters.");
         }
         if (!$add_item->execute()) {
@@ -275,7 +275,7 @@ function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
     }
 }
 
-// remove_item removes a row from playlist_item.
+// remove_item removes a row from watchlist_item.
 //
 // Input:
 //  $conn: Variable, with which connection can be laid with the database.
@@ -283,21 +283,21 @@ function add_item_to_playlist($conn, $playlist_id, $item_id, $ss_link) {
 //  $picture_url: The picture URL of the item to be removed.
 //  $ss_link: The link to the streaming service of the item to be removed.
 //  $email: The email of the user.
-//  $name: The name of the playlist to be removed.
+//  $name: The name of the watchlist to be removed.
 //
 // Output: None.
 function remove_item($conn, $title, $picture_url, $ss_link, $email, $name) {
     // Prepare SQL statement to remove an item id and its corresponding
-    // playlist id from the table playlist_item.
+    // watchlist id from the table watchlist_item.
     $remove_item =
-       "DELETE playlist_item FROM playlist_item
-        JOIN item ON item.iid = playlist_item.iid
+       "DELETE watchlist_item FROM watchlist_item
+        JOIN item ON item.iid = watchlist_item.iid
         JOIN item_ssid ON item_ssid.iid = item.iid
-        JOIN playlist_name ON playlist_name.pid = playlist_item.pid
-        JOIN playlist_user ON playlist_user.pid = playlist_name.pid
-        JOIN user ON user.uid = playlist_user.uid
+        JOIN watchlist_name ON watchlist_name.wid = watchlist_item.wid
+        JOIN watchlist_user ON watchlist_user.wid = watchlist_name.wid
+        JOIN user ON user.uid = watchlist_user.uid
         WHERE item.title = ? AND item.picture_url = ? AND item_ssid.ss_link = ?
-        AND user.email = ? AND playlist_name.name = ?";
+        AND user.email = ? AND watchlist_name.name = ?";
 
     $remove_item = $conn->prepare($remove_item);
 
@@ -313,14 +313,14 @@ function remove_item($conn, $title, $picture_url, $ss_link, $email, $name) {
 }
 
 // calls the right function to execute item removal
-function remove_from_playlist($title, $picture, $service_url, $playlist) {
+function remove_from_watchlist($title, $picture, $service_url, $watchlist) {
     global $conn;
-    if (!($playlist == "future watching" || $playlist == "currently watching" || $playlist == "finished watching")) {
-        exit("Invalid playlist");
+    if (!($watchlist == "future watching" || $watchlist == "currently watching" || $watchlist == "finished watching")) {
+        exit("Invalid watchlist");
     }
     try {
         remove_item(
-            $conn, $title, $picture, $service_url, $_COOKIE['checker'], $playlist
+            $conn, $title, $picture, $service_url, $_COOKIE['checker'], $watchlist
         );
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
@@ -329,14 +329,14 @@ function remove_from_playlist($title, $picture, $service_url, $playlist) {
     }
 }
 
-// calls the right functions to add an item to the playlist
+// calls the right functions to add an item to the watchlist
 //
 // in: $title: Title of the movie/serie.
 //     $picture: Picture url.
 //     $service_url: Url to streaming service.
 //     $service: Name of the streaming service.
-//     $playlist: Name of the playlist where item should be added.
-function add_to_playlist($conn, $title, $picture, $service_url, $service, $playlist) {
+//     $watchlist: Name of the watchlist where item should be added.
+function add_to_watchlist($conn, $title, $picture, $service_url, $service, $watchlist) {
     // Check if the user is logged in, if not redirect the user to the login page.
     if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
         if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
@@ -384,7 +384,7 @@ function add_to_playlist($conn, $title, $picture, $service_url, $service, $playl
         $conn->rollback();
     }
 
-    // Retrieve necessary variable to add the item to the playlist:
+    // Retrieve necessary variable to add the item to the watchlist:
     try {
         $user_id = retrieve_uid($conn, $_COOKIE['checker']);
     } catch (Exception $err) {
@@ -396,9 +396,9 @@ function add_to_playlist($conn, $title, $picture, $service_url, $service, $playl
     }
     if (!$user_id) { exit("No user found."); }
 
-    // Add the playlist to the database and retrieve the corresponding playlist id:
+    // Add the watchlist to the database and retrieve the corresponding watchlist id:
     try {
-        $playlist_id = retrieve_pid($conn, $user_id, $playlist);
+        $watchlist_id = retrieve_wid($conn, $user_id, $watchlist);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
@@ -407,9 +407,9 @@ function add_to_playlist($conn, $title, $picture, $service_url, $service, $playl
         $conn->rollback();
     }
 
-    // Check if the item doesn't already exist in another playlist:
+    // Check if the item doesn't already exist in another watchlist:
     try {
-        update_playlists($conn, $user_id, $item_id, $playlist_id);
+        update_watchlists($conn, $user_id, $item_id, $watchlist_id);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
@@ -418,9 +418,9 @@ function add_to_playlist($conn, $title, $picture, $service_url, $service, $playl
         $conn->rollback();
     }
 
-    // Finally add the item to the playlist:
+    // Finally add the item to the watchlist:
     try {
-        add_item_to_playlist($conn, $playlist_id, $item_id, $service_url);
+        add_item_to_watchlist($conn, $watchlist_id, $item_id, $service_url);
     } catch (Exception $err) {
         $err_file = fopen(ERROR_LOG_FILE, "a");
         fwrite($err_file, $err->getMessage() . "\n");
