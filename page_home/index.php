@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="../styles/homepageNav.css">
         <link rel="stylesheet" type="text/css" href="../styles/loading.css">
         <title>wheretowatch.com</title>
-        <script type="text/javascript" src="scripts.js"></script>
+        <script type="text/javascript" src="scripts.js" defer></script>
         <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
         <script type="text/javascript" src="homepageScript.js" defer></script>
         <script type="text/javascript" src="../page_watchlist/add.js"></script>
