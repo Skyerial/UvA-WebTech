@@ -5,18 +5,30 @@ function dropdown() {
 }
 
 function input_user() {
-    var x = document.getElementById('mainID');
-    x.classList.toggle("user_appear");
-    x.classList.remove("pass_appear");
-    x.classList.remove("error-message");
+    var passwordbox = document.getElementById('passID');
+    passwordbox.style.display = "none";
+
+    var usernamebox = document.getElementById('userID');
+    usernamebox.style.display = "flex";
+
+    // var x = document.getElementById('mainID');
+    // x.classList.toggle("user_appear");
+    // x.classList.remove("pass_appear");
+    // x.classList.remove("error-message");
 
 }
 
 function input_pass() {
-    var x = document.getElementById('mainID');
-    x.classList.toggle("pass_appear");
-    x.classList.remove("user_appear");
-    x.classList.remove("error-message");
+    var passwordbox = document.getElementById('passID');
+    passwordbox.style.display = "flex";
+
+    var usernamebox = document.getElementById('userID');
+    usernamebox.style.display = "none";
+
+    // var x = document.getElementById('mainID');
+    // x.classList.toggle("pass_appear");
+    // x.classList.remove("user_appear");
+    // x.classList.remove("error-message");
 
 }
 

@@ -42,12 +42,14 @@ p {
     margin: auto;
     border: 2px solid;
     border-color: var(--color3);
-    border-radius: 25px;
+    border-radius: 10px;
     width : 60%;
     background-color: var(--color7);
     /* padding-left: 25%;
     padding-right: 25%; */
     padding-bottom: 18px;
+    margin-top: 4%;
+    margin-bottom: 4%;
 }
 
 select {
@@ -101,8 +103,8 @@ select {
 }
 
 .show .all-options {
-    background: var(--color3);
-    color: var(--color5);
+    background: var(--color5);
+    color: var(--color3);
     width: 100%;
     max-height: 210px;
     opacity: 1;
@@ -111,7 +113,8 @@ select {
 
 /* The selected region. */
 .region {
-    background: #B8DBD9;
+    background: var(--color5);
+    color: var(--color3);
     border-radius: 5px;
     padding: 3px;
 }
@@ -121,7 +124,11 @@ select {
 }
 
 .dropdown .option:hover {
-    background: var(--color8);
+    background-color: var(--color3);
+}
+
+.dropdown .option:hover label {
+    color: var(--color5) !important;
 }
 
 .view {
@@ -149,10 +156,12 @@ select {
     background-color: var(--color5);
     color: var(--color3);
     opacity: 1;
+    margin-top: 3%;
 }
 
 .buttons:hover {
-    background-color: black;
+    background-color: var(--color3);
+    color: var(--color5);
 }
 
 .view {
@@ -163,11 +172,11 @@ select {
 }
 
 .userbutton {
-    width: 30%;
+    width: 35%;
 }
 
 .passbutton {
-    width: 30%;
+    width: 35%;
 }
 
 .email-confirmation {
@@ -206,18 +215,18 @@ select {
     justify-content: space-evenly;
 }
 .one {
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 .two {
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
 .column {
     padding: 3px;
     text-align: left;
-    opacity: 0;
+    /* opacity: 0; */
 }
 
 .left {
@@ -231,33 +240,19 @@ select {
 /* Inputs shown on click. */
 .text {
     padding: 5px 0 !important;
-    margin-left: 17%;
+    width: fit-content !important;
 }
 
-
-/* .userchange {
-    text-align: right;
-    margin-left: 5%;
-} */
-
-.user_appear .userchange {
-    opacity: 1;
-    max-height: 50px;
-}
-
-.pass_appear .passchange {
-    opacity: 1;
-    max-height: 50px;
+.settings_text {
+    color: var(--color3) !important;
 }
 
 /* Hidden and shown submit buttons. */
 .hidden_pass {
-    opacity: 0;
     margin: 2vw 1vw 2vw 1vw;
 }
 
 .hidden_user {
-    opacity: 0;
     margin: 2vw 1vw 2vw 1vw;
 }
 
@@ -277,4 +272,12 @@ select {
     min-height: 5vh;
     display: flex;
     flex-direction: column;
+}
+.container-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.reg-header {
+    margin-bottom: 4% !important;
 }
