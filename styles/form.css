@@ -26,6 +26,10 @@ p {
     color: var(--color3);
 }
 
+.error-message p {
+    color: var(--error) !important;
+}
+
 
 .content {
     background-color: var(--color1);
