@@ -281,3 +281,7 @@ select {
 .reg-header {
     margin-bottom: 4% !important;
 }
+
+#APIkey {
+    display: none;
+}

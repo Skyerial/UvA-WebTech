@@ -9,42 +9,16 @@ async function sendData(id, watchlist, action) {
     const request = new Request('switch_watchlist.php', {
         method: 'POST', body: body
     });
-    //fetch(request).then(response => response.text()).then(result => console.log(result));
     try {
         const response = await fetch(request);
         if (response.status != 200) {
             console.log("response is not 200");
         }
         const text = await response.text();
-        console.log(text);
     } catch (error) {
         console.log("an error occured");
     }
 }
-
-async function deleteData(id, watchlist, action) {
-    const body = JSON.stringify({
-        id: id,
-        watchlist: watchlist,
-        action: action
-    })
-
-    const request = new Request('switch_watchlist.php', {
-        method: 'POST', body: body
-    });
-    //fetch(request).then(response => response.text()).then(result => console.log(result));
-    try {
-        const response = await fetch(request);
-        if (response.status != 200) {
-            console.log("response is not 200");
-        }
-        const text = await response.text();
-        console.log(text);
-    } catch (error) {
-        console.log("an error occured");
-    }
-}
-
 
 function deleteCard(id) {
     var cardID = "card" + id;
@@ -67,4 +41,4 @@ function curWatching(id) { sendData(id, "currently watching", "add"); deleteCard
 
 function watched(id) { sendData(id, "finished watching", "add"); deleteCard(id); }
 
-function deleteItem(id, watchlist) { deleteData(id, watchlist, "remove"); deleteCard(id); }
+function deleteItem(id, watchlist) { sendData(id, watchlist, "remove"); deleteCard(id); }

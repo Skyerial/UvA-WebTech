@@ -289,7 +289,7 @@ if (isset($_POST['reset_password'])) {
 
         // Generate and send the email:
         $email_link = "https://webtech-in01.webtech-uva.nl/" .
-        "reset_password.php?token=$email_token";
+        "page_login/reset_password.php?token=$email_token";
         generate_email($username, $email, $email_link, false);
         $email_sent = true;
     }

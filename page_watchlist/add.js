@@ -7,7 +7,7 @@ async function sendData(id, watchlist) {
         watchlist: watchlist
     })
 
-    const request = new Request('add_to_watchlist.php', {
+    const request = new Request('../page_watchlist/add_to_watchlist.php', {
         method: 'POST', body: body
     });
     try {

@@ -294,17 +294,18 @@ if (isset($_POST['change_password'])) {
 <html>
     <head>
         <?php require_once("../page_include/headtags.php") ?>
+        <?php require_once("../Api/api_selfmade.php");?>
         <title>Settings</title>
         <link rel="stylesheet" href="../styles/settings.css">
         <link rel="stylesheet" href="../styles/form.css">
         <script type="text/javascript" src="../page_home/scripts.js"></script>
-        <script type="text/javascript" src="../page_settings/settings.js"></script>
+        <script type="text/javascript" src="settings.js"></script>
         <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
     </head>
     <body>
         <!-- insert the nav bar -->
         <?php require_once("../page_include/nav.php") ?>
-
+        
         <main id="mainID">
         <p></p>
         <div class = "border">
@@ -474,6 +475,11 @@ if (isset($_POST['change_password'])) {
                         <?php endif; ?>
                     </form>
                 </div>
+            </div>
+            <div class="apikey">
+                <h3 class="settings_text">Your API key</h3>
+                <button class="buttons" onclick="copy('<?=$api_key?>'); return false">Click to copy key</button>
+                <p id="APIkey"></p>
             </div>
         </div>
 

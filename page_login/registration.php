@@ -132,7 +132,7 @@ if (isset($_POST['register'])) {
     if (!(in_array(true, $errors))) {
         // Generate a email verification token:
         $email_token = bin2hex(random_bytes(32));
-        $email_link = "https://webtech-in01.webtech-uva.nl/login.php?token=$email_token";
+        $email_link = "https://webtech-in01.webtech-uva.nl/page_login/login.php?token=$email_token";
 
         // Hash the users password:
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);

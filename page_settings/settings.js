@@ -86,3 +86,13 @@ function search() {
         }
     }
 }
+
+function copy(search) {
+    // var search = document.getElementById("APIkey").value;
+
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(search);
+
+    // Alert the copied text
+    alert("Copied your key");
+}
