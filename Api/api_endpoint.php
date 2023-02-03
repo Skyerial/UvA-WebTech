@@ -42,7 +42,7 @@ $query_options = explode('%26', $query_parts[1]);
 
 $option = $query_parts[0];
 $title = explode('title=', $query_options[0]);
-$country = explode('country=', $query_options[1]);
+$country = explode('country=', $query_options[1]) ?? 'nl';
 
 // based on the first part of query a function gets called to give the appropriate
 // data as a response

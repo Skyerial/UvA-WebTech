@@ -3,11 +3,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/basic_error_checks.php";
-require_once "account_verification/close_connection.php";
-require_once "account_verification/csrf.php";
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+require_once "../account_verification/basic_error_checks.php";
+require_once "../account_verification/close_connection.php";
+require_once "../account_verification/csrf.php";
+require_once "../account_verification/session_token.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Check session:
@@ -17,12 +17,12 @@ require_once "/../../../conn/db.php";
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         close_connection($conn);
-        header("Location: login.php");
+        header("Location: ../page_login/login.php");
         exit(0);
     }
 } else {
     close_connection($conn);
-    header("Location: login.php");
+    header("Location: ../page_login/login.php");
     exit(0);
 }
 
@@ -199,7 +199,7 @@ $errors = [
 ];
 
 // Define log file:
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Retrieve region information:
@@ -293,17 +293,17 @@ if (isset($_POST['change_password'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require_once("headtags.php") ?>
+        <?php require_once("../page_include/headtags.php") ?>
         <title>Settings</title>
-        <link rel="stylesheet" href="styles/settings.css">
-        <link rel="stylesheet" href="styles/form.css">
-        <script type="text/javascript" src="scripts.js"></script>
-        <script type="text/javascript" src="settings.js"></script>
-        <script type="text/javascript" src="menuScript.js" defer></script>
+        <link rel="stylesheet" href="../styles/settings.css">
+        <link rel="stylesheet" href="../styles/form.css">
+        <script type="text/javascript" src="../page_home/scripts.js"></script>
+        <script type="text/javascript" src="../page_settings/settings.js"></script>
+        <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
     </head>
     <body>
         <!-- insert the nav bar -->
-        <?php require_once("nav.php") ?>
+        <?php require_once("../page_include/nav.php") ?>
 
         <main id="mainID">
         <p></p>
@@ -478,7 +478,7 @@ if (isset($_POST['change_password'])) {
         </div>
 
         </main>
-        <?php require_once("footer.php")?>
+        <?php require_once("../page_include/footer.php")?>
 
     </body>
 </html>

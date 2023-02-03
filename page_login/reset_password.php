@@ -3,10 +3,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/basic_error_checks.php";
-require_once "account_verification/close_connection.php";
-require_once "account_verification/csrf.php";
-require_once "/../../../conn/db.php";
+require_once "../account_verification/basic_error_checks.php";
+require_once "../account_verification/close_connection.php";
+require_once "../account_verification/csrf.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Start error definement:
@@ -17,7 +17,7 @@ $errors = [
 ];
 
 // Define log file:
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -85,7 +85,7 @@ if (isset($_POST['reset_password'])) {
         close_connection($conn);
         session_destroy();
         unset($_SESSION['token']);
-        header("Location: login.php?success=true");
+        header("Location: ../page_login/login.php?success=true");
         exit(0);
     }
 
@@ -97,15 +97,15 @@ if (isset($_POST['reset_password'])) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php require_once("headtags.php") ?>
+        <?php require_once("../page_include/headtags.php") ?>
         <title>Reset Password</title>
-        <link rel="stylesheet" href="styles/form.css">
+        <link rel="stylesheet" href="../styles/form.css">
         <script src = "https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
 
     <body>
-        <?php require_once("nav.php") ?>
+        <?php require_once("../page_include/nav.php") ?>
         <main id="mainID" class="content">
             <!-- The main container for the reset password form -->
             <div class="reg-form">
@@ -154,6 +154,6 @@ if (isset($_POST['reset_password'])) {
                 </form>
             </div>
         </main>
-        <?php require_once("footer.php")?>
+        <?php require_once("../page_include/footer.php")?>
     </body>
 </html>

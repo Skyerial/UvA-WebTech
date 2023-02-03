@@ -10,7 +10,7 @@ function getCardData(search){
     const container = document.getElementById('cardcontainerID');
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "APICall/retrieve_region_api.php", true);
+    xhttp.open("POST", "../APICall/retrieve_region_api.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhttp.onreadystatechange = function () {
@@ -96,7 +96,7 @@ function changeOpacity(card) {
 function streamingdiv(service, servicelink) {
 
     var div = `<a href="${servicelink}" target="_blank" class="streamingservice">
-                    <img src="streaming_img/${service}.png">
+                    <img src="../streaming_img/${service}.png">
                 </a>`;
 
     return div;

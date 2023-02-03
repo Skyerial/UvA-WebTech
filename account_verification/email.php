@@ -67,12 +67,12 @@ function generate_email($username, $email, $email_link, $act) {
     if ($act) {
         $subject = "Verify your email on WhereToWatch.com";
         $email_message = file_get_contents(
-            'email_templates/email_activation.html'
+            '../email_templates/email_activation.html'
         );
     } else {
         $subject = "Reset your WhereToWatch.com password";
         $email_message = file_get_contents(
-            'email_templates/email_reset.html'
+            '../email_templates/email_reset.html'
         );
     }
 

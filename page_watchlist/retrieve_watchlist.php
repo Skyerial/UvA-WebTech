@@ -21,13 +21,13 @@ $displayed_cards = array();
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+require_once "../account_verification/session_token.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Error log file definement:
 ////////////////////////////////////////////////////////////////////////////////
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -87,27 +87,27 @@ function display_card($movie, $watchlist) {
                 <div class="streamingservicebox">
                     <?php if($movie->prime) {?>
                         <a href="<?=$movie->prime?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/prime.png">
+                            <img src="../streaming_img/prime.png">
                         </a>
                     <?php } if($movie->netflix) {?>
                         <a href="<?=$movie->netflix?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/netflix.png">
+                            <img src="../streaming_img/netflix.png">
                         </a>
                     <?php } if($movie->disney) {?>
                         <a href="<?=$movie->disney?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/disney.png">
+                            <img src="../streaming_img/disney.png">
                         </a>
                     <?php } if($movie->hbo) {?>
                         <a href="<?=$movie->hbo?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/hbo.png">
+                            <img src="../streaming_img/hbo.png">
                         </a>
                     <?php } if($movie->hulu) {?>
                         <a href="<?=$movie->hulu?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/hulu.png">
+                            <img src="../streaming_img/hulu.png">
                         </a>
                     <?php } if($movie->apple) {?>
                         <a href="<?=$movie->apple?>" target="_blank" class="streamingservice">
-                            <img src="streaming_img/apple.png">
+                            <img src="../streaming_img/apple.png">
                         </a>
                     <?php }?>
                 </div>

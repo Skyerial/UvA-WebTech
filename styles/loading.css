@@ -1,3 +1,5 @@
+@import "colors.css";
+
 .loader {
     opacity: 1;
     transition-duration: 0.6s;
@@ -5,11 +7,11 @@
     height: 400px;
     margin: 1rem;
     padding: 1rem;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px 0 var(--color5);
     border-radius: 8px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #636363;
+    background-color: var(--color5);
     transform-origin: 0 50%;
     animation: loader 1.2s ease-out;
     animation-iteration-count: 2;
@@ -24,6 +26,6 @@
     100% {
         transform: scaleX(1);
         opacity: 0.3;
-        background-color: #3a3a3a;
+        background-color: var(--color5);
     }
 }

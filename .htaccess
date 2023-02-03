@@ -1,4 +1,6 @@
 RedirectMatch 404 /\.git
 
+DirectoryIndex /page_home/index.php
+
 RewriteEngine On 
 RewriteRule ^v1 Api/api_endpoint.php

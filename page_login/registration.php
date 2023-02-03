@@ -3,13 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Imported files:
 ////////////////////////////////////////////////////////////////////////////////
-require_once "account_verification/basic_error_checks.php";
-require_once "account_verification/close_connection.php";
-require_once "account_verification/csrf.php";
-require_once "account_verification/email.php";
-require_once "account_verification/recaptcha.php";
-require_once "account_verification/session_token.php";
-require_once "/../../../conn/db.php";
+require_once "../account_verification/basic_error_checks.php";
+require_once "../account_verification/close_connection.php";
+require_once "../account_verification/csrf.php";
+require_once "../account_verification/email.php";
+require_once "../account_verification/recaptcha.php";
+require_once "../account_verification/session_token.php";
+require_once "../../../../conn/db.php";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions:
@@ -61,7 +61,7 @@ function add_user($conn, $username, $email, $hashed_password, $email_token) {
 if (isset($_COOKIE['login']) && isset($_COOKIE['checker'])) {
     if (!check_token($conn, $_COOKIE['checker'], $_COOKIE['login'])) {
         if (is_resource($conn)) { mysqli_close($conn); }
-        header("Location: index.php");
+        header("Location: ../page_home/index.php");
         exit(0);
     }
 }
@@ -87,7 +87,7 @@ $errors = [
 ];
 
 // Define log file:
-define("ERROR_LOG_FILE", "errorLog/error.txt");
+define("ERROR_LOG_FILE", "../errorLog/error.txt");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Handling register form:
@@ -157,7 +157,7 @@ if (isset($_POST['register'])) {
 }
 
 if (isset($_POST['to_login'])) {
-    header("location: login.php");
+    header("location: ../page_login/login.php");
     close_connection($conn);
     exit(0);
 }
@@ -168,14 +168,14 @@ if (isset($_POST['to_login'])) {
     <html lang="en">
     <head>
         <title>Registration</title>
-        <?php require_once("headtags.php") ?>
-        <link rel="stylesheet" href="styles/form.css">
-        <script type="text/javascript" src="menuScript.js" defer></script>
+        <?php require_once("../page_include/headtags.php") ?>
+        <link rel="stylesheet" href="../styles/form.css">
+        <script type="text/javascript" src="../page_include/menuScript.js" defer></script>
         <script src="https://www.google.com/recaptcha/api.js" asyncdefer>
         </script>
     </head>
     <body>
-        <?php require_once("nav.php") ?>
+        <?php require_once("../page_include/nav.php") ?>
 
         <main class="reg-form" id="mainID">
             <!-- The header with the title -->
@@ -306,6 +306,6 @@ if (isset($_POST['to_login'])) {
             <!-- End registration form -->
         </main>
 
-        <?php require_once("footer.php");?>
+        <?php require_once("../page_include/footer.php");?>
     </body>
 </html>
